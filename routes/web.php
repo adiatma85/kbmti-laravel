@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+// User Controller
+use App\Http\Controllers\Admin\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +19,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// User Controller
+Route::resource('user', UserController::class, []);
