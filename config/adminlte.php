@@ -246,6 +246,13 @@ return [
             'text' => 'Article',
             'url'  => 'admin/articles',
             'icon' => 'fas fa-fw fa-user',
+            'submenu' => [
+                [
+                    'text' => 'Create Article',
+                    'url' => 'admin/articles/create',
+                    'icon' => 'fas fa-fw fa-user'
+                ]
+            ],
         ],
         [
             'text' => 'Event',

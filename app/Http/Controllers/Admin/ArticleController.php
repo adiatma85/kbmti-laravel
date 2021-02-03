@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+// Model
+use App\Models\Article;
+
 class ArticleController extends Controller
 {
     /**
@@ -14,7 +17,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('Admin/Article/index-article');
+        $articles = Article::all();
+        return view('Admin/Article/index-article', compact('articles'));
     }
 
     /**
@@ -24,7 +28,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('Admin/Article/create-article');
     }
 
     /**
@@ -35,7 +39,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return response()->json($request->image);
     }
 
     /**
