@@ -11,7 +11,7 @@
         <ol class="breadcrumb float-sm-left">
             <li class="breadcrumb-item">Home</li>
             <li class="breadcrumb-item">Articles</li>
-            <li class="breadcrumb-item active">Create Articles</li>
+            <li class="breadcrumb-item active">Edit Articles</li>
         </ol>
     </div>
 </div>
@@ -29,25 +29,26 @@
     </div>
     @endif
     {{-- @include('include.modals.modal-create', ['variable' => 'INI VARIABEL']) --}}
-    <div class="card card-primary">
+    <div class="card card-warning">
         <div class="card-header">
-            <h3 class="card-title">Form Menambah Artikel</h3>
+            <h3 class="card-title">Form Mengedit Artikel</h3>
         </div>
         {{-- /.card-header --}}
         {{-- form start --}}
-        <form method="POST" action="{{route('articles.store')}}" enctype="multipart/form-data">
+        <form method="POST" action="{{route('articles.update', [ 'article' => $article->id])}}" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="card-body">
                 <div class="form-group">
                     <label for="title-article">Judul Artikel</label>
                     <input type="text" class="form-control" id="title-article" placeholder="Judul Artikel" name="name"
-                        value="{{old('name') ?? ''}}">
+                        value="{{old('name') ?? $article->name ?? ''}}">
                 </div>
                 <div class="form-group">
                     <label for="content-article">Konten Artikel</label>
                     {{-- <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Konten Artikel"> --}}
                     <textarea id="content-article" class="form-control" rows="3" placeholder="Konten ..."
-                        name="content">{{old('content') ?? ''}}</textarea>
+                        name="content">{{old('content') ?? $article->content ?? ''}}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="img-article">Gambar Artikel</label>

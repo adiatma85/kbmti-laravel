@@ -244,13 +244,17 @@ return [
         ['header' => 'MANAGEMENT'],
         [
             'text' => 'Article',
-            'url'  => 'admin/articles',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-newspaper',
             'submenu' => [
+                [
+                    'text' => 'List Article',
+                    'url'  => 'admin/articles',
+                    'icon' => 'fas fa-paste'
+                ],
                 [
                     'text' => 'Create Article',
                     'url' => 'admin/articles/create',
-                    'icon' => 'fas fa-fw fa-user'
+                    'icon' => 'fas fa-marker'
                 ]
             ],
         ],

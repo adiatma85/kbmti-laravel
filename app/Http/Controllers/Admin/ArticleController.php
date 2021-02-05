@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
+
+// Request Validations
+use App\Http\Requests\Article\Store;
 
 // Model
 use App\Models\Article;
@@ -37,53 +42,87 @@ class ArticleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Store $request)
     {
-        return response()->json($request->image);
+
+        // Initiate the image
+        $imageName = Carbon::now() . '.' . $request->image->extension();
+        $request->image->storeAs('images/articles', $imageName);
+
+        Article::create([
+            'name' => $request->name,
+            'content' => $request->content,
+            'image' => $imageName
+        ])->save();
+        return back()
+            ->with('success', 'Penambahan Artikel telah berhasil');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $name
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($name)
     {
-        //
+        $name = str_replace('-', ' ', $name);
+        $article = Article::where('name', $name)->first();
+        return view('Admin/Article/show-article', compact('article'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $name
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($name)
     {
-        //
+        // return response()->json([
+        //     'name' => $name
+        // ]);
+        $name = str_replace('-', ' ', $name);
+        $article = Article::where('name', $name)->first();
+        return view('Admin/Article/edit-article', compact('article'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  string  $name
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        // $name = str_replace('-', ' ', $name);
+        // $article = Article::where('name', $name)->first();
+        $article = Article::findOrFail($id);
+        if ($request->image) {
+            Storage::delete('storage/app/images/articles/'.$article->image);
+            $imageName = Carbon::now() . '.' . $request->image->extension();
+            $request->image->storeAs('images/articles', $imageName);
+            $article->image = $imageName;
+        }
+        // Change the name and content
+        $article->name = $request->name;
+        $article->content = $request->content;
+        $article->save();
+        return redirect(route('articles.index'))->with('success', 'Pengeditan artikel berhasil dilakukan');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $article = Article::findOrFail($id);
+        Storage::delete('storage/app/images/articles'.$article->image);
+        Article::where('id', $id)->delete();
+        return back()->with('success', 'Penghapusan artikel berhasil dilakukan');
     }
 }
