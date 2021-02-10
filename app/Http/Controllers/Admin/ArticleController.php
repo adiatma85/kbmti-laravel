@@ -54,8 +54,15 @@ class ArticleController extends Controller
             'content' => $request->content,
             'image' => $imageName
         ])->save();
+        // return redirect()->route('articles.index')->with('response', [
+        //     'type' => 'success',
+        //     'msg' => 'Penambahan Artikel telah berhasil!'
+        // ]);
         return back()
-            ->with('success', 'Penambahan Artikel telah berhasil');
+            ->with('response', [
+                'type' => 'success',
+                'msg' => 'Penambahan Artikel telah berhasil!'
+            ]);
     }
 
     /**
@@ -100,7 +107,7 @@ class ArticleController extends Controller
         // $article = Article::where('name', $name)->first();
         $article = Article::findOrFail($id);
         if ($request->image) {
-            Storage::delete('storage/app/images/articles/'.$article->image);
+            Storage::delete('images/articles/' . $article->image);
             $imageName = Carbon::now() . '.' . $request->image->extension();
             $request->image->storeAs('images/articles', $imageName);
             $article->image = $imageName;
@@ -109,7 +116,12 @@ class ArticleController extends Controller
         $article->name = $request->name;
         $article->content = $request->content;
         $article->save();
-        return redirect(route('articles.index'))->with('success', 'Pengeditan artikel berhasil dilakukan');
+        // return back()->with('success', 'Pengeditan artikel berhasil dilakukan');
+        return back()
+            ->with('response', [
+                'type' => 'success',
+                'msg' => 'Pengeditan artikel berhasil dilakukan!'
+            ]);
     }
 
     /**
@@ -121,8 +133,13 @@ class ArticleController extends Controller
     public function destroy($id)
     {
         $article = Article::findOrFail($id);
-        Storage::delete('storage/app/images/articles'.$article->image);
+        Storage::delete('images/articles/' . $article->image);
         Article::where('id', $id)->delete();
-        return back()->with('success', 'Penghapusan artikel berhasil dilakukan');
+        // return back()->with('success', 'Penghapusan artikel berhasil dilakukan');
+        return back()
+            ->with('response', [
+                'type' => 'success',
+                'msg' => 'Penghapusan artikel berhasil dilakukan!'
+            ]);
     }
 }

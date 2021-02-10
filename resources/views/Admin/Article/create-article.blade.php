@@ -3,18 +3,14 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-<div class="row">
-    <div class="col-12">
-        <h1>Article</h1>
-    </div>
-    <div class="col-12">
-        <ol class="breadcrumb float-sm-left">
-            <li class="breadcrumb-item">Home</li>
-            <li class="breadcrumb-item">Articles</li>
-            <li class="breadcrumb-item active">Create Articles</li>
-        </ol>
-    </div>
-</div>
+@include('include.admin.breadcrumbs', [
+        'pageTitle' => 'Article',
+        'preBreadcrumbs' => [
+            'Home' => route('admin.index'),
+            'Articles' => route('articles.index')
+        ],
+        'activeItem' => 'Create Article'
+    ])
 @stop
 
 @section('content')
@@ -28,7 +24,6 @@
         </ul>
     </div>
     @endif
-    {{-- @include('include.modals.modal-create', ['variable' => 'INI VARIABEL']) --}}
     <div class="card card-primary">
         <div class="card-header">
             <h3 class="card-title">Form Menambah Artikel</h3>
@@ -81,7 +76,7 @@
 
 @section('js')
 {{-- Jquery --}}
-<script src="{{asset(' plugins/jquery/jquery.min.js')}}"></script>
+<script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
 {{-- bs-custom-file-input --}}
 <script src="{{asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
 {{-- init bs-custom-file --}}

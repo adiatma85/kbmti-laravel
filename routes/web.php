@@ -35,7 +35,7 @@ Route::group([
     'name' => 'admin.'
 ], function () {
     // Index Dashboard
-    Route::get('/', [AdminMiscController::class, 'index'])->name('index');
+    Route::get('/', [AdminMiscController::class, 'index'])->name('admin.index');
     // Articles Dashboard
     Route::resource('articles', AdminArticleController::class);
 });

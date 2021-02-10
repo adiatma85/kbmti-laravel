@@ -3,18 +3,14 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-<div class="row">
-    <div class="col-12">
-        <h1>Article</h1>
-    </div>
-    <div class="col-12">
-        <ol class="breadcrumb float-sm-left">
-            <li class="breadcrumb-item">Home</li>
-            <li class="breadcrumb-item">Articles</li>
-            <li class="breadcrumb-item active">Edit Articles</li>
-        </ol>
-    </div>
-</div>
+@include('include.admin.breadcrumbs', [
+'pageTitle' => 'Article',
+'preBreadcrumbs' => [
+'Home' => route('admin.index'),
+'Articles' => route('articles.index')
+],
+'activeItem' => 'Edit Article'
+])
 @stop
 
 @section('content')
@@ -35,7 +31,8 @@
         </div>
         {{-- /.card-header --}}
         {{-- form start --}}
-        <form method="POST" action="{{route('articles.update', [ 'article' => $article->id])}}" enctype="multipart/form-data">
+        <form method="POST" action="{{route('articles.update', [ 'article' => $article->id])}}"
+            enctype="multipart/form-data" id="main-form">
             @csrf
             @method('PUT')
             <div class="card-body">
@@ -73,6 +70,37 @@
     </div>
 </div>
 
+{{--  Modal  --}}
+<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="center-modal-title"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-title">Konfirmasi Pengeditan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="" method="POST" id="article-form">
+                <fieldset disabled>
+                    <div class="modal-body">
+                        <p>Apakah Anda yakin mengedit Artikel ini?</p>
+                        <label for="on-delete-confirmation">Judul Artikel</label>
+                        <input type="text" class="form-control" id="title-article" value="{{old('name') ?? ''}}"
+                            id="on-delete-confirmation">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="btn btn-danger">Edit</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
 @stop
 
 @section('css')
@@ -82,13 +110,36 @@
 
 @section('js')
 {{-- Jquery --}}
-<script src="{{asset(' plugins/jquery/jquery.min.js')}}"></script>
+<script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
 {{-- bs-custom-file-input --}}
 <script src="{{asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
-{{-- init bs-custom-file --}}
 <script>
+    // init bscustomfile
     $(function () {
       bsCustomFileInput.init();
     });
+
+    // on-submit-event
+
+    // this is the id of the form
+//         $("#idForm").submit(function(e) {
+
+//             e.preventDefault(); // avoid to execute the actual submit of the form.
+
+// var form = $(this);
+// var url = form.attr('action');
+
+// $.ajax({
+//        type: "POST",
+//        url: url,
+//        data: form.serialize(), // serializes the form's elements.
+//        success: function(data)
+//        {
+//            alert(data); // show response from the php script.
+//        }
+//      });
+
+
+// });
 </script>
 @stop
