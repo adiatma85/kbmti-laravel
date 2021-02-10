@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Str;
+use Illuminate\Database\DBAL\TimestampType;
 
 return [
 
@@ -143,5 +144,13 @@ return [
         ],
 
     ],
+
+    // DBAL Configuration for modifying column
+    
+    'dbal' => [
+        'types' => [
+            'timestamp' => TimestampType::class,
+        ],
+    ],  
 
 ];
