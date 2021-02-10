@@ -70,8 +70,9 @@
 @stop
 
 @section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
 
+{{-- Response --}}
+@include('include.plugins.load-response-css')
 @stop
 
 @section('js')
@@ -79,6 +80,8 @@
 <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
 {{-- bs-custom-file-input --}}
 <script src="{{asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
+{{-- Response --}}
+@include('include.plugins.load-response-js')
 {{-- init bs-custom-file --}}
 <script>
     $(function () {
