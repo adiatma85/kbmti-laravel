@@ -259,6 +259,22 @@ return [
             ],
         ],
         [
+            'text' => 'User',
+            'icon' => 'fas fa-user',
+            'submenu' => [
+                [
+                    'text' => 'List User',
+                    'url'  => 'admin/users',
+                    'icon' => 'fas fa-paste'
+                ],
+                [
+                    'text' => 'Create Article',
+                    'url' => 'admin/users/create',
+                    'icon' => 'fas fa-marker'
+                ]
+            ],
+        ],
+        [
             'text' => 'Event',
             'url'  => 'admin/events',
             'icon' => 'fas fa-fw fa-lock',
