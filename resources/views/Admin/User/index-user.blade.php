@@ -119,12 +119,24 @@ $itemName = 'title-user';
 
 <script>
     $(function () {
-
+        $('#article-table thead th').each( function () {
+        var title = $('#article-table tfoot th').eq( $(this).index() ).text();
+        $(this).html( '&amp;lt;input type=&amp;quot;text&amp;quot; placeholder=&amp;quot;Search '+title+'&amp;quot; /&amp;gt;' );
+    } );
     // Data Tables
-    $("#article-table").DataTable({
+    var theTable = $("#article-table").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
     }).buttons().container().appendTo('#article-table_wrapper .col-md-6:eq(0)');
+
+    theTable.columns().eq( 0 ).each( function ( colIdx ) {
+        $( 'input', theTable.column( colIdx ).header() ).on( 'keyup change', function () {
+            theTable
+                .column( colIdx )
+                .search( this.value )
+                .draw();
+        } );
+    } );
 
   });
 

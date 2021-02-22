@@ -9,9 +9,9 @@ class MiscController extends Controller
 {
     public function index()
     {
+        // must returnig view...
         return response()->json([
             'msg' => 'Anda bukanlah Admon',
-            'type' => 'error'
         ]);
     }
 

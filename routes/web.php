@@ -47,7 +47,7 @@ Auth::routes();
 Route::group([
     'prefix' => 'admin',
     'name' => 'admin.',
-    'middleware' => ['isGeneralAdmin', 'auth']
+    'middleware' => ['auth', 'isGeneralAdmin']
 ], function () {
     // Index Dashboard
     Route::get('/', [AdminMiscController::class, 'index'])->name('admin.index');

@@ -16,8 +16,10 @@ class IsGeneralAdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $adminsId = [1,2,3,4,5,6,7,8,9,10];
-        if(in_array(auth()->user()->adminId, $adminsId)){
+        // $response = $next($request);
+        $adminsId = [1,2,3,4,5,6,7,8,9,10,11];
+        // 'getAttributes' is checked as undefined, but the code is work properly.
+        if(in_array(auth()->user()->getAttributes()['adminId'], $adminsId)){
             return $next($request);
         }
         return redirect()->route('guest.index');
