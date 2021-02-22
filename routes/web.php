@@ -34,6 +34,7 @@ Route::get('/', function () {
     // Route::get('/', [GuestMiscController::class, 'landingPage'])->name('guest.landing.page');
 })->name('guest.landing.page');
 
+// Staf Ahli Temporary
 Route::resource('staf_Ahli', StaffAhliController::class, []);
 
 // User Controller
@@ -59,3 +60,10 @@ Route::group([
 //     // Landing Page
 //     Route::get('/', [GuestMiscController::class, 'landingPage'])->name('guest.landing.page');
 // });
+
+Route::name('pengumuman.')
+    ->prefix('pengumuman')
+    ->group(function () {
+    Route::get('/staf-ahli', [StaffAhliController::class, 'showPengumumanForm'])->name('stafAhliForm');
+    Route::post('/staf-ahli', [StaffAhliController::class, 'postPengumumanForm'])->name('postPengumumanForm');
+});

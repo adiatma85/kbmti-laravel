@@ -34,6 +34,7 @@ class AddStafAhliTable extends Migration
                 $t->string('id_line');
                 $t->string('no_wa');
                 $t->string('komitmen');
+                $t->boolean('isAccepted')->default(false);
                 $t->timestamps();
             });
         }

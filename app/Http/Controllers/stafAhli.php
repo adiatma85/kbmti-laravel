@@ -57,10 +57,10 @@ class stafAhli extends Controller
         ];
 
         // Fetch the data if there are duplicate
-        // $isExist = StafAhliModel::where($arrayData)->exists();
-        // if ($isExist) {
-        //     return back()->with('err', 'Anda Telah Mendaftar!');
-        // }
+        $isExist = StafAhliModel::where($arrayData)->exists();
+        if ($isExist) {
+            return back()->with('err', 'Anda Telah Mendaftar!');
+        }
 
         // Initiate the rar
         // $komitmenName = Carbon::now() . '.' . $request->name . $request->image->extension();
@@ -131,5 +131,60 @@ class stafAhli extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // Below is custom functions
+    public function showPengumumanForm()
+    {
+        return view('general.pengumumanFormPendaftaran');
+    }
+
+    // To show the 
+    public function postPengumumanForm(Request $request)
+    {
+        $dataRequest = explode(' - ', $request->unique_code);
+        // return response()->json(compact('dataRequest'));
+        try {
+            $applicant = StafAhliModel::where([
+                'id_line' => $dataRequest[0],
+                'no_wa' => $dataRequest[1],
+            ])->first();
+
+            $response = [];
+            if ($applicant) {
+                if ($applicant->isAccepted) {
+                    $response = array(
+                        'success' => true,
+                        'title' => 'Selamat!',
+                        'msg' => 'Selamat, Anda telah diterima ke tahap selanjutnya. Harap hubungi LINE berikut untuk konfirmasi.',
+                        'icon' => 'success'
+                    );
+                }
+                // default
+                $response = array(
+                    'success' => false,
+                    'title' => 'Yah, maaf ya...',
+                    'err' => 'Anda tidak lolos ke tahap berikutnya',
+                    'icon' => 'error'
+                );
+            } else {
+                $response = array(
+                    'success' => false,
+                    'title' => 'Terjadi kesalahan',
+                    'err' => 'Data Anda tidak terdaftar dalam database kita',
+                    'icon' => 'warning'
+                );
+            }
+            return response()->json($response);
+            // return redirect()->back()->with(compact('response'));
+        } catch (\Throwable $th) {
+            throw $th;
+            // $response = [
+            //     'success' => false,
+            //     'title' => 'Terjadi kesalahan',
+            //     'err' => 'Data Anda tidak terdaftar dalam database kita',
+            //     'icon' => 'warning'
+            // ];
+        }
     }
 }

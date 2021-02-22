@@ -90,7 +90,7 @@
 <body>
 <nav class="navbar navbar-expand-md navbar-dark" id="toTop">
     <div class="container">
-        <div class="navbar-brand"><a id="pramuimge-logo" href="{{route('guest.landing.page')}}"><img src="{{asset('images/mis/logo.svg')}}" alt=""/></a></div>
+        <div class="navbar-brand"><a id="pramuimge-logo" href="{{route('guest.landing.page')}}"><img src="{{asset('images/misc/logo.svg')}}" alt=""/></a></div>
         <button class="navbar-toggler collapsed nav-mobile-toggle" type="button" data-toggle="collapse" data-target="#main-nav-1" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
