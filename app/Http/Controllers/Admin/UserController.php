@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\Users\Store;
+use Illuminate\Support\Facades\Hash;
+
+// Model
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -15,7 +19,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return view('Admin/User/index-user', compact('users'));
     }
 
     /**
@@ -25,8 +30,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        // View untuk form menambahkan User
-        
+        // View untuk form menambahkan User dari Admin
+        return view('Admin/Users/create-user');
     }
 
     /**
@@ -35,9 +40,20 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Store $request)
     {
-        
+        $this->middleware('isMasterAdminMiddleware');
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'adminId' => $request->adminId
+        ])->save();
+        return back()
+            ->with('response', [
+                'type' => 'success',
+                'msg' => 'Penambahan User Baru telah berhasil!'
+            ]);
     }
 
     /**
@@ -48,40 +64,66 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        // Showing the detail of User
+        // Jujur Ak bingung ki sek an...
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        //
+        $thisUser = User::where('id', $id)->first();
+        return view('Admin/User/edit-user', compact('thisUser'));;
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        //
+        $thisUser = User::findOrFail($id);
+        $thisUser->name = $request->name;
+        $thisUser->adminId = $request->adminid;
+        $thisUser->save();
+        return back()
+            ->with('response', [
+                'type' => 'success',
+                'msg' => 'Pengeditan user berhasil dilakukan!'
+            ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
         //
+        User::where('id', $id)->delete();
+        return back()
+            ->with('response', [
+                'type' => 'success',
+                'msg' => 'Penghapusan artikel berhasil dilakukan!'
+            ]);
+    }
+
+    /**
+     * Remove many resource from storage
+     *
+     * @param  int[]  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function massDestroy($ids){
+        // Sek bingung
     }
 }

@@ -6,12 +6,12 @@ use Illuminate\Support\Facades\Auth;
 // Admin Side Controller
 use App\Http\Controllers\Admin\MiscController as AdminMiscController;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
+
+// Guest Side Controller
+use App\Http\Controllers\Guest\MiscController as GuestMiscController;
 
 // User Controller
-use App\Http\Controllers\Admin\UserController;
-
-// Guest Controller
-use App\Http\Controllers\Guest\MiscController as GuestMiscController;
 
 
 // Temporary Staff Ahli
@@ -37,19 +37,40 @@ Route::get('/', function () {
 // Staf Ahli Temporary
 Route::resource('staf_Ahli', StaffAhliController::class, []);
 
-// User Controller
-Route::resource('user', UserController::class, []);
+
+
+
+// Auth Routes
 Auth::routes();
 
-// Route::get('/admin', [MiscController::class, 'index'])->name('admin');
+// Admin Side Group Route
 Route::group([
     'prefix' => 'admin',
-    'name' => 'admin.'
+    'name' => 'admin.',
+    'middleware' => ['isGeneralAdmin', 'auth']
 ], function () {
     // Index Dashboard
     Route::get('/', [AdminMiscController::class, 'index'])->name('admin.index');
-    // Articles Dashboard
+    // Articles Resource Controller
     Route::resource('articles', AdminArticleController::class);
+    // Users Resource Controller
+    Route::resource('users', AdminUserController::class)->names([
+        'index' => 'admin.users.index',
+        'create' => 'admin.users.create',
+        'destroy' => 'admin.users.destroy',
+        'update' => 'admin.users.update',
+        'show' => 'admin.users.show',
+        'edit' => 'admin.users.edit'
+        ]);
+});
+
+// Guest Side Group Route
+Route::group([
+    'name' => 'guest.',
+    'prefix' => 'guest'
+], function () {
+    // Landing Page
+    Route::get('/', [GuestMiscController::class, 'index'])->name('guest.index');
 });
 
 // Route::group
