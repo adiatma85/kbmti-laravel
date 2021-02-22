@@ -10,6 +10,12 @@ use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
 // User Controller
 use App\Http\Controllers\Admin\UserController;
 
+// Guest Controller
+use App\Http\Controllers\Guest\MiscController as GuestMiscController;
+
+
+// Temporary Staff Ahli
+use App\Http\Controllers\stafAhli as StaffAhliController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,9 +27,14 @@ use App\Http\Controllers\Admin\UserController;
 |
 */
 
+// Landing Page ketika membuka pertama kali
 Route::get('/', function () {
-    return view('welcome');
-});
+    // return view('welcome');
+    return view('general.index-landing-page');
+    // Route::get('/', [GuestMiscController::class, 'landingPage'])->name('guest.landing.page');
+})->name('guest.landing.page');
+
+Route::resource('staf_Ahli', StaffAhliController::class, []);
 
 // User Controller
 Route::resource('user', UserController::class, []);
@@ -39,3 +50,12 @@ Route::group([
     // Articles Dashboard
     Route::resource('articles', AdminArticleController::class);
 });
+
+// Route::group
+// Route::group([
+//     'prefix' => 'guest',
+//     'name' => 'guest'
+// ], function () {
+//     // Landing Page
+//     Route::get('/', [GuestMiscController::class, 'landingPage'])->name('guest.landing.page');
+// });
