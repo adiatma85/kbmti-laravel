@@ -71,12 +71,12 @@
                                     <div class="form-group col-md-6">
                                         <label for="nama">Nama</label>
                                         <input type="text" name="name" class="form-control" id="nama"
-                                            value="{{old('name') ?? ''}}">
+                                            value="{{old('name') ?? ''}}" placeholder="Nama">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="nim">NIM</label>
                                         <input type="text" name="nim" class="form-control" id="nim"
-                                            value="{{old('nim') ?? ''}}">
+                                            value="{{old('nim') ?? ''}}" placeholder="NIM">
                                     </div>
                                 </div>
                                 <div class="form-row mt-4">
@@ -98,7 +98,7 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <select name="dept[]" id="dept1" class="form-control">
-                                            <option value="" selected>Select One</option>
+                                            <option value="" selected>Pilihan Departemen ke-1</option>
                                             <option value="Dept. Advocacy">Dept. Advocacy</option>
                                             <option value="Dept. Research and Development">Dept. Research and
                                                 Development</option>
@@ -114,7 +114,7 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <select name="dept[]" id="dept2" class="form-control">
-                                            <option value="" selected>Select One</option>
+                                            <option value="" selected>Pilihan Departemen ke-2</option>
                                             <option value="Dept. Advocacy">Dept. Advocacy</option>
                                             <option value="Dept. Research and Development">Dept. Research and
                                                 Development</option>
@@ -135,18 +135,18 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <select name="time[]" id="time1" class="form-control">
-                                            <option value="" selected>Select One</option>
+                                            <option value="" selected>Pilihan Jadwal Interview ke-1</option>
                                             @foreach ($allocatedTimes as $time)
-                                            <option value="{{$time->id}}">{{$time->tanggal . $time->jam}} (Stock
+                                            <option value="{{$time->id}}">{{$time->tanggal . ' ' . $time->jam}} (Stock
                                                 {{$time->stock}})</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <select name="time[]" id="time2" class="form-control">
-                                            <option value="" selected>Select One</option>
+                                            <option value="" selected>Pilihan Jadwal Interview ke-2</option>
                                             @foreach ($allocatedTimes as $time)
-                                            <option value="{{$time->id}}">{{$time->tanggal . $time->jam}} (Stock
+                                            <option value="{{$time->id}}">{{$time->tanggal . ' ' . $time->jam}} (Stock
                                                 {{$time->stock}})</option>
                                             @endforeach
                                         </select>
