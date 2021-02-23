@@ -61,7 +61,7 @@ $itemName = 'title-user';
                                             <a
                                                 href="{{$user->adminId == "Master Admon" ? route('admin.users.edit', ['user' => $user->id]) : ''}}">
                                                 <button type="button" class="btn btn-warning"
-                                                    {{$user->adminId == "Master Admon" ? '' : 'disabled'}}>
+                                                    {{auth()->user()->adminId == "Master Admon" ? '' : 'disabled'}}>
                                                     <i class="far fa-edit"></i>
                                                 </button>
                                             </a>
@@ -72,7 +72,7 @@ $itemName = 'title-user';
                                                 data-toggle="modal" data-target="#delete-modal"
                                                 data-artId="{{$user->adminId == "Master Admon" ? $user->id : ''}}"
                                                 data-artName="{{$user->adminId == "Master Admon" ? $user->id : ''}}"
-                                                {{$user->adminId == "Master Admon" ? '' : 'disabled'}}>
+                                                {{auth()->user()->adminId == "Master Admon" ? '' : 'disabled'}}>
                                                 <i class="fas fa-trash"></i>
                                             </button>
 
@@ -120,23 +120,35 @@ $itemName = 'title-user';
 <script>
     $(function () {
         $('#article-table thead th').each( function () {
-        var title = $('#article-table tfoot th').eq( $(this).index() ).text();
-        $(this).html( '&amp;lt;input type=&amp;quot;text&amp;quot; placeholder=&amp;quot;Search '+title+'&amp;quot; /&amp;gt;' );
+            var title = $(this).text();
+            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
     } );
     // Data Tables
     var theTable = $("#article-table").DataTable({
+        initComplete: function () {
+            // Apply the search
+            this.api().columns().every( function () {
+                var that = this;
+                var searchTextBoxes = $('input', this.header())
+                searchTextBoxes.on( 'keyup change clear', function () {
+                    if ( that.search() !== this.value ) {
+                        that
+                            .search( this.value )
+                            .draw();
+                    }
+                } );
+                searchTextBoxes.on('click', function (event) {
+                    event.stopPropagation()
+                })
+            } );
+        },
       "responsive": true, "lengthChange": false, "autoWidth": false,
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
     }).buttons().container().appendTo('#article-table_wrapper .col-md-6:eq(0)');
 
-    theTable.columns().eq( 0 ).each( function ( colIdx ) {
-        $( 'input', theTable.column( colIdx ).header() ).on( 'keyup change', function () {
-            theTable
-                .column( colIdx )
-                .search( this.value )
-                .draw();
-        } );
-    } );
+    // var table = $('#article-table').DataTable({
+        
+    // });
 
   });
 

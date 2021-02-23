@@ -61,17 +61,16 @@ Route::group([
         'update' => 'admin.users.update',
         'show' => 'admin.users.show',
         'edit' => 'admin.users.edit'
-        ]);
+    ]);
 });
 
 // Guest Side Group Route
-Route::group([
-    'name' => 'guest.',
-    'prefix' => 'guest'
-], function () {
-    // Landing Page
-    Route::get('/', [GuestMiscController::class, 'index'])->name('guest.index');
-});
+Route::name('guest.')
+    ->prefix('guest')
+    ->group(function () {
+        // Landing Page
+        Route::get('/', [GuestMiscController::class, 'index'])->name('guest.index');
+    });
 
 // Route::group
 // Route::group([
@@ -85,6 +84,6 @@ Route::group([
 Route::name('pengumuman.')
     ->prefix('pengumuman')
     ->group(function () {
-    Route::get('/staf-ahli', [StaffAhliController::class, 'showPengumumanForm'])->name('stafAhliForm');
-    Route::post('/staf-ahli', [StaffAhliController::class, 'postPengumumanForm'])->name('postPengumumanForm');
-});
+        Route::get('/staf-ahli', [StaffAhliController::class, 'showPengumumanForm'])->name('stafAhliForm');
+        Route::post('/staf-ahli', [StaffAhliController::class, 'postPengumumanForm'])->name('postPengumumanForm');
+    });
