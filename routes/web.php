@@ -8,6 +8,9 @@ use App\Http\Controllers\Admin\MiscController as AdminMiscController;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 
+// Temporary Staff Ahli Controller
+use App\Http\Controllers\admin\stafAhli as AdminStaffAhliController;
+
 // Guest Side Controller
 use App\Http\Controllers\Guest\MiscController as GuestMiscController;
 
@@ -44,25 +47,27 @@ Route::resource('staf_Ahli', StaffAhliController::class, []);
 Auth::routes();
 
 // Admin Side Group Route
-Route::group([
-    'prefix' => 'admin',
-    'name' => 'admin.',
-    'middleware' => ['auth', 'isGeneralAdmin']
-], function () {
-    // Index Dashboard
-    Route::get('/', [AdminMiscController::class, 'index'])->name('admin.index');
-    // Articles Resource Controller
-    Route::resource('articles', AdminArticleController::class);
-    // Users Resource Controller
-    Route::resource('users', AdminUserController::class)->names([
-        'index' => 'admin.users.index',
-        'create' => 'admin.users.create',
-        'destroy' => 'admin.users.destroy',
-        'update' => 'admin.users.update',
-        'show' => 'admin.users.show',
-        'edit' => 'admin.users.edit'
-    ]);
-});
+Route::name('admin.')
+    ->prefix('admin')
+    ->middleware(['auth', 'isGeneralAdmin'])
+    ->group(function () {
+        // Index Dashboard
+        Route::get('/', [AdminMiscController::class, 'index'])->name('index');
+        // Articles Resource Controller
+        Route::resource('articles', AdminArticleController::class);
+        // Users Resource Controller
+        Route::resource('users', AdminUserController::class)->names([
+            'index' => 'users.index',
+            'create' => 'users.create',
+            'destroy' => 'users.destroy',
+            'update' => 'users.update',
+            'show' => 'users.show',
+            'edit' => 'users.edit'
+        ]);
+
+        // Staff Ahli Resource Controller
+        Route::resource('staff_ahli', AdminStaffAhliController::class);
+    });
 
 // Guest Side Group Route
 Route::name('guest.')
@@ -71,15 +76,6 @@ Route::name('guest.')
         // Landing Page
         Route::get('/', [GuestMiscController::class, 'index'])->name('guest.index');
     });
-
-// Route::group
-// Route::group([
-//     'prefix' => 'guest',
-//     'name' => 'guest'
-// ], function () {
-//     // Landing Page
-//     Route::get('/', [GuestMiscController::class, 'landingPage'])->name('guest.landing.page');
-// });
 
 Route::name('pengumuman.')
     ->prefix('pengumuman')

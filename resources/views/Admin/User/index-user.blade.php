@@ -40,12 +40,12 @@ $itemName = 'title-user';
                             </a>
                         </div>
                     </div>
-                    <table id="article-table" class="table table-bordered table-striped">
+                    <table id="main-table" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Nama User</th>
-                                <th>Username / Email</th>
-                                <th>Role</th>
+                                <th class="is-using-setup">Nama User</th>
+                                <th class="is-using-setup">Username / Email</th>
+                                <th class="is-using-setup">Role</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -70,8 +70,8 @@ $itemName = 'title-user';
 
                                             <button type="button" class="btn btn-danger delete-butt-conf"
                                                 data-toggle="modal" data-target="#delete-modal"
-                                                data-artId="{{$user->adminId == "Master Admon" ? $user->id : ''}}"
-                                                data-artName="{{$user->adminId == "Master Admon" ? $user->id : ''}}"
+                                                data-artId="{{auth()->user()->adminId == "Master Admon" ? $user->id : ''}}"
+                                                data-artName="{{auth()->user()->adminId == "Master Admon" ? $user->name : ''}}"
                                                 {{auth()->user()->adminId == "Master Admon" ? '' : 'disabled'}}>
                                                 <i class="fas fa-trash"></i>
                                             </button>
@@ -117,49 +117,18 @@ $itemName = 'title-user';
 {{-- Response --}}
 @include('include.plugins.load-response-js')
 
+{{-- DataTables Setup --}}
+@include('include.admin.datatable-setup')
+
 <script>
-    $(function () {
-        $('#article-table thead th').each( function () {
-            var title = $(this).text();
-            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-    } );
-    // Data Tables
-    var theTable = $("#article-table").DataTable({
-        initComplete: function () {
-            // Apply the search
-            this.api().columns().every( function () {
-                var that = this;
-                var searchTextBoxes = $('input', this.header())
-                searchTextBoxes.on( 'keyup change clear', function () {
-                    if ( that.search() !== this.value ) {
-                        that
-                            .search( this.value )
-                            .draw();
-                    }
-                } );
-                searchTextBoxes.on('click', function (event) {
-                    event.stopPropagation()
-                })
-            } );
-        },
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
-    }).buttons().container().appendTo('#article-table_wrapper .col-md-6:eq(0)');
-
-    // var table = $('#article-table').DataTable({
-        
-    // });
-
-  });
-
-//   On-Click delete confirmation modals
+    //   On-Click delete confirmation modals
     $('.delete-butt-conf').click( function (event) {
         var button = $(this)
-        var artId = button.attr("data-artid")
-        var titleArticle = button.attr("data-artName")
+        var itemId = button.attr("data-artid")
+        var itemName = button.attr("data-artName")
         // Set the value in form
-        document.getElementById('title-article').value = titleArticle
-        document.getElementById('article-form').setAttribute('action', `<?php echo url()->current()?>` + `/${artId}`)
+        document.getElementById('{{$itemName}}').value = itemName
+        document.getElementById('{{$domFormId}}').setAttribute('action', `<?php echo url()->current()?>` + `/${itemId}`)
     } )
 
 </script>

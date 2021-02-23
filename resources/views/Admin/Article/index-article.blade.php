@@ -41,13 +41,13 @@ $itemName = 'title-article';
                             </a>
                         </div>
                     </div>
-                    <table id="article-table" class="table table-bordered table-striped">
+                    <table id="main-table" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Nama Artikel</th>
-                                <th>Konten Artikel</th>
-                                <th>Last updated</th>
-                                <th>Total dikunjungi</th>
+                                <th class="is-using-setup">Nama Artikel</th>
+                                <th class="is-using-setup">Konten Artikel</th>
+                                <th class="is-using-setup">Last updated</th>
+                                <th class="is-using-setup">Total dikunjungi</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -119,29 +119,11 @@ $itemName = 'title-article';
 
 {{-- Datatables --}}
 @include('include.plugins.load-datatables-js')
+
 {{-- Response --}}
 @include('include.plugins.load-response-js')
 
-<script>
-    $(function () {
+{{-- Datatable setup --}}
+@include('include.admin.datatable-setup')
 
-    // Data Tables
-    $("#article-table").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#article-table_wrapper .col-md-6:eq(0)');
-
-  });
-
-//   On-Click delete confirmation modals
-    $('.delete-butt-conf').click( function (event) {
-        var button = $(this)
-        var artId = button.attr("data-artid")
-        var titleArticle = button.attr("data-artName")
-        // Set the value in form
-        document.getElementById('title-article').value = titleArticle
-        document.getElementById('article-form').setAttribute('action', `<?php echo url()->current()?>` + `/${artId}`)
-    } )
-
-</script>
 @stop

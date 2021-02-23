@@ -249,7 +249,7 @@ return [
                 [
                     'text' => 'List Article',
                     'url'  => 'admin/articles',
-                    'icon' => 'fas fa-paste'
+                    'icon' => 'fas fa-list'
                 ],
                 [
                     'text' => 'Create Article',
@@ -265,20 +265,32 @@ return [
                 [
                     'text' => 'List User',
                     'url'  => 'admin/users',
-                    'icon' => 'fas fa-paste'
+                    'icon' => 'fas fa-list'
                 ],
                 [
-                    'text' => 'Create Article',
+                    'text' => 'Create New Instance User',
                     'url' => 'admin/users/create',
                     'icon' => 'fas fa-marker'
                 ]
             ],
         ],
         [
-            'text' => 'Event',
+            'text' => 'Staff Ahli',
+            'icon' => 'fas fa-paper-plane',
+            'submenu' => [
+                [
+                    'text' => 'Daftar Peserta',
+                    'url'  => 'admin/staff_ahli',
+                    'icon' => 'fas fa-list'
+                ],
+            ],
+        ],
+        [
+            'text' => 'Event (Not yet finished)',
             'url'  => 'admin/events',
             'icon' => 'fas fa-fw fa-lock',
         ],
+        
         // [
         //     'text'    => 'multilevel',
         //     'icon'    => 'fas fa-fw fa-share',
