@@ -97,8 +97,6 @@
                 unique_code
               },
               success:function(response){
-                  console.log(response)
-                  console.log(response.icon)
                 swal({
                     title: response.title,
                     text: (response.success ? response.msg : response.err),

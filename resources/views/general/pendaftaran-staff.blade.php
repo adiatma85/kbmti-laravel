@@ -21,6 +21,17 @@
 
 <body>
     @include('include.general.mega-drop-down')
+    {{-- Validation Error --}}
+    {{-- Need to be separated module --}}
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
 
     <section id="title">
         <div class="osi-cpw__title">Pendaftaran Staff Ahli</div>

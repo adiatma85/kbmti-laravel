@@ -11,6 +11,9 @@ use App\Models\applicantOption as ApplicantOptionModel;
 use App\Models\applicantInterviewTime as ApplicantInterviewTime;
 use App\Models\jadwalInterview as JadwalInterviewModel;
 
+// Request Validator
+use App\Http\Requests\Temp\PendaftaranStaffAhli as Store;
+
 
 class stafAhli extends Controller
 {
@@ -42,7 +45,7 @@ class stafAhli extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Store $request)
     {
         // For testing purpose only
         // return response()->json($request);
@@ -150,21 +153,21 @@ class stafAhli extends Controller
 
             $response = [];
             if ($applicant) {
-                if ($applicant->isAccepted) {
+                if ($applicant->isAccepted == 1) {
                     $response = array(
                         'success' => true,
                         'title' => 'Selamat!',
                         'msg' => 'Selamat, Anda telah diterima ke tahap selanjutnya. Harap hubungi LINE berikut untuk konfirmasi.',
                         'icon' => 'success'
                     );
+                } else {
+                    $response = array(
+                        'success' => false,
+                        'title' => 'Yah, maaf ya...',
+                        'err' => 'Anda tidak lolos ke tahap berikutnya',
+                        'icon' => 'error'
+                    );
                 }
-                // default
-                $response = array(
-                    'success' => false,
-                    'title' => 'Yah, maaf ya...',
-                    'err' => 'Anda tidak lolos ke tahap berikutnya',
-                    'icon' => 'error'
-                );
             } else {
                 $response = array(
                     'success' => false,
