@@ -1,0 +1,13 @@
+footer{
+    background: #A4B3B6 !important;
+    /* color: #2A1B3C !important; */
+}
+
+footer h5{
+    color: #2A1B3C !important;
+}
+
+.footer-pharagraphs{
+    margin-top: 1rem;
+    margin-left: 1rem;
+}

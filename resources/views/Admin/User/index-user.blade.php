@@ -4,39 +4,38 @@
 
 @section('content_header')
 @include('include.admin.breadcrumbs', [
-'pageTitle' => 'Article',
+'pageTitle' => 'Users',
 'preBreadcrumbs' => [
 'Home' => route('admin.index'),
-'Articles' => route('articles.index')
+'Users' => route('admin.users.index')
 ],
-'activeItem' => 'List Article'
+'activeItem' => 'List User'
 ])
 @stop
 
 @section('content')
-{{-- @section('plugins.Datatables', true) --}}
 
 @php
 // Localization Indonesia
 setLocale(LC_TIME, 'id_ID.utf8');
 // Sett for modal
-$domFormId = 'article-form';
-$topic = 'Artikel';
-$itemName = 'title-article';
+$domFormId = 'user-form';
+$topic = 'User';
+$itemName = 'title-user';
 @endphp
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">List Artikel</h3>
+                    <h3 class="card-title">Daftar User</h3>
                 </div>
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-12">
-                            <a href="{{route('articles.create')}}">
+                            <a href="{{route('admin.users.create')}}">
                                 <button type="button" class="btn btn-primary">
-                                    Create new Article
+                                    Register New User
                                 </button>
                             </a>
                         </div>
@@ -44,30 +43,25 @@ $itemName = 'title-article';
                     <table id="main-table" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th class="is-using-setup">Nama Artikel</th>
-                                <th class="is-using-setup">Konten Artikel</th>
-                                <th class="is-using-setup">Last updated</th>
-                                <th class="is-using-setup">Total dikunjungi</th>
+                                <th class="is-using-setup">Nama User</th>
+                                <th class="is-using-setup">Username / Email</th>
+                                <th class="is-using-setup">Role</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($articles as $article)
+                            @foreach ($users as $user)
                             <tr>
-                                <td>{{$article->name}}</td>
-                                <td>
-                                    @php
-                                    echo substr($article->content, 0, 40).(strlen($article->content) > 40 ? '...' : '');
-                                    @endphp
-                                </td>
-                                <td>{{Carbon::parse($article->created_at)->formatLocalized('%A %d %B %Y')}}</td>
-                                <td>{{$article->counter}}</td>
+                                <td>{{$user->name ?? ''}}</td>
+                                <td> {{$user->email ?? ''}}</td>
+                                <td>{{$user->adminId}}</td>
                                 <td>
                                     <div class="row">
                                         <div class="col">
                                             <a
-                                                href="{{route('articles.edit', ['article' => str_replace(' ', '-', $article->name)])}}">
-                                                <button type="button" class="btn btn-warning">
+                                                href="{{$user->adminId == "Master Admon" ? route('admin.users.edit', ['user' => $user->id]) : ''}}">
+                                                <button type="button" class="btn btn-warning"
+                                                    {{auth()->user()->adminId == "Master Admon" ? '' : 'disabled'}}>
                                                     <i class="far fa-edit"></i>
                                                 </button>
                                             </a>
@@ -76,7 +70,9 @@ $itemName = 'title-article';
 
                                             <button type="button" class="btn btn-danger delete-butt-conf"
                                                 data-toggle="modal" data-target="#delete-modal"
-                                                data-artId="{{$article->id}}" data-artName="{{$article->name}}">
+                                                data-artId="{{auth()->user()->adminId == "Master Admon" ? $user->id : ''}}"
+                                                data-artName="{{auth()->user()->adminId == "Master Admon" ? $user->name : ''}}"
+                                                {{auth()->user()->adminId == "Master Admon" ? '' : 'disabled'}}>
                                                 <i class="fas fa-trash"></i>
                                             </button>
 
@@ -87,10 +83,9 @@ $itemName = 'title-article';
                             @endforeach
                         </tbody>
                         <tfoot>
-                            <th>Nama Artikel</th>
-                            <th>Konten Artikel</th>
-                            <th>Last updated</th>
-                            <th>Total dikunjungi</th>
+                            <th>Nama User</th>
+                            <th>Username / Email</th>
+                            <th>Role</th>
                             <th>Action</th>
                         </tfoot>
                     </table>
@@ -119,11 +114,22 @@ $itemName = 'title-article';
 
 {{-- Datatables --}}
 @include('include.plugins.load-datatables-js')
-
 {{-- Response --}}
 @include('include.plugins.load-response-js')
 
-{{-- Datatable setup --}}
+{{-- DataTables Setup --}}
 @include('include.admin.datatable-setup')
 
+<script>
+    //   On-Click delete confirmation modals
+    $('.delete-butt-conf').click( function (event) {
+        var button = $(this)
+        var itemId = button.attr("data-artid")
+        var itemName = button.attr("data-artName")
+        // Set the value in form
+        document.getElementById('{{$itemName}}').value = itemName
+        document.getElementById('{{$domFormId}}').setAttribute('action', `<?php echo url()->current()?>` + `/${itemId}`)
+    } )
+
+</script>
 @stop

@@ -1,0 +1,166 @@
+.osi-cpw__title {
+    color: #2A1B3C;
+    padding-left: 200px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-right: 30px;
+    width: 60rem;
+    background-color: #FFECF5;
+    font-size: 5rem;
+    font-weight: 900;
+}
+
+.osi-cpw__sub{
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 2.5rem;
+}
+
+#title {
+    background: transparent;
+    background-size: cover;
+    padding: 80px 0 60px 0;
+    color: white;
+}
+
+#title img {
+    background-color: #FFECF5;
+    padding-left: 200px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-right: 30px;
+    width: 40rem;
+}
+
+@media (max-width:770px) {
+    .osi-cpw__title {
+        width: 100%;
+        text-align: center;
+        padding: 0;
+        font-size: 15vw;
+    }
+}
+
+@media (max-width:566px) {}
+
+
+/* Form Section */
+
+#form .flex-container {
+    display: flex;
+}
+
+#form .flex-15 {
+    flex-basis: 15%;
+}
+
+#form .flex-15 img {
+    display: none;
+}
+
+#form .flex-20 {
+    flex-basis: 20%;
+}
+
+#form .flex-70 {
+    flex-basis: 70%;
+}
+
+#form input {
+    border-radius: 30px;
+    width: 30vw;
+    height: 3rem;
+    background-color: #FFECF5;
+    margin-left: auto;
+    margin-right: 30px;
+    /* margin-left: auto;
+    margin-right: auto;
+    margin-top: 45px; */
+}
+
+#form label {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 2rem;
+    width: 350px;
+}
+
+#form textarea {
+    border-radius: 30px;
+    width: 30vw;
+    height: 150px;
+    background-color: #FFECF5;
+    margin-left: auto;
+    margin-right: 30px;
+}
+
+#form button {
+    background-color: #A4B3B6;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 40px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-left: auto;
+    margin-right: 30px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    padding: 10px 30px;
+}
+
+#form button:focus {
+    outline: 0;
+}
+
+#form .button-place {
+    text-align: right;
+}
+
+#form input[type=checkbox]:focus {
+    box-shadow: none;
+}
+
+#form input:disabled {
+    background-color: lightgray !important;
+}
+
+.purple-pills {
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    border-radius: 30px;
+    width: 30vw;
+    height: 3rem;
+    background-color: #FFECF5;
+    margin-left: auto;
+    margin-right: 30px;
+}
+
+@media (max-width:942px) {
+    #form input {
+        display: block;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #form textarea {
+        display: block;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #form .button-place {
+        text-align: center;
+    }
+    .purple-pills {
+        display: block;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

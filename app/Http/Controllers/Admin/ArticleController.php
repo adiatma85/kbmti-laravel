@@ -44,7 +44,7 @@ class ArticleController extends Controller
      */
     public function store(Store $request)
     {
-
+        // return response()->json($request);
         // Initiate the image
         $imageName = Carbon::now() . '.' . $request->image->extension();
         $request->image->storeAs('images/articles', $imageName);
@@ -54,10 +54,6 @@ class ArticleController extends Controller
             'content' => $request->content,
             'image' => $imageName
         ])->save();
-        // return redirect()->route('articles.index')->with('response', [
-        //     'type' => 'success',
-        //     'msg' => 'Penambahan Artikel telah berhasil!'
-        // ]);
         return back()
             ->with('response', [
                 'type' => 'success',
@@ -103,8 +99,6 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $name = str_replace('-', ' ', $name);
-        // $article = Article::where('name', $name)->first();
         $article = Article::findOrFail($id);
         if ($request->image) {
             Storage::delete('images/articles/' . $article->image);
@@ -116,7 +110,6 @@ class ArticleController extends Controller
         $article->name = $request->name;
         $article->content = $request->content;
         $article->save();
-        // return back()->with('success', 'Pengeditan artikel berhasil dilakukan');
         return back()
             ->with('response', [
                 'type' => 'success',

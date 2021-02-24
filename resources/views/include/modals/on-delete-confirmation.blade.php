@@ -12,7 +12,7 @@
             <form action="" method="POST" id="{{$domFormId}}">
                 <div class="modal-body">
                     <p>Apakah Anda yakin menghapus {{$topic}} ini?</p>
-                    <label for="{{$itemName}}">Judul {{$topic}}</label>
+                    <label for="{{$itemName}}">Nama {{$topic}}</label>
                     <input type="text" class="form-control" id="{{$itemName}}" value="{{old('name') ?? ''}}" disabled>
                 </div>
                 <div class="modal-footer">
