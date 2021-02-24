@@ -32,8 +32,8 @@ use App\Http\Controllers\stafAhli as StaffAhliController;
 
 // Landing Page ketika membuka pertama kali
 Route::get('/', function () {
-    // return view('welcome');
-    return view('general.index-landing-page');
+    return view('welcome');
+    // return view('general.index-landing-page');
     // Route::get('/', [GuestMiscController::class, 'landingPage'])->name('guest.landing.page');
 })->name('guest.landing.page');
 
@@ -67,6 +67,7 @@ Route::name('admin.')
 
         // Staff Ahli Resource Controller
         Route::resource('staff_ahli', AdminStaffAhliController::class);
+        Route::get('download_komit_staff/{komitmen}', [AdminStaffAhliController::class, 'handlingDownloadFile'])->name('download.komit-staffAhli');
     });
 
 // Guest Side Group Route

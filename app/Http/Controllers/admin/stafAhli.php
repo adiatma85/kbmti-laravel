@@ -4,6 +4,8 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Response;
 
 use App\Models\stafAhli as StaffAhliModel;
 
@@ -91,5 +93,10 @@ class stafAhli extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // handling download file
+    public function handlingDownloadFile($komitmen){
+        return Storage::download("rar/stafAhli/{$komitmen}");
     }
 }

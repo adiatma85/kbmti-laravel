@@ -7,7 +7,7 @@
         'pageTitle' => 'Article',
         'preBreadcrumbs' => [
             'Home' => route('admin.index'),
-            'Articles' => route('articles.index')
+            'Articles' => route('admin.articles.index')
         ],
         'activeItem' => 'Create Article'
     ])
@@ -30,7 +30,7 @@
         </div>
         {{-- /.card-header --}}
         {{-- form start --}}
-        <form method="POST" action="{{route('articles.store')}}" enctype="multipart/form-data">
+        <form method="POST" action="{{route('admin.articles.store')}}" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <div class="form-group">

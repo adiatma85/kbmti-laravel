@@ -44,7 +44,7 @@ class ArticleController extends Controller
      */
     public function store(Store $request)
     {
-
+        // return response()->json($request);
         // Initiate the image
         $imageName = Carbon::now() . '.' . $request->image->extension();
         $request->image->storeAs('images/articles', $imageName);

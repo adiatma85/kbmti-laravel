@@ -52,18 +52,23 @@ $itemName = 'peserta-name';
                                     <div class="row">
                                         <div class="col">
                                             {{-- Storage --}}
-                                            <a href="">
-                                                <button type="button" class="btn btn-info">
+                                            {{-- target="_blank" and rel="noopener noreferrer" --}}
+                                            <a href="{{route('admin.download.komit-staffAhli', ['komitmen' => $user->komitmen])}}"
+                                                target="_blank">
+                                                <button type="button" class="btn btn-info"
+                                                    data-komit="{{$user->komitmen}}">
                                                     <i class="fas fa-download"></i>
                                                 </button>
                                             </a>
                                         </div>
                                         <div class="col">
-                                            <button type="button" class="btn btn-{{$user->isAccepted ? 'success' : 'danger'}} on-change-status"
+                                            <button type="button"
+                                                class="btn btn-{{$user->isAccepted ? 'success' : 'danger'}} on-change-status"
                                                 data-toggle="modal" data-target="#change-status-modal"
                                                 data-artId="{{$user->id}}" data-artName="{{$user->name}}"
                                                 data-userStat="{{$user->isAccepted}}">
-                                                <i class="fas {{$user->isAccepted ? 'fa-check' : 'fa-skull-crossbones'}}"></i>
+                                                <i
+                                                    class="fas {{$user->isAccepted ? 'fa-check' : 'fa-skull-crossbones'}}"></i>
                                             </button>
                                         </div>
                                     </div>

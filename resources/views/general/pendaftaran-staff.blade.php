@@ -63,8 +63,7 @@
                     <div class="card-body">
 
 
-                        <form method="post" action="{{route('staf_Ahli.store')}}" enctype="multipart/form-data"
-                            onsubmit="return checkFile();">
+                        <form method="post" action="{{route('staf_Ahli.store')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="col-md-12">
                                 <div class="form-row mt-4">
@@ -162,20 +161,20 @@
                                 <small>* Untuk yang mendaftar Dept. RND dan/atau Biro RNC</small>
                                 <br><small>* Portfolio bersifat optional</small><br><br>
                             </div>
-                            <div class="form-group col-md-12 mt-4">
+                            {{-- <div class="form-group col-md-12 mt-4">
                                 <div class="form-row row">
                                     <label for="komitmen_text">Link Komitmen</label>
                                     <input type="text" name="komitmen" class="form-control" placeholder="Link Komitmen"
                                         id="komitmen_text">
                                 </div>
-                            </div>
-                            {{-- <div class="col-md-6">
+                            </div> --}}
+                            <div class="form-group col-md-6">
                                 <br>
                                 <label for="ukuran">Upload Berkas ZIP/RAR</label><br>
-                                <small>* Berisi Berkas Surat Pernyataan Komitmen dan Foto 3x4</small>
-                                <input type="file" accept=".zip,.rar" class="form-control-file mr-1" id="komitmen"
+                                <small>* Berisi Berkas Surat Pernyataan Komitmen yang dikompress menjadi ZIP/RAR</small>
+                                <input type="file" accept=".zip, .rar" class="form-control-file mr-1" id="komitmen"
                                     style="margin: 10px;background-color: white;" name="komitmen" required><br>
-                            </div> --}}
+                            </div>
                             <div class="form-group col-md-12">
                                 <div class="row">
                                     <div class="col-md-2 offset-md-10 ">
@@ -223,21 +222,9 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
-        function readURL(input) {
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-    
-    reader.onload = function(e) {
-      $('#blah').attr('src', 'https://icon-library.com/images/zipped-folder-icon/zipped-folder-icon-26.jpg');
-    }
-    
-    reader.readAsDataURL(input.files[0]); // convert to base64 string
-  }
-}
-
-$("#imgInp").change(function() {
-  readURL(this);
-});
+        $("#imgInp").change(function() {
+        readURL(this);
+        });
         AOS.init();
         let isEmpty;
         const showModal = () => {
@@ -271,79 +258,6 @@ $("#imgInp").change(function() {
             });
     </script>
     @endif
-
-
-    <script>
-        $(document).ready(function() {
-            // organisasi
-            $org =  "<div class='form-group col-md-6'>" +
-                        "<div class='row'>" +
-                            "<div class='col-md-9'>" +
-                                "<input type='text' name='organisasi[]' class='form-control' placeholder='Nama Organisasi'>" +
-                            "</div>" +
-                            "<div class='col-md-3'>" +
-                                "<input type='number' name='tahunOrganisasi[]' class='form-control' placeholder='Tahun'>"+
-                            "</div>" +
-                        "</div>" +
-                    "</div>" ;
-            $("#tambahOrg").click(function() {
-                $("#organisasi").append($org);
-            });
-
-            // kepanitiaan
-            $panitia =  "<div class='form-group col-md-6'>" +
-                        "<div class='row'>" +
-                            "<div class='col-md-9'>" +
-                                "<input type='text' name='kepanitiaan[]' class='form-control' placeholder='Nama Kepanitiaan'>" +
-                            "</div>" +
-                            "<div class='col-md-3'>" +
-                                "<input type='number' name='tahunKepanitiaan[]' class='form-control' placeholder='Tahun'>"+
-                            "</div>" +
-                        "</div>" +
-                    "</div>" ;
-            $("#tambahPanitia").click(function() {
-                $("#kepanitiaan").append($panitia);
-            });
-
-            // prestasi
-            $prestasi =  "<div class='form-group col-md-6'>" +
-                        "<div class='row'>" +
-                            "<div class='col-md-9'>" +
-                                "<input type='text' name='prestasi[]' class='form-control' placeholder='Nama Prestasi'>" +
-                            "</div>" +
-                            "<div class='col-md-3'>" +
-                                "<input type='number' name='tahunPrestasi[]' class='form-control' placeholder='Tahun'>"+
-                            "</div>" +
-                        "</div>" +
-                    "</div>" ;
-            $("#tambahPrestasi").click(function() {
-                $("#prestasi").append($prestasi);
-            });
-
-            // pengalaman
-            $pengalaman =  "<div class='form-group col-md-6'>" +
-                        "<div class='row'>" +
-                            "<div class='col-md-9'>" +
-                                "<input type='text' name='pengalaman[]' class='form-control' placeholder='Nama Pengalaman'>" +
-                            "</div>" +
-                            "<div class='col-md-3'>" +
-                                "<input type='number' name='tahunPengalaman[]' class='form-control' placeholder='Tahun'>"+
-                            "</div>" +
-                        "</div>" +
-                    "</div>" ;
-            $("#tambahPengalaman").click(function() {
-                $("#pengalaman").append($pengalaman);
-            });
-
-            $("#uploadPortfolio").click(function() {
-                $("#portfolio").click();
-            });
-
-            $("#uploadJadwal").click(function() {
-                $("#jadwal").click();
-            });
-        });
-    </script>
 
     <script type="text/javascript">
         function checkFile() {

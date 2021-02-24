@@ -53,7 +53,7 @@ class stafAhli extends Controller
             'no_wa' => $request->no_wa,
             'id_line' => $request->id_line,
             // if text
-            'komitmen' => $request->komitmen
+            // 'komitmen' => $request->komitmen
         ];
 
         // Fetch the data if there are duplicate
@@ -63,12 +63,10 @@ class stafAhli extends Controller
         }
 
         // Initiate the rar
-        // $komitmenName = Carbon::now() . '.' . $request->name . $request->image->extension();
-        // $request->komitmen->storeAs('rar/stafAhli/', $komitmenName);
-
+        $komitmenName = Carbon::now() . ' ' . $request->name . '.' . $request->komitmen->extension();
+        $request->komitmen->storeAs('rar/stafAhli/', $komitmenName);
+        $arrayData['komitmen'] = $komitmenName;
         $staffAhli = StafAhliModel::create($arrayData);
-        // return response()->json($staffAhli);
-        // $staffAhli->save();
         foreach ($request->dept as $departmen) {
             # code...
             ApplicantOptionModel::create([
@@ -178,13 +176,12 @@ class stafAhli extends Controller
             return response()->json($response);
             // return redirect()->back()->with(compact('response'));
         } catch (\Throwable $th) {
-            throw $th;
-            // $response = [
-            //     'success' => false,
-            //     'title' => 'Terjadi kesalahan',
-            //     'err' => 'Data Anda tidak terdaftar dalam database kita',
-            //     'icon' => 'warning'
-            // ];
+            $response = [
+                'success' => false,
+                'title' => 'Terjadi kesalahan',
+                'err' => 'Terjadi kesalahan pada Server',
+                'icon' => 'warning'
+            ];
         }
     }
 }
