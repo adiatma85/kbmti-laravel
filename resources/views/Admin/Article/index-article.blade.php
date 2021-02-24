@@ -7,7 +7,7 @@
 'pageTitle' => 'Article',
 'preBreadcrumbs' => [
 'Home' => route('admin.index'),
-'Articles' => route('articles.index')
+'Articles' => route('admin.articles.index')
 ],
 'activeItem' => 'List Article'
 ])
@@ -34,7 +34,7 @@ $itemName = 'title-article';
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-12">
-                            <a href="{{route('articles.create')}}">
+                            <a href="{{route('admin.articles.create')}}">
                                 <button type="button" class="btn btn-primary">
                                     Create new Article
                                 </button>
@@ -66,7 +66,7 @@ $itemName = 'title-article';
                                     <div class="row">
                                         <div class="col">
                                             <a
-                                                href="{{route('articles.edit', ['article' => str_replace(' ', '-', $article->name)])}}">
+                                                href="{{route('admin.articles.edit', ['article' => str_replace(' ', '-', $article->name)])}}">
                                                 <button type="button" class="btn btn-warning">
                                                     <i class="far fa-edit"></i>
                                                 </button>
@@ -125,5 +125,18 @@ $itemName = 'title-article';
 
 {{-- Datatable setup --}}
 @include('include.admin.datatable-setup')
+
+<script>
+    //   On-Click delete confirmation modals
+    $('.delete-butt-conf').click( function (event) {
+        var button = $(this)
+        var itemId = button.attr("data-artid")
+        var itemName = button.attr("data-artName")
+        // Set the value in form
+        document.getElementById('{{$itemName}}').value = itemName
+        document.getElementById('{{$domFormId}}').setAttribute('action', `<?php echo url()->current()?>` + `/${itemId}`)
+    } )
+
+</script>
 
 @stop
