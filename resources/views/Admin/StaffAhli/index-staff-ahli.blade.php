@@ -38,6 +38,8 @@ $itemName = 'peserta-name';
                                 <th class="is-using-setup">NIM</th>
                                 <th class="is-using-setup">Id Line</th>
                                 <th class="is-using-setup">Nomor WA</th>
+                                <th class="hidden-item">Departemen Pilihan</th>
+                                <th class="hidden-item">Jadwal Pilihan</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -48,11 +50,21 @@ $itemName = 'peserta-name';
                                 <td> {{$user->nim ?? ''}}</td>
                                 <td>{{$user->id_line}}</td>
                                 <td>{{$user->no_wa}}</td>
+                                <td class="hidden-item">
+                                    @foreach ($user->applicantOption as $option)
+                                    {{$option->option}}
+                                    <br>
+                                    @endforeach</td>
+                                <td class="hidden-item">
+                                    @foreach ($user->applicantInterviewTime as $interviewTime)
+                                    <?php $time = $interviewTime->jadwalInterview?>
+                                    {{$time->tanggal . ' ' . $time->jam}}
+                                    <br>
+                                    @endforeach</td>
+                                </td>
                                 <td>
                                     <div class="row">
                                         <div class="col">
-                                            {{-- Storage --}}
-                                            {{-- target="_blank" and rel="noopener noreferrer" --}}
                                             <a href="{{route('admin.download.komit-staffAhli', ['komitmen' => $user->komitmen])}}"
                                                 target="_blank">
                                                 <button type="button" class="btn btn-info"
@@ -81,6 +93,8 @@ $itemName = 'peserta-name';
                             <th>NIM</th>
                             <th>Id Line</th>
                             <th>Nomor WA</th>
+                            <th class="hidden-item">Departemen Pilihan</th>
+                                <th class="hidden-item">Jadwal Pilihan</th>
                             <th>Action</th>
                         </tfoot>
                     </table>
@@ -126,6 +140,12 @@ $itemName = 'peserta-name';
 
 {{-- Response --}}
 @include('include.plugins.load-response-css')
+
+<style>
+    .hidden-item {
+        display: none;
+    }
+</style>
 
 @stop
 
