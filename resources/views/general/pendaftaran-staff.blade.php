@@ -166,7 +166,7 @@
                             <div class="form-group col-md-12 mt-4">
                                 <div class="form-row row">
                                     <label for="portofolio">Link Portofolio (Drive / Github)</label>
-                                    <input type="text" name="portfolio" class="form-control"
+                                    <input type="text" name="portofolio" class="form-control"
                                         placeholder="Link Portfolio" id="portofolio">
                                 </div>
                                 <small>* Untuk yang mendaftar Dept. RND dan/atau Biro RNC</small>
