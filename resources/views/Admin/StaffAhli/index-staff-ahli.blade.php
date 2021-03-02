@@ -34,6 +34,7 @@ $itemName = 'peserta-name';
                     <table id="main-table" class="table table-bordered table-striped">
                         <thead>
                             <tr>
+                                <th class="">Urutan pendaftaran</th>
                                 <th class="is-using-setup">Nama</th>
                                 <th class="is-using-setup">NIM</th>
                                 <th class="is-using-setup">Id Line</th>
@@ -47,6 +48,7 @@ $itemName = 'peserta-name';
                         <tbody>
                             @foreach ($staffAhli as $user)
                             <tr>
+                                <td>{{$user->id ?? ''}}</td>
                                 <td>{{$user->name ?? ''}}</td>
                                 <td> {{$user->nim ?? ''}}</td>
                                 <td>{{$user->id_line}}</td>
