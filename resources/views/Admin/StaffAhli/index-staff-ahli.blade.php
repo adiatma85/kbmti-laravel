@@ -39,6 +39,7 @@ $itemName = 'peserta-name';
                                 <th class="is-using-setup">Id Line</th>
                                 <th class="is-using-setup">Nomor WA</th>
                                 <th class="hidden-item">Departemen Pilihan</th>
+                                <th class="">Portofolio</th>
                                 <th class="hidden-item">Jadwal Pilihan</th>
                                 <th>Action</th>
                             </tr>
@@ -55,6 +56,29 @@ $itemName = 'peserta-name';
                                     {{$option->option}}
                                     <br>
                                     @endforeach</td>
+                                <td class="">
+                                    <a href="{{$user->portofolio}}">
+                                        {{$user->portofolio}}
+                                    </a>
+                                </td>
+                                <td class="hidden-item">
+                                    @foreach ($user->applicantInterviewTime as $interviewTime)
+                                    <?php $time = $interviewTime->jadwalInterview?>
+                                    {{$time->tanggal . ' ' . $time->jam}}
+                                    <br>
+                                    @endforeach</td>
+                                </td>
+                                <td class="">
+                                    <div class="row">
+                                        <div class="col">
+                                            <a href="{{$user->portofolio ?? '#'}}">
+                                                <button type="button" class="btn {{$user->portofolio ? 'btn-info' : 'btn-warning'}}">
+                                                    <i class="fas {{$user->portofolio ? 'fa-eye' : 'fa-stop-circle'}}"></i>
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
                                 <td class="hidden-item">
                                     @foreach ($user->applicantInterviewTime as $interviewTime)
                                     <?php $time = $interviewTime->jadwalInterview?>
@@ -94,7 +118,8 @@ $itemName = 'peserta-name';
                             <th>Id Line</th>
                             <th>Nomor WA</th>
                             <th class="hidden-item">Departemen Pilihan</th>
-                                <th class="hidden-item">Jadwal Pilihan</th>
+                            <th class="">Portofolio</th>
+                            <th class="hidden-item">Jadwal Pilihan</th>
                             <th>Action</th>
                         </tfoot>
                     </table>
