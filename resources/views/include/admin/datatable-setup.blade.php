@@ -3,7 +3,7 @@
     $(function () {
         $('#main-table thead th.is-using-setup').each( function () {
             var title = $(this).text();
-            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+            $(this).html( '<input type="text" style="font-size: 13px;" placeholder="Search '+title+'" />' );
     } );
     // Data Tables
     var theTable = $("#main-table").DataTable({
