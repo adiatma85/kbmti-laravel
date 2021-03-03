@@ -34,14 +34,14 @@ $itemName = 'peserta-name';
                     <table id="main-table" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th class="">Urutan pendaftaran</th>
+                                <th class="">No.</th>
                                 <th class="is-using-setup">Nama</th>
                                 <th class="is-using-setup">NIM</th>
                                 <th class="is-using-setup">Id Line</th>
                                 <th class="is-using-setup">Nomor WA</th>
-                                <th class="hidden-item">Departemen Pilihan</th>
+                                <th class="">Departemen Pilihan</th>
+                                <th class="">Jadwal Pilihan</th>
                                 <th class="">Portofolio</th>
-                                <th class="hidden-item">Jadwal Pilihan</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -53,17 +53,12 @@ $itemName = 'peserta-name';
                                 <td> {{$user->nim ?? ''}}</td>
                                 <td>{{$user->id_line}}</td>
                                 <td>{{$user->no_wa}}</td>
-                                <td class="hidden-item">
+                                <td class="">
                                     @foreach ($user->applicantOption as $option)
                                     {{$option->option}}
                                     <br>
                                     @endforeach</td>
                                 <td class="">
-                                    <a href="{{$user->portofolio}}">
-                                        {{$user->portofolio}}
-                                    </a>
-                                </td>
-                                <td class="hidden-item">
                                     @foreach ($user->applicantInterviewTime as $interviewTime)
                                     <?php $time = $interviewTime->jadwalInterview?>
                                     {{$time->tanggal . ' ' . $time->jam}}
@@ -80,13 +75,6 @@ $itemName = 'peserta-name';
                                             </a>
                                         </div>
                                     </div>
-                                </td>
-                                <td class="hidden-item">
-                                    @foreach ($user->applicantInterviewTime as $interviewTime)
-                                    <?php $time = $interviewTime->jadwalInterview?>
-                                    {{$time->tanggal . ' ' . $time->jam}}
-                                    <br>
-                                    @endforeach</td>
                                 </td>
                                 <td>
                                     <div class="row">
@@ -115,13 +103,14 @@ $itemName = 'peserta-name';
                             @endforeach
                         </tbody>
                         <tfoot>
+                            <th>No.</th>
                             <th>Nama</th>
                             <th>NIM</th>
                             <th>Id Line</th>
                             <th>Nomor WA</th>
-                            <th class="hidden-item">Departemen Pilihan</th>
+                            <th class="">Departemen Pilihan</th>
+                            <th class="">Jadwal Pilihan</th>
                             <th class="">Portofolio</th>
-                            <th class="hidden-item">Jadwal Pilihan</th>
                             <th>Action</th>
                         </tfoot>
                     </table>
