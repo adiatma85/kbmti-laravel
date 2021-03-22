@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Storage;
+/* use Illuminate\Support\Facades\Storage; */
 
 // Request Validations
 use App\Http\Requests\Article\Store;
@@ -47,12 +47,25 @@ class ArticleController extends Controller
         // return response()->json($request);
         // Initiate the image
         $imageName = Carbon::now() . '.' . $request->image->extension();
-        $request->image->storeAs('images/articles', $imageName);
+        /* $request->image->storeAs('images/articles', $imageName); */
+
+        // Experiment CDN
+        // Work well, but need to re-configure in server
+        // Add image_cloud_name when created the resource
+        $response = cloudinary()->upload($request->file('image')->getRealPath(), [
+            'public_id' => $imageName,
+            'folder' => 'kbmti_article'
+        ])->getSecurePath();
+        /* return response()->json($response); */
+        /* dd($response); */
 
         Article::create([
             'name' => $request->name,
             'content' => $request->content,
-            'image' => $imageName
+            /* 'image' => $imageName, */
+            // Cloudinary experiment
+            'image' => $response,
+            'image_cloud_name' => $imageName,
         ])->save();
         return back()
             ->with('response', [
@@ -101,10 +114,25 @@ class ArticleController extends Controller
     {
         $article = Article::findOrFail($id);
         if ($request->image) {
-            Storage::delete('images/articles/' . $article->image);
+            
+
+            /* Storage::delete('images/articles/' . $article->image); */
             $imageName = Carbon::now() . '.' . $request->image->extension();
-            $request->image->storeAs('images/articles', $imageName);
-            $article->image = $imageName;
+            /* $request->image->storeAs('images/articles', $imageName); */
+            /* $article->image = $imageName; */
+
+            // Experiment Cloudinary
+            // Delete the resource
+            cloudinary()->destroy("kbmti_article/$article->image_cloud_name"); 
+            // Input new image
+             $response = cloudinary()->upload($request->file('image')->getRealPath(), [
+                 'public_id' => $imageName,
+                 'folder' => 'kbmti_article'
+            ])->getSecurePath();
+            /* return response()->json($response); */
+            /* dd($response); */
+            $article->image = $response;
+            $article->image_cloud_name = $imageName;
         }
         // Change the name and content
         $article->name = $request->name;
@@ -126,7 +154,11 @@ class ArticleController extends Controller
     public function destroy($id)
     {
         $article = Article::findOrFail($id);
-        Storage::delete('images/articles/' . $article->image);
+        /* Storage::delete('images/articles/' . $article->image); */
+        // Experiment Cloudinary 
+        // Delete the resource in cloudinar
+        cloudinary()->destroy("kbmti_article/$article->image_cloud_name");
+
         Article::where('id', $id)->delete();
         // return back()->with('success', 'Penghapusan artikel berhasil dilakukan');
         return back()

@@ -14,5 +14,5 @@ class Article extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'content', 'image', 'created_at', 'updated_at', 'counter'];
+    protected $fillable = ['name', 'content', 'image', 'created_at', 'updated_at', 'counter', 'image_cloud_name'];
 }
