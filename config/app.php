@@ -175,6 +175,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // Custom Provider
+        CloudinaryLabs\CloudinaryLaravel\CloudinaryServiceProvider::class,
+
     ],
 
     /*
@@ -228,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         // Custom Aliases
         'Carbon' => Carbon\Carbon::class,  
+        'Cloudinary' => CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary::class,
     ],
 
 ];
