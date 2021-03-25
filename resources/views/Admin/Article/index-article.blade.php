@@ -41,9 +41,13 @@ $itemName = 'title-article';
                             </a>
                         </div>
                     </div>
+
+
+                    {{-- Back up old --}}
                     <table id="main-table" class="table table-bordered table-striped">
                         <thead>
                             <tr>
+                                <th>No</th>
                                 <th class="is-using-setup">Nama Artikel</th>
                                 <th class="is-using-setup">Konten Artikel</th>
                                 <th class="is-using-setup">Last updated</th>
@@ -54,6 +58,7 @@ $itemName = 'title-article';
                         <tbody>
                             @foreach ($articles as $article)
                             <tr>
+                                <td>{{$article->id}}</td>
                                 <td>{{$article->name}}</td>
                                 <td>
                                     @php
@@ -87,6 +92,7 @@ $itemName = 'title-article';
                             @endforeach
                         </tbody>
                         <tfoot>
+                            <th>No</th>
                             <th>Nama Artikel</th>
                             <th>Konten Artikel</th>
                             <th>Last updated</th>
@@ -140,3 +146,30 @@ $itemName = 'title-article';
 </script>
 
 @stop
+
+
+{{-- Experiment View --}}
+                    {{-- <section id="indexes">
+                        <div class="container">
+                            <div class="row">
+                                @foreach ($articles as $article)
+                                <div class="col-lg-4 mb-2">
+                                    <div class="card">
+                                        <img src="https://images.unsplash.com/photo-1477862096227-3a1bb3b08330?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60"
+                                            alt="" class="card-img-top">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{$article->name}}</h5>
+                    <p class="card-text">@php
+                        echo substr($article->content, 0, 40).(strlen($article->content) > 40 ?
+                        '...' : '');
+                        @endphp
+                    </p>
+                    <a href="" class="btn btn-outline-success btn-sm">Edit</a>
+                    <a href="" class="btn btn-outline-danger btn-sm"><i class="far fa-heart"></i></a>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</div>
+</section> --}}

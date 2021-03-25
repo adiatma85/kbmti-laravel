@@ -37,6 +37,11 @@ Route::get('/', function () {
     // Route::get('/', [GuestMiscController::class, 'landingPage'])->name('guest.landing.page');
 })->name('guest.landing.page');
 
+// Testing Ground
+Route::get('article-testing-card', function () {
+    return view('Admin.Article.testing-artcile-card');
+});
+
 // Staf Ahli Temporary
 Route::resource('staf_Ahli', StaffAhliController::class, []);
 
