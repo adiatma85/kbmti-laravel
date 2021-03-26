@@ -82,9 +82,6 @@ class ArticleController extends Controller
      */
     public function edit($name)
     {
-        // return response()->json([
-        //     'name' => $name
-        // ]);
         $name = str_replace('-', ' ', $name);
         $article = Article::where('name', $name)->first();
         return view('Admin/Article/edit-article', compact('article'));

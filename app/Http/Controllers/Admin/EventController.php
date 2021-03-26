@@ -18,8 +18,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        $event = Event::all(); 
-        return view('Admin/Event/index-events', compact('event'));
+        $events = Event::all();
+        return view('Admin/Events/index-event', compact('events'));
     }
 
     /**
@@ -29,7 +29,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('Admin/Event/create-event');
+        return view('Admin/Events/create-event');
     }
 
     /**
@@ -40,7 +40,7 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        $newEvent = Event::create($request->all());
+        Event::create($request->except(['_token']));
         return back()
             ->with('response', [
                 'type' => 'success',
@@ -54,11 +54,10 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($name)
+    public function show($id)
     {
-        $name = str_replace('-', ' ', $name);
-        $event = Event::where('name', $name)->first();
-        return view('Admin/Event/show-event', compact('event'));
+        $event = Event::findOrFail($id);
+        return view('Admin/Events/edit-event', compact('event'));
     }
 
     /**
@@ -67,11 +66,10 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($name)
+    public function edit($id)
     {
-        $name = str_replace('-', ' ', $name);
-        $event = Event::where('name', $name)->first();
-        return view('Admin/Event/show-event', compact('event'));
+        $event = Event::find($id);
+        return view('Admin/Events/edit-event', compact('event'));
     }
 
     /**
@@ -83,8 +81,15 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        $event = Event::findOrFail($id);
+        $event = Event::find($id);
+        $event->name = $request->name;
+        $event->description = $request->description;
+        $event->save();
+        return back()
+            ->with('response', [
+                'type' => 'success',
+                'msg' => 'Pengeditan pendaftaran event berhasil dilakukan!'
+            ]);
     }
 
     /**
@@ -95,6 +100,11 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Event::where('id', $id)->delete();
+        return back()
+            ->with('response', [
+                'type' => 'success',
+                'msg' => 'Penghapusan pendafatarn event berhasil dilakukan!'
+            ]);
     }
 }
