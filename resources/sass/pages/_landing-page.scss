@@ -1,0 +1,19 @@
+.landing-page {
+    &__karena {
+        @include respon(phone) {
+            padding-top: 12em;
+        }
+    }
+    &__gambar-alfa-reza {
+        @include respon(phone) {
+            img {
+                margin-top: -17em;
+            }
+        }
+    }
+    &__selamat {
+        @include respon(phone) {
+            margin-right: 4em;
+        }
+    }
+}

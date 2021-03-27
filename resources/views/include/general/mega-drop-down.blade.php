@@ -1,125 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>KBMTI (Keluarga Besar Mahasiswa Teknologi Informasi)</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <style>
-    .top-auto{top:auto}
-    .dropdown-hamburger:hover {
-  transform: scale(1.5);
-  background-color: transparent;
-}
-.nav-mobile-toggle{
-    background-color: #212529 !important;
-}
-
-.dropdown-list{
-    position:fixed !important;
-}
-
-.dropdown-text{
-    display:none;
-    color:#2A1B3C;
-    font-size:18px;
-}
-
-.dropdown-burger{
-    display:block;
-}
-
-@media (max-width: 768px) {
-    .dropdown-list{
-    top:0;
-    bottom:0;
-    right:0;
-    left:0;
-    height:100vh;
-    width:100vw;
-}
-.dropdown-burger{
-    display:none;
-}
-.dropdown-text{
-    display:block;
-}
-}
-
-.modal-active{
-    overflow:hidden;
-}
-
-.desktop-emti{
-        display:block;
-    }
-    .mobile-emti{
-        display:none;
-    }
-@media(max-width:992px){
-    .desktop-emti{
-        display:none;
-    }
-    .mobile-emti{
-        display:block;
-    }
-}
-#myBtn {
-  display: block;
-  position: fixed;
-  bottom: 20px;
-  right: 30px;
-  z-index: 99;
-  font-size: 18px;
-  border: none;
-  outline: none;
-  color: white;
-  cursor: pointer;
-  padding: 15px;
-  border-radius: 4px;
-}
-
-
-  </style>
-</head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark" id="toTop">
     <div class="container">
         <div class="navbar-brand"><a id="pramuimge-logo" href="{{route('guest.landing.page')}}"><img src="{{asset('images/misc/logo.svg')}}" alt=""/></a></div>
-        <button class="navbar-toggler collapsed nav-mobile-toggle" type="button" data-toggle="collapse" data-target="#main-nav-1" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler collapsed megadrown__nav-mobile-toggle" type="button" data-toggle="collapse" data-target="#main-nav-1" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
         <div class="navbar-collapse collapse" id="main-nav-1">
             <ul class="navbar-nav mx-auto">
-                
+
                 <li class="nav-item"><a title="Blog" href="#" class="nav-link"style="color:#2A1B3C;font-size: 18px;"><b>Profile</b></a>
                 </li>
                 <li class="nav-item dropdown position-static"><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="#" style="color:#2A1B3C;font-size: 18px;"><b>EMTI</b></a>
-                    <div class="dropdown-menu w-100 top-auto dropdown-list" style="background-color:#2A1B3C;opacity: 0.9; top:0px">
+                    <div class="dropdown-menu w-100 megadrown__top-auto megadrown__dropdown-list" style="background-color:#2A1B3C;opacity: 0.9; top:0px">
                         <div class="container">
                             <div class="row w-100">
                                 <div class="text-center col-sm-4">
                                     <!-- <h3 class="border border-top-0 border-right-0 border-left-0">For Individuals</h3> -->
-                                    <a href="#" class="dropdown-item dropdown-hamburger" style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;padding-top:20px;">Profile EMTI</a>
-                                    <a href="#" title="Windows Application"  class="dropdown-item dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;">Entrepeneur</a>
-                                    <a href="#" title="Android App"  class="dropdown-item dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;"><span class="desktop-emti">Relation and Creative</span><span class="mobile-emti">RnC</span></a>
-                                   <!--  <a href="http://kbmti.filkom.ub.ac.id/landing/bank_soal" title="FireFox Extension"  class="dropdown-item dropdown-hamburger"style="color:white">HRD</a> -->
+                                    <a href="#" class="dropdown-item megadrown__dropdown-hamburger" style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;padding-top:20px;">Profile EMTI</a>
+                                    <a href="#" title="Windows Application"  class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;">Entrepeneur</a>
+                                    <a href="#" title="Android App"  class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;"><span class="megadrown__desktop-emti">Relation and Creative</span><span class="megadrown__mobile-emti">RnC</span></a>
+                                   <!--  <a href="http://kbmti.filkom.ub.ac.id/landing/bank_soal" title="FireFox Extension"  class="dropdown-item megadrown__dropdown-hamburger"style="color:white">HRD</a> -->
                                 </div>
                                 <div class="text-center col-sm-4">
                                     <!-- <h3 class="border border-top-0 border-right-0 border-left-0">For Website Owners</h3> -->
-                                    <a title="WordPress Plugin" href="#" class="dropdown-item dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;padding-top:20px;">Advocacy</a>
-                                    <a title="Drupal Module" href="#" class="dropdown-item dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;"><span class="desktop-emti">Research and Development</span><span class="mobile-emti">RnD</span></a>
-                                    <a href="#" title="Android App"  class="dropdown-item dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;">Administrative</a>
+                                    <a title="WordPress Plugin" href="#" class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;padding-top:20px;">Advocacy</a>
+                                    <a title="Drupal Module" href="#" class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;"><span class="megadrown__desktop-emti">Research and Development</span><span class="megadrown__mobile-emti">RnD</span></a>
+                                    <a href="#" title="Android App"  class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;">Administrative</a>
                                 </div>
                                 <div class="text-center col-sm-4">
                                     <!-- <h3 class="border border-top-0 border-right-0 border-left-0">For Developers</h3> -->
-                                    <a href="#" title="JavaScript Library"  class="dropdown-item dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;padding-top:20px;"><span class="desktop-emti">Human Resource Development</span><span class="mobile-emti">HRD</span></a>
-                                    <a href="#" title="TinyMCE Plugin"  class="dropdown-item dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;"><span class="desktop-emti">Social Environment</span><span class="mobile-emti">SE</span></a>
+                                    <a href="#" title="JavaScript Library"  class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;padding-top:20px;"><span class="megadrown__desktop-emti">Human Resource Development</span><span class="megadrown__mobile-emti">HRD</span></a>
+                                    <a href="#" title="TinyMCE Plugin"  class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;"><span class="megadrown__desktop-emti">Social Environment</span><span class="megadrown__mobile-emti">SE</span></a>
                                 </div>
                             </div>
                         </div>
@@ -132,23 +43,23 @@
             </ul>
 
             <ul class="navbar-nav" >
-            <li class="nav-item dropdown position-static"><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="#"><img class="dropdown-burger" src="http://kbmti.filkom.ub.ac.id/landing/home/assets/burger-ico.svg"> <span class="dropdown-text">More</span></a>
-                    <div class="dropdown-menu w-100 top-auto dropdown-list" style="background-color:#2A1B3C;opacity: 0.9;top:0px">
+            <li class="nav-item dropdown position-static"><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="#"><img class="megadrown__dropdown-burger" src="http://kbmti.filkom.ub.ac.id/landing/home/assets/burger-ico.svg"> <span class="megadrown__dropdown-text">More</span></a>
+                    <div class="dropdown-menu w-100 megadrown__top-auto megadrown__dropdown-list" style="background-color:#2A1B3C;opacity: 0.9;top:0px">
                         <div class="container">
                             <div class="row w-100">
                                 <div class="text-center col-sm-4">
-                                    <a href="#" class="dropdown-item dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;padding-top:40px;text-align: left;">Bank Materi</a>
-                                    <a href="#" title="Windows Application"  class="dropdown-item dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;">Bank Soal</a>
+                                    <a href="#" class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;padding-top:40px;text-align: left;">Bank Materi</a>
+                                    <a href="#" title="Windows Application"  class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;">Bank Soal</a>
                                 </div>
                                 <div class="text-center col-sm-4">
-                                    <a title="WordPress Plugin" href="#" class="dropdown-item dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;padding-top:40px;text-align: left;">Info Lomba</a>
-                                    <a title="Drupal Module" href="#" class="dropdown-item dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;">Info Event IT</a>
-                                    <a title="Joomla Extension" href="#" class="dropdown-item dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;">Info Beasiswa</a>
-                                    <a title="Joomla Extension" href="#" class="dropdown-item dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;">Info Karir</a>
+                                    <a title="WordPress Plugin" href="#" class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;padding-top:40px;text-align: left;">Info Lomba</a>
+                                    <a title="Drupal Module" href="#" class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;">Info Event IT</a>
+                                    <a title="Joomla Extension" href="#" class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;">Info Beasiswa</a>
+                                    <a title="Joomla Extension" href="#" class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;">Info Karir</a>
                                 </div>
                                 <div class="text-center col-sm-4">
-                                    <a href="#" title="JavaScript Library"  class="dropdown-item dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;padding-top:40px;text-align: left;">TI Talks</a>
-                                    <a href="#" title="TinyMCE Plugin" class="dropdown-item dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;">Pengajuan Surat</a>
+                                    <a href="#" title="JavaScript Library"  class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;padding-top:40px;text-align: left;">TI Talks</a>
+                                    <a href="#" title="TinyMCE Plugin" class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;">Pengajuan Surat</a>
                                 </div>
                             </div>
                         </div>
@@ -158,7 +69,7 @@
         </div>
     </div>
 </nav>
-<a href="#toTop" id="myBtn" title="Go to top">
+<a href="#toTop" id="myBtn" title="Go to top" class="megadrown__top-button">
     <svg width="100" height="100" viewBox="0 0 131 131" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_ddd)">
 <circle cx="65.5" cy="61.5" r="61.5" fill="#8265A7"/>
@@ -210,18 +121,17 @@
 </svg>
 
 </a>
-   
+
    <script>
-  AOS.init();
 
   $('.dropdown').on('show.bs.dropdown', function() {
     $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
-    $('body').toggleClass('modal-active');
+    $('body').toggleClass('megadrown__modal-active');
   });
 
   $('.dropdown').on('hide.bs.dropdown', function() {
     $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
-    $('body').toggleClass('modal-active');
+    $('body').toggleClass('megadrown__modal-active');
   });
 </script>
 <script>
@@ -242,7 +152,7 @@ $(document).ready(function(){
       $('html, body').animate({
         scrollTop: $(hash).offset().top
       }, 800, function(){
-   
+
         // Add hash (#) to URL when done scrolling (default click behavior)
         window.location.hash = hash;
       });
