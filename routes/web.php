@@ -42,7 +42,20 @@ Route::get('/', function () {
 // Staf Ahli Temporary
 Route::resource('staf_Ahli', StaffAhliController::class, []);
 
-Route::resource('event-registration', GuestEventRegistrationController::class);
+// Grouped Guest Routes
+Route::name('guest.')
+    ->group(function () {
+        // event-registration -> Route Registrasi Event-event yang ada di KBMTI
+        Route::name('event-registration.')
+            ->prefix('event-registration')
+            ->group(function () {
+                // Index page -> Redirect to lates updated, but for now, it will be the tester
+                Route::get('', [GuestEventRegistrationController::class, 'index'])->name('index');
+                // Get and Post Routes
+                Route::get('/{eventName}', [GuestEventRegistrationController::class, 'showFromName'])->name('showFromName');
+                Route::post('/{eventName}', [GuestEventRegistrationController::class, 'storeEventRegistration'])->name('storeEventRegistration');
+            });
+    });
 
 
 // Auth Routes

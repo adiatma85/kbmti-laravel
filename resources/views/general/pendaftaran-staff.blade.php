@@ -172,13 +172,6 @@
                                 <small>* Untuk yang mendaftar Dept. RND dan/atau Biro RNC</small>
                                 <br><small>* Portfolio bersifat optional</small><br><br>
                             </div>
-                            {{-- <div class="form-group col-md-12 mt-4">
-                                <div class="form-row row">
-                                    <label for="komitmen_text">Link Komitmen</label>
-                                    <input type="text" name="komitmen" class="form-control" placeholder="Link Komitmen"
-                                        id="komitmen_text">
-                                </div>
-                            </div> --}}
                             <div class="form-group col-md-6">
                                 <br>
                                 <label for="ukuran">Upload Berkas ZIP/RAR</label><br>

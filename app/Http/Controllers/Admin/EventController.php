@@ -50,6 +50,7 @@ class EventController extends Controller
 
     /**
      * Display the specified resource.
+     * Dalam hal ini menunjukkan siapa saja pendaftarnya!
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -57,7 +58,7 @@ class EventController extends Controller
     public function show($id)
     {
         $event = Event::findOrFail($id);
-        return view('Admin/Events/edit-event', compact('event'));
+        return view('Admin/Events/detail-event', compact('event'));
     }
 
     /**

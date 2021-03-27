@@ -61,11 +61,17 @@ $itemName = 'title-article';
                                     echo substr($event->description, 0, 40).(strlen($event->description) > 40 ? '...' : '');
                                     @endphp
                                 </td>
-                                {{-- <td>{{Carbon::parse($article->created_at)->formatLocalized('%A %d %B %Y')}}</td> --}}
-                                {{-- <td>{{$article->counter}}</td> --}}
                                 <td>
                                     <div class="row">
-                                        <div class="col">
+                                        <div class="m-2">
+                                            <a
+                                                href="{{route('admin.events.show', ['event' => str_replace(' ', '-', $event->id)])}}">
+                                                <button type="button" class="btn btn-info">
+                                                    <i class="far fa-eye"></i>
+                                                </button>
+                                            </a>
+                                        </div>
+                                        <div class="m-2">
                                             <a
                                                 href="{{route('admin.events.edit', ['event' => str_replace(' ', '-', $event->id)])}}">
                                                 <button type="button" class="btn btn-warning">
@@ -73,8 +79,7 @@ $itemName = 'title-article';
                                                 </button>
                                             </a>
                                         </div>
-                                        <div class="col">
-
+                                        <div class="m-2">
                                             <button type="button" class="btn btn-danger delete-butt-conf"
                                                 data-toggle="modal" data-target="#delete-modal"
                                                 data-artId="{{$event->id}}" data-artName="{{$event->name}}">
