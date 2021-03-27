@@ -89,7 +89,7 @@ Route::name('admin.')
 
         // Event Controller
         Route::resource('events', AdminEventController::class);
-        // Staff Ahli Resource Controller
+        // For Controller in Staff Ahli
         Route::resource('staff_ahli', AdminStaffAhliController::class);
         Route::get('download_komit_staff/{komitmen}', [AdminStaffAhliController::class, 'handlingDownloadFile'])->name('download.komit-staffAhli');
     });
