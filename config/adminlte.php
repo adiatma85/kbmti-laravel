@@ -275,6 +275,22 @@ return [
             ],
         ],
         [
+            'text' => 'Event',
+            'icon' => 'fas fa-calendar',
+            'submenu' => [
+                [
+                    'text' => 'Daftar Web Event',
+                    'url'  => 'admin/events',
+                    'icon' => 'fas fa-list'
+                ],
+                [
+                    'text' => 'Tambahkan Web Event Baru',
+                    'url' => 'admin/events/create',
+                    'icon' => 'fas fa-marker'
+                ]
+            ],
+        ],
+        [
             'text' => 'Staff Ahli',
             'icon' => 'fas fa-paper-plane',
             'submenu' => [
@@ -285,12 +301,6 @@ return [
                 ],
             ],
         ],
-        [
-            'text' => 'Event (Not yet finished)',
-            'url'  => 'admin/events',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        
         // [
         //     'text'    => 'multilevel',
         //     'icon'    => 'fas fa-fw fa-share',
