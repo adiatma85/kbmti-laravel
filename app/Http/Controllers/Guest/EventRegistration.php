@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Guest;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\_GuestControllerBase;
 use Illuminate\Http\Request;
 
 // Model
@@ -10,7 +10,7 @@ use App\Models\EventRegister; // This is the model where the applicants store th
 use App\Models\Event; // This is the model for event
 use App\Models\EventFieldResponse;
 
-class EventRegistration extends Controller
+class EventRegistration extends _GuestControllerBase
 {
     public function index()
     {
@@ -22,12 +22,12 @@ class EventRegistration extends Controller
         $name = str_replace('-', ' ', $name);
         $event = Event::where('name', $name)->first();
         if (!$event) {
-            return redirect()
-                ->route('guest.landing.page')
-                ->with('response', [
-                    'type' => 'error',
-                    'msg' => 'Halaman yang Anda cari tidaklah ada!'
-                ]);
+            return $this->generalSwalResponse(
+                'Halaman tidak ditemukan',
+                'Halaman yang Anda cari tidaklah ada!',
+                'error',
+                // 404
+            );
         }
         return view('general/event-registration/variable-page', compact('event'));
     }
@@ -36,10 +36,12 @@ class EventRegistration extends Controller
     {
         $isAlreadyExist = EventRegister::where('nim', $request->nim)->exists();
         if ($isAlreadyExist) {
-            return back()->with([
-                'type' => 'error',
-                'msg' => 'Mohon maaf Anda telah terdaftar pada sistem.'
-            ]);
+            return $this->generalSwalResponse(
+                'Terjadi kesalahan dalam penyimpanan data!',
+                'Anda telah terdaftar dalam sistem untuk event ini!',
+                'error',
+                // 409
+            );
         }
         $name = str_replace('-', ' ', explode('/', url()->current())[4]);
         $event = Event::where('name', $name)->first() ?? null;
@@ -68,9 +70,10 @@ class EventRegistration extends Controller
         }
         $newRegistrationItem->save();
         // Maybe need a function to mailing the user?
-        return back()->with([
-            'type' => 'success',
-            'msg' => 'Pendaftaran telah sukses dilakukan, harap menunggu konfirmasi dari panitia.'
-        ]);
+        return $this->generalSwalResponse(
+            'Pendaftaran berhasil!',
+            'Terima kasih Anda telah mendaftar!',
+            'success',
+        );
     }
 }

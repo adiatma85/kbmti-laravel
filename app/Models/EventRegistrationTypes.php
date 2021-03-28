@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 // Another Model
 use App\Models\Event;
+use App\Models\EventFieldChoice as FieldChoices;
 
 class EventRegistrationTypes extends Model
 {
@@ -15,7 +16,14 @@ class EventRegistrationTypes extends Model
     protected $table = 'eventFields';
 
     // Reference on Event
-    public function toEvent () {
+    public function toEvent()
+    {
         return $this->belongsTo(Event::class, 'event_id');
+    }
+
+    // Reference on eventFieldChoice for the dropdwon type
+    public function eventFieldChoice()
+    {
+        return $this->hasMany(FieldChoices::class, 'eventField_id');
     }
 }

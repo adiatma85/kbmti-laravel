@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\_AdminControllerBase;
 use Illuminate\Http\Request;
 
 /* model */
 use App\Models\Event;
-use App\Models\EventRegister;
 
-class EventController extends Controller
+class EventController extends _AdminControllerBase
 {
     /**
      * Display a listing of the resource.
@@ -41,11 +40,10 @@ class EventController extends Controller
     public function store(Request $request)
     {
         Event::create($request->except(['_token']));
-        return back()
-            ->with('response', [
-                'type' => 'success',
-                'msg' => 'Penambahan Event  telah berhasil!'
-            ]);
+
+        return $this->generalSwalResponse(
+            'Penambahan Event telah berhasil!',
+        );
     }
 
     /**
@@ -86,11 +84,9 @@ class EventController extends Controller
         $event->name = $request->name;
         $event->description = $request->description;
         $event->save();
-        return back()
-            ->with('response', [
-                'type' => 'success',
-                'msg' => 'Pengeditan pendaftaran event berhasil dilakukan!'
-            ]);
+        return $this->generalSwalResponse(
+            'Pengeditan pendaftaran event berhasil dilakukan!',
+        );
     }
 
     /**
@@ -102,10 +98,8 @@ class EventController extends Controller
     public function destroy($id)
     {
         Event::where('id', $id)->delete();
-        return back()
-            ->with('response', [
-                'type' => 'success',
-                'msg' => 'Penghapusan pendafatarn event berhasil dilakukan!'
-            ]);
+        return $this->generalSwalResponse(
+            'Penghapusan pendafatarn event berhasil dilakukan!',
+        );
     }
 }

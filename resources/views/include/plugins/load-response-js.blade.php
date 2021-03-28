@@ -5,7 +5,7 @@
 
 {{-- Response --}}
 @if (\Session::has('response'))
-    @include('include.modals.swal2-modal', [
+    @include('include.modals.swal2-admin-modal', [
         'response' => \Session::get('response'),
     ])
 @endif

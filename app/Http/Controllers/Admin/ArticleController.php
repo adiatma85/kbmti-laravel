@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\_AdminControllerBase;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 /* use Illuminate\Support\Facades\Storage; */
@@ -13,7 +13,7 @@ use App\Http\Requests\Article\Store;
 // Model
 use App\Models\Article;
 
-class ArticleController extends Controller
+class ArticleController extends _AdminControllerBase
 {
     /**
      * Display a listing of the resource.
@@ -67,11 +67,10 @@ class ArticleController extends Controller
             'image' => $response,
             'image_cloud_name' => $imageName,
         ])->save();
-        return back()
-            ->with('response', [
-                'type' => 'success',
-                'msg' => 'Penambahan Artikel telah berhasil!'
-            ]);
+
+        return $this->generalSwalResponse(
+            'Penambahan Artikel telah berhasil!',
+        );
     }
 
     /**
@@ -135,11 +134,10 @@ class ArticleController extends Controller
         $article->name = $request->name;
         $article->content = $request->content;
         $article->save();
-        return back()
-            ->with('response', [
-                'type' => 'success',
-                'msg' => 'Pengeditan artikel berhasil dilakukan!'
-            ]);
+
+        return $this->generalSwalResponse(
+            'Pengeditan Artikel telah berhasil!',
+        );
     }
 
     /**
@@ -157,11 +155,9 @@ class ArticleController extends Controller
         cloudinary()->destroy("kbmti_article/$article->image_cloud_name");
 
         Article::where('id', $id)->delete();
-        // return back()->with('success', 'Penghapusan artikel berhasil dilakukan');
-        return back()
-            ->with('response', [
-                'type' => 'success',
-                'msg' => 'Penghapusan artikel berhasil dilakukan!'
-            ]);
+
+        return $this->generalSwalResponse(
+            'Penghapusan artikel berhasil dilakukan!',
+        );
     }
 }

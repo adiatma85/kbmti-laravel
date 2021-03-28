@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\_AdminControllerBase;
 use Illuminate\Http\Request;
 use App\Http\Requests\Users\Store;
 use Illuminate\Support\Facades\Hash;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 // Model
 use App\Models\User;
 
-class UserController extends Controller
+class UserController extends _AdminControllerBase
 {
     /**
      * Display a listing of the resource.
@@ -49,11 +49,9 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
             'adminId' => $request->adminId
         ])->save();
-        return back()
-            ->with('response', [
-                'type' => 'success',
-                'msg' => 'Penambahan User Baru telah berhasil!'
-            ]);
+        return $this->generalSwalResponse(
+            'Penambahan User Baru telah berhasil!',
+        );
     }
 
     /**
@@ -65,7 +63,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         // Showing the detail of User
-        // Jujur Ak bingung ki sek an...
+        // Left empty because I am confused what to do in this function
     }
 
     /**
@@ -93,11 +91,9 @@ class UserController extends Controller
         $thisUser->name = $request->name;
         $thisUser->adminId = $request->adminid;
         $thisUser->save();
-        return back()
-            ->with('response', [
-                'type' => 'success',
-                'msg' => 'Pengeditan user berhasil dilakukan!'
-            ]);
+        return $this->generalSwalResponse(
+            'Pengeditan user berhasil dilakukan!',
+        );
     }
 
     /**
@@ -110,11 +106,9 @@ class UserController extends Controller
     {
         //
         User::where('id', $id)->delete();
-        return back()
-            ->with('response', [
-                'type' => 'success',
-                'msg' => 'Penghapusan artikel berhasil dilakukan!'
-            ]);
+        return $this->generalSwalResponse(
+            'Penghapusan user berhasil dilakukan!',
+        );
     }
 
     /**
