@@ -25,8 +25,9 @@ class EventRegistration extends Controller
             return redirect()
                 ->route('guest.landing.page')
                 ->with('response', [
-                    'type' => 'error',
-                    'msg' => 'Halaman yang Anda cari tidaklah ada!'
+                    'title' => 'Halaman tidak ditemukan!',
+                    'text' => 'Halaman yang Anda cari tidaklah ada!',
+                    'icon' => 'error',
                 ]);
         }
         return view('general/event-registration/variable-page', compact('event'));
@@ -36,10 +37,12 @@ class EventRegistration extends Controller
     {
         $isAlreadyExist = EventRegister::where('nim', $request->nim)->exists();
         if ($isAlreadyExist) {
-            return back()->with([
-                'type' => 'error',
-                'msg' => 'Mohon maaf Anda telah terdaftar pada sistem.'
-            ]);
+            return back()
+                ->with('response', [
+                    'title' => 'Terjadi kesalahan dalam penyimpanan data!',
+                    'text' => 'Halaman yang Anda cari tidaklah ada!',
+                    'icon' => 'error',
+                ]);
         }
         $name = str_replace('-', ' ', explode('/', url()->current())[4]);
         $event = Event::where('name', $name)->first() ?? null;
@@ -68,9 +71,11 @@ class EventRegistration extends Controller
         }
         $newRegistrationItem->save();
         // Maybe need a function to mailing the user?
-        return back()->with([
-            'type' => 'success',
-            'msg' => 'Pendaftaran telah sukses dilakukan, harap menunggu konfirmasi dari panitia.'
-        ]);
+        return back()
+            ->with('response', [
+                'title' => 'Pendaftaran berhasil!',
+                'text' => 'Terima kasih Anda telah mendaftar!',
+                'icon' => 'success',
+            ]);
     }
 }

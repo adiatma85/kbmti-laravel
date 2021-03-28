@@ -16,7 +16,6 @@ use App\Http\Controllers\admin\stafAhli as AdminStaffAhliController;
 use App\Http\Controllers\Guest\MiscController as GuestMiscController;
 use App\Http\Controllers\Guest\EventRegistration as GuestEventRegistrationController;
 
-// User Controller
 
 
 // Temporary Staff Ahli
@@ -50,6 +49,9 @@ Route::resource('staf_Ahli', StaffAhliController::class, []);
 // Grouped Guest Routes
 Route::name('guest.')
     ->group(function () {
+        // Group of page-page
+
+
         // event-registration -> Route Registrasi Event-event yang ada di KBMTI
         Route::name('event-registration.')
             ->prefix('event-registration')
@@ -102,6 +104,7 @@ Route::name('guest.')
         Route::get('/', [GuestMiscController::class, 'index'])->name('guest.index');
     });
 
+// Temporary 
 Route::name('pengumuman.')
     ->prefix('pengumuman')
     ->group(function () {

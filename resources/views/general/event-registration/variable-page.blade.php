@@ -4,7 +4,6 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="home/assets/w3.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/v4-shims.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -15,8 +14,10 @@
     <link href="{{asset('css/news-page.css')}}" rel="stylesheet">
     <link href="{{asset('css/osi-cpw.css')}}" rel="stylesheet">
     <link rel="shortcut icon" href="{{asset('images/favicon/kbmti-ungu.png')}}" type="image/x-icon">
-    <!-- Footer -->
+    {{-- Footer --}}
     <link href="{{asset('css/footer.css')}}" rel="stylesheet">
+    {{-- SweetAlert2 CSS --}}
+    @include('include.plugins.load-swal2-guest-css')
     <title>Pendaftaran {{$event->name}}</title>
 </head>
 
@@ -72,12 +73,23 @@
                     @foreach ($event->eventFields as $field)
                         @if ($field->type == 'dropdown')
                             {{-- Dropdown type --}}
+                            <div class="form-group row">
+                                <label for="input{{$field->name}}">{{ucfirst($field->name)}}</label>
+                                    <select name="{{strtolower($field->name)}}" id="input{{$field->name}}" class="form-control" required>
+                                        <option value="" selected>Choose One</option>
+                                        @foreach ($field->eventFieldChoice as $choice)
+                                            <option value="{{$choice->choice}}">{{$choice->choice}}</option>
+                                        @endforeach
+                                    </select>
+                            </div>
+                        @else
+                            <div class="form-group row">
+                                <label for="input{{$field->name}}">{{ucfirst($field->name)}}</label>
+                                <input type="{{$field->type}}" name="{{strtolower($field->name)}}" id="input{{$field->name}}" class="form-control"
+                                    placeholder="{{$field->name}}" required>
+                            </div>
                         @endif
-                    <div class="form-group row">
-                        <label for="input{{$field->name}}">{{ucfirst($field->name)}}</label>
-                        <input type="{{$field->type}}" name="{{strtolower($field->name)}}" id="{{$field->name}}" class="form-control"
-                            placeholder="{{$field->name}}" required>
-                    </div>
+                    
                     @endforeach
 
                     <div class="button-place">
@@ -85,10 +97,10 @@
                     </div>
                 </form>
             </div>
-            <div class="flex-15">
+            {{-- <div class="flex-15">
                 <img src="../home/assets/image/Siperat/siperat-big.svg" alt="" srcset="" data-aos="fade-left"
                     data-aos-anchor-placement="center-bottom">
-            </div>
+            </div> --}}
         </div>
     </section>
 
@@ -97,8 +109,9 @@
     @include('include.general.footer')
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script>
+    {{-- SweetAlert2 JS --}}
+    @include('include.plugins.load-swal2-guest-js')
+    {{-- <script>
         AOS.init();
         let isEmpty;
         const showModal = () => {
@@ -112,8 +125,7 @@
                 $('#registerModal').modal('show')
             }
         }
-    </script>
-    {{-- Modal swal alert in here --}}
+    </script> --}}
 
 
 </body>
