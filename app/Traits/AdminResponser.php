@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-trait GuestResponser{
+trait AdminResponser{
 
     // General Response for swal response only
     protected function generalSwalResponse($title = "", $text = "", $icon="success", $statusCode = 302){

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Controllers\_AdminControllerBase;
 
-class MiscController extends Controller
+class MiscController extends _AdminControllerBase
 {
     /**
      * Create a new controller instance.

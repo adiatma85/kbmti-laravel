@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\_AdminControllerBase;
 use Illuminate\Http\Request;
 
 /* model */
 use App\Models\Event;
-use App\Models\EventRegister;
 
-class EventController extends Controller
+class EventController extends _AdminControllerBase
 {
     /**
      * Display a listing of the resource.

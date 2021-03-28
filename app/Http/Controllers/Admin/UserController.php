@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\_AdminControllerBase;
 use Illuminate\Http\Request;
 use App\Http\Requests\Users\Store;
 use Illuminate\Support\Facades\Hash;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 // Model
 use App\Models\User;
 
-class UserController extends Controller
+class UserController extends _AdminControllerBase
 {
     /**
      * Display a listing of the resource.

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\_AdminControllerBase;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 /* use Illuminate\Support\Facades\Storage; */
@@ -13,7 +13,7 @@ use App\Http\Requests\Article\Store;
 // Model
 use App\Models\Article;
 
-class ArticleController extends Controller
+class ArticleController extends _AdminControllerBase
 {
     /**
      * Display a listing of the resource.
