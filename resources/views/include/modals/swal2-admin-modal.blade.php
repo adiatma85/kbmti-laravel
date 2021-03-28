@@ -8,8 +8,8 @@
       });
       $('document').ready( function () {
         Toast.fire({
-          icon: '{{$response['type']}}',
-          title: '{{$response['msg']}}'
+          icon: '{{$response['icon']}}',
+          title: '{{$response['title']}}'
         })  
       });  ;
     });

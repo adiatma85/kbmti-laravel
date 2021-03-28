@@ -49,11 +49,9 @@ class UserController extends _AdminControllerBase
             'password' => Hash::make($request->password),
             'adminId' => $request->adminId
         ])->save();
-        return back()
-            ->with('response', [
-                'type' => 'success',
-                'msg' => 'Penambahan User Baru telah berhasil!'
-            ]);
+        return $this->generalSwalResponse(
+            'Penambahan User Baru telah berhasil!',
+        );
     }
 
     /**
@@ -65,7 +63,7 @@ class UserController extends _AdminControllerBase
     public function show(User $user)
     {
         // Showing the detail of User
-        // Jujur Ak bingung ki sek an...
+        // Left empty because I am confused what to do in this function
     }
 
     /**
@@ -93,11 +91,9 @@ class UserController extends _AdminControllerBase
         $thisUser->name = $request->name;
         $thisUser->adminId = $request->adminid;
         $thisUser->save();
-        return back()
-            ->with('response', [
-                'type' => 'success',
-                'msg' => 'Pengeditan user berhasil dilakukan!'
-            ]);
+        return $this->generalSwalResponse(
+            'Pengeditan user berhasil dilakukan!',
+        );
     }
 
     /**
@@ -110,11 +106,9 @@ class UserController extends _AdminControllerBase
     {
         //
         User::where('id', $id)->delete();
-        return back()
-            ->with('response', [
-                'type' => 'success',
-                'msg' => 'Penghapusan artikel berhasil dilakukan!'
-            ]);
+        return $this->generalSwalResponse(
+            'Penghapusan user berhasil dilakukan!',
+        );
     }
 
     /**

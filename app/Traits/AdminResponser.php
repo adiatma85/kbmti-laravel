@@ -4,7 +4,7 @@ namespace App\Traits;
 
 trait AdminResponser{
 
-    // General Response for swal response only
+    // General Response for swal response only (with toastr)
     protected function generalSwalResponse($title = "", $text = "", $icon="success", $statusCode = 302){
         // For default the response will return success message
         return redirect()

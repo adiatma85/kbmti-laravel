@@ -40,11 +40,10 @@ class EventController extends _AdminControllerBase
     public function store(Request $request)
     {
         Event::create($request->except(['_token']));
-        return back()
-            ->with('response', [
-                'type' => 'success',
-                'msg' => 'Penambahan Event  telah berhasil!'
-            ]);
+
+        return $this->generalSwalResponse(
+            'Penambahan Event telah berhasil!',
+        );
     }
 
     /**
@@ -85,11 +84,9 @@ class EventController extends _AdminControllerBase
         $event->name = $request->name;
         $event->description = $request->description;
         $event->save();
-        return back()
-            ->with('response', [
-                'type' => 'success',
-                'msg' => 'Pengeditan pendaftaran event berhasil dilakukan!'
-            ]);
+        return $this->generalSwalResponse(
+            'Pengeditan pendaftaran event berhasil dilakukan!',
+        );
     }
 
     /**
@@ -101,10 +98,8 @@ class EventController extends _AdminControllerBase
     public function destroy($id)
     {
         Event::where('id', $id)->delete();
-        return back()
-            ->with('response', [
-                'type' => 'success',
-                'msg' => 'Penghapusan pendafatarn event berhasil dilakukan!'
-            ]);
+        return $this->generalSwalResponse(
+            'Penghapusan pendafatarn event berhasil dilakukan!',
+        );
     }
 }

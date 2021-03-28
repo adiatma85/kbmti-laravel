@@ -67,11 +67,10 @@ class ArticleController extends _AdminControllerBase
             'image' => $response,
             'image_cloud_name' => $imageName,
         ])->save();
-        return back()
-            ->with('response', [
-                'type' => 'success',
-                'msg' => 'Penambahan Artikel telah berhasil!'
-            ]);
+
+        return $this->generalSwalResponse(
+            'Penambahan Artikel telah berhasil!',
+        );
     }
 
     /**
@@ -135,11 +134,10 @@ class ArticleController extends _AdminControllerBase
         $article->name = $request->name;
         $article->content = $request->content;
         $article->save();
-        return back()
-            ->with('response', [
-                'type' => 'success',
-                'msg' => 'Pengeditan artikel berhasil dilakukan!'
-            ]);
+
+        return $this->generalSwalResponse(
+            'Pengeditan Artikel telah berhasil!',
+        );
     }
 
     /**
@@ -157,11 +155,9 @@ class ArticleController extends _AdminControllerBase
         cloudinary()->destroy("kbmti_article/$article->image_cloud_name");
 
         Article::where('id', $id)->delete();
-        // return back()->with('success', 'Penghapusan artikel berhasil dilakukan');
-        return back()
-            ->with('response', [
-                'type' => 'success',
-                'msg' => 'Penghapusan artikel berhasil dilakukan!'
-            ]);
+
+        return $this->generalSwalResponse(
+            'Penghapusan artikel berhasil dilakukan!',
+        );
     }
 }
