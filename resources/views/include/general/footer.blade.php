@@ -1,9 +1,9 @@
-<footer id="footer" class="page-footer font-small">
+<footer id="footer" class="page-footer font-small footer__footer">
     <div class="footer-top">
         <div class="container" id="foot">
             <div class="row">
                 <div class="col-md-9 col-12 pt-2">
-                    <h5 class="font-weight-bold mt-3 mb-4">
+                    <h5 class="font-weight-bold mt-3 mb-4 footer__h5">
                         Keluarga Besar Mahasiswa Teknologi Informasi
                     </h5>
                     <div class="text-md-left font-small">
@@ -18,7 +18,7 @@
                 <hr class="clearfix pt-2 w-100 d-lg-none d-md-inline-flex">
                 <div class="col-md-3 col-12 pt-2">
                     <div class="d-flex flex-row justify-content-start">
-                        <h5 class="font-weight-bold mt-lg-3 mb-4">
+                        <h5 class="font-weight-bold mt-lg-3 mb-4 footer__h5">
                             Social Media
                         </h5>
                     </div>
