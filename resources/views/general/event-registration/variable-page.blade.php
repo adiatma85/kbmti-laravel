@@ -1,29 +1,15 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.app')
 
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/v4-shims.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-    </script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="{{asset('css/news-page.css')}}" rel="stylesheet">
-    <link href="{{asset('css/osi-cpw.css')}}" rel="stylesheet">
-    <link rel="shortcut icon" href="{{asset('images/favicon/kbmti-ungu.png')}}" type="image/x-icon">
-    {{-- Footer --}}
-    <link href="{{asset('css/footer.css')}}" rel="stylesheet">
-    {{-- SweetAlert2 CSS --}}
-    @include('include.plugins.load-swal2-guest-css')
-    <title>Pendaftaran {{$event->name}}</title>
-</head>
+    @section('custom-style')
+        {{-- SweetAlert2 CSS --}}
+        @include('include.plugins.load-swal2-guest-css')
+        {{-- This Page / Temporary --}}
+        <link href="{{asset('css/news-page.css')}}" rel="stylesheet">
+        <link href="{{asset('css/osi-cpw.css')}}" rel="stylesheet">
+    @endsection
 
-<body>
-    @include('include.general.mega-drop-down')
-    {{-- Validation Error --}}
+    @section('content')
+        {{-- Validation Error --}}
     {{-- Need to be separated module --}}
     @if ($errors->any())
     <div class="alert alert-danger">
@@ -97,37 +83,12 @@
                     </div>
                 </form>
             </div>
-            {{-- <div class="flex-15">
-                <img src="../home/assets/image/Siperat/siperat-big.svg" alt="" srcset="" data-aos="fade-left"
-                    data-aos-anchor-placement="center-bottom">
-            </div> --}}
         </div>
     </section>
-
-
-    {{-- Footer Partials --}}
-    @include('include.general.footer')
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    {{-- SweetAlert2 JS --}}
-    @include('include.plugins.load-swal2-guest-js')
-    {{-- <script>
-        AOS.init();
-        let isEmpty;
-        const showModal = () => {
-            const namaElem = document.getElementById("namaForm").value == "";
-            const emailElem = document.getElementById("emailForm").value == "";
-            const noHPElem = document.getElementById("noHPForm").value == "";
-            const domisiliElem = document.getElementById("domisiliForm").value == "";
-            isEmpty = namaElem || emailElem || noHPElem || domisiliElem;
-            console.log(isEmpty);
-            if (!isEmpty) {
-                $('#registerModal').modal('show')
-            }
-        }
-    </script> --}}
-
-
-</body>
-
-</html>
+    @endsection
+    
+    @section('custom-script')
+        <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+        {{-- SweetAlert2 JS --}}
+        @include('include.plugins.load-swal2-guest-js')
+    @endsection

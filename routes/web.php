@@ -20,6 +20,7 @@ use App\Http\Controllers\Guest\EventRegistration as GuestEventRegistrationContro
 
 // Temporary Staff Ahli
 use App\Http\Controllers\stafAhli as StaffAhliController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,11 +33,7 @@ use App\Http\Controllers\stafAhli as StaffAhliController;
 */
 
 // Landing Page ketika membuka pertama kali
-Route::get('/', function () {
-    return view('welcome');
-    // return view('general.index-landing-page');
-    // Route::get('/', [GuestMiscController::class, 'landingPage'])->name('guest.landing.page');
-})->name('guest.landing.page');
+Route::get('/', [GuestMiscController::class, 'landingPage'])->name('guest.landing.page');
 
 // Testing Ground
 Route::get('article-testing-card', function () {
@@ -49,7 +46,7 @@ Route::resource('staf_Ahli', StaffAhliController::class, []);
 // Grouped Guest Routes
 Route::name('guest.')
     ->group(function () {
-        // Group of page-page
+        // Group of pages
 
 
         // event-registration -> Route Registrasi Event-event yang ada di KBMTI
@@ -81,12 +78,7 @@ Route::name('admin.')
 
         // Users Resource Controller
         Route::resource('users', AdminUserController::class)->names([
-            'index' => 'users.index',
-            'create' => 'users.create',
-            'destroy' => 'users.destroy',
-            'update' => 'users.update',
-            'show' => 'users.show',
-            'edit' => 'users.edit'
+            // names if needed
         ]);
 
         // Event Controller

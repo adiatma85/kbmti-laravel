@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-<!-- Section TOP -->
+{{-- Section top --}}
 
 <section class="top mb-md-3 ml-md-0 ml-4 ml-sm-2">
     <div class="row ml-md-5 ml-3" style="max-width: 70%; height: auto">
@@ -18,9 +18,8 @@
             <p class="pharagraph-top col-12 col-md landing-page__karena" style="font-size: 22px;text-align:justify"><b>Karena berhimpun menjadi cara terampuh untuk menghapus batas potensi, merajut prestasi dan membentang bakti kepada negeri.</b></p>
         </div>
 
-        <!-- <div class="col-md-6 col-12 mt-5 d-sm-inline-flex justify-content-center"> -->
+        {{-- <div class="col-md-6 col-12 mt-5 d-sm-inline-flex justify-content-center"> --}}
         <div class="col-md-5 col-12 mt-3 d-md-flex d-md-block justify-content-center align-self-center landing-page__gambar-alfa-reza">
-            <!-- home/assets/image/Landing_Page/ -->
             {{-- <img id="img-top" src="landing/home/assets/image/Landing_Page/alfa-reza.svg" style="top: -20em;"> --}}
             <img id="img-top" src="{{asset('images/Landing_Page/alfa-reza.svg')}}" style="top: -20em;">
         </div>
@@ -42,21 +41,20 @@
     </div>
 </section>
 
-<!-- Section TOP END -->
+{{--  Section TOP END  --}}
 
-<!-- Section MID -->
+{{--  Section MID  --}}
 <div class="container-fluid">
     <section class="mid">
-        <!-- KBMTI-FULL -->
+         {{-- KBMTI-FULL  --}}
         <div class="row d-md-flex justify-content-end d-md-block d-none" data-aos="fade-left">
             <img id="text-KBMTI-Full" src="{{asset('images/Landing_Page/Text-KBMTI-Full.svg')}}" alt="">
         </div>
-        <!-- Embeds Video -->
+         {{-- Embeds Video  --}}
         <div class="container">
             <div class="row d-flex justify-content-center">
                 <div class="col-md-7 col-12">
                     <div class="embed-responsive embed-responsive-16by9">
-                        <!-- <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" style="z-index: -1;" allowfullscreen></iframe> -->
                         <iframe width="560" height="315" src="https://www.youtube.com/embed/Jy9KfuwmdH4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
@@ -73,7 +71,7 @@
                 </div>
             </div>
         </div>
-        <!-- KBMTI Transparent -->
+        {{--  KBMTI Transparent  --}}
         <div class="row d-md-flex justify-content-start d-md-block d-none" data-aos="fade-right">
             <img id="text-KBMTI-Tranparent" src="{{asset('Landing_Page/Text-KBMTI-Transparent.svg')}}" alt="">
         </div>
