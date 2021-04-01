@@ -21,12 +21,12 @@
     </div>
     @endif
 
-    <section id="title">
+    {{-- <section id="title"> --}}
         <div class="osi-cpw__title">{{$event->name}}</div>
-        <div class="image-title">
-        </div>
+    {{-- </section> --}}
 
-    </section>
+    {{-- Temporary USE! --}}
+    <h4 style="background-color: #FFECF5; padding-left: 200px; width: 60rem">Mata kuliah yang tersedia hanya Pemograman Lanjut</h4>
     <section id="form">
         <div class="flex-container">
             <div class="flex-15">
