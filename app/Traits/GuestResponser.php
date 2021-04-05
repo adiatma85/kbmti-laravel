@@ -1,6 +1,11 @@
 <?php
 
 namespace App\Traits;
+// Email Helper
+use App\Mail\EmailTestingMail;
+use App\Mail\EventEmailResponser;
+use Illuminate\Support\Facades\Mail;
+use Symfony\Component\Mime\Test\Constraint\EmailAddressContains;
 
 trait GuestResponser{
 
@@ -17,4 +22,14 @@ trait GuestResponser{
     }
 
     // Specialized Response(s) goes here
+
+    // Event Registration Email Response
+    protected function eventEmailResponse( $emailTo = '', $context = '', $respondent = '', $bodyText = '', $link = ''){
+        $eventEmail = (object) 'eventEmail';
+        $eventEmail->context = $context;
+        $eventEmail->respondent = $respondent;
+        $eventEmail->bodyText = $bodyText;
+        $eventEmail->link = $link ?? 'Tautan Belum Tersedia!';
+        Mail::to($emailTo)->send(new EventEmailResponser($eventEmail));
+    }
 }
