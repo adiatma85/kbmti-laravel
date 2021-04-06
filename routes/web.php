@@ -70,7 +70,7 @@ Route::name('admin.')
         // Users Resource Controller
         Route::resource('users', AdminUserController::class)->names([
             // names if needed
-        ]);
+        ])->middleware(['isMasterAdmin']);
 
         // Event Controller
         Route::resource('events', AdminEventController::class);
@@ -99,8 +99,6 @@ Route::get('article-testing-card', function () {
     return view('Admin.Article.testing-artcile-card');
 });
 
-// Route::get('testing-object', function () {
-//     $object = (object) 'object';
-//     $object->les = "LES";
-//     return response()->json($object);
-// });
+Route::get('testing-open-tender-view', function () {
+    return view('general.event-registration.open-tender-page');
+});

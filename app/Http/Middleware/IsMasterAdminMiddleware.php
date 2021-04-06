@@ -16,9 +16,16 @@ class IsMasterAdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->adminId == 11){
+        // Master Admon is using 12 
+        if (auth()->user()->getAttributes()['adminId'] == 12) {
             return $next($request);
         }
-        return redirect()->route('admin.index');
+        return redirect()
+            ->route('admin.index')
+            ->with('response', [
+                'title' => "Keterbatasan Akses!",
+                'text' => "Maaf, Anda mengakses sebuah resource yang tidak bisa diakses dengan role Anda!",
+                'icon' => "error"
+            ]);
     }
 }

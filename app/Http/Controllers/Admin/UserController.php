@@ -31,7 +31,7 @@ class UserController extends _AdminControllerBase
     public function create()
     {
         // View untuk form menambahkan User dari Admin
-        return view('Admin/Users/create-user');
+        return view('Admin/User/create-user');
     }
 
     /**
@@ -89,7 +89,10 @@ class UserController extends _AdminControllerBase
     {
         $thisUser = User::findOrFail($id);
         $thisUser->name = $request->name;
-        $thisUser->adminId = $request->adminid;
+        if ($request->adminId) {
+            // Bug in selection
+            $thisUser->adminId = $request->adminid;
+        }
         $thisUser->save();
         return $this->generalSwalResponse(
             'Pengeditan user berhasil dilakukan!',

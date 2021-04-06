@@ -89,13 +89,13 @@ class ArticleController extends _AdminControllerBase
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  string  $name
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($name)
+    public function edit($id)
     {
-        $name = str_replace('-', ' ', $name);
-        $article = Article::where('name', $name)->first();
+        // $name = str_replace('-', ' ', $name);
+        $article = Article::find($id);
         return view('Admin/Article/edit-article', compact('article'));
     }
 

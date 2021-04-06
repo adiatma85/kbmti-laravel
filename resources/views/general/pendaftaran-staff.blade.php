@@ -14,7 +14,7 @@
     <link href="{{asset('css/osi-cpw.css')}}" rel="stylesheet">
     <link rel="shortcut icon" href="{{asset('images/favicon/kbmti-ungu.png')}}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- Footer -->
+    {{-- Footer css --}}
     <link href="{{asset('css/footer.css')}}" rel="stylesheet">
     <title>Staf Ahli</title>
 </head>
@@ -50,7 +50,7 @@
                         <h6 class="m-0">Download Berkas</h6>
                     </div>
                     <div class='card-body p-0 text-center'>
-                        <!-- Berkas belum diganti, ini masih yang lama -->
+                        {{-- Berkas --}}
                         <a href="https://drive.google.com/file/d/17oQgvUh2VJPlaIOX6ANvCTZMk_Skc1wo/view?usp=sharing"
                             download target="_blank">
                             <button class="btn"><i class="fa fa-download"></i>Tautan Download Berkas</button></a><br>
