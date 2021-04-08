@@ -23,4 +23,9 @@ class MiscController extends _GuestControllerBase
     public function pendaftaranStaff(){
         return view('general.pendaftaran-staff');
     }
+
+    // Testing email
+    public function sendingEmail(){
+        return $this->eventEmailResponse('adiatma85@gmail.com', 'TESTING EMAIL IN FTP SERVER', 'lucky', 'ini bodi text', 'https://google.com');
+    }
 }
