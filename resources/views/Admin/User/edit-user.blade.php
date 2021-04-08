@@ -1,17 +1,16 @@
-@extends('adminlte::page')
+@extends('Admin.base-layout')
 
-@section('title', 'Dashboard')
-
+{{-- Content Header --}}
 @section('content_header')
-@include('include.admin.breadcrumbs', [
-'pageTitle' => 'User',
-'preBreadcrumbs' => [
-'Home' => route('admin.index'),
-'Users' => route('admin.users.index')
-],
-'activeItem' => 'Edit a User'
-])
-@stop
+    @include('include.admin.breadcrumbs', [
+    'pageTitle' => 'User',
+    'preBreadcrumbs' => [
+    'Home' => route('admin.index'),
+    'Users' => route('admin.users.index')
+    ],
+    'activeItem' => 'Edit a User'
+    ])
+@endsection
 
 @section('content')
 <div class="container-fluid">
@@ -30,13 +29,14 @@
         </div>
         {{-- /.card-header --}}
         {{-- form start --}}
-        <form method="POST" action="{{route('admins.users.update')}}">
+        <form method="POST" action="{{route('admin.users.update', ['user' => $thisUser->id])}}">
             @csrf
+            @method('PUT')
             <div class="card-body">
                 <div class="form-group">
                     <label for="title-article">Nama User</label>
                     <input type="text" class="form-control" id="title-article" placeholder="Nama User" name="name"
-                        value="{{$user->name ?? old('name') ?? ''}}">
+                        value="{{$thisUser->name ?? old('name') ?? ''}}">
                 </div>
                 {{-- <div class="form-group">
                     <label for="title-article">Email / Username User</label>
@@ -69,26 +69,15 @@
                                 'Social Environment',
                                 'Entrepreneurship',
                                 'Administrative',
+                                'Research and Development',
                                 'Master Admin'
                             ]
                             ?>
-                        <option selected>Open this select menu</option>
-                        {{-- <option value="0">Ketua Himpunan</option>
-                        <option value="1">Wakil Ketua Himpunan</option>
-                        <option value="2">Internal</option>
-                        <option value="3">Sekretaris</option>
-                        <option value="4">Bendahara</option>
-                        <option value="5">Human Resource Development</option>
-                        <option value="6">Advocacy</option>
-                        <option value="7">Social Environment</option>
-                        <option value="8">Entrepreneurship</option>
-                        <option value="9">Relation and Creative</option>
-                        <option value="10">Administrative</option>
-                        <option value="11">Master Admin</option> --}}
+                        <option>Open this select menu</option>
                         <?php 
                             foreach ($roleArray as $role) {
                                 ?>
-                                    <option value="{{$roleIndex}}" {{$user->adminId == $roleIndex ? "selected" : ""}}>{{$roleArray[$roleIndex]}}</option>
+                                    <option value="{{$roleIndex}}" {{$thisUser->adminId == $roleIndex ? "selected" : ""}}>{{$roleArray[$roleIndex]}}</option>
                                 <?php
                                 $roleIndex++;
                             }
@@ -105,18 +94,4 @@
     </div>
 </div>
 
-@stop
-
-@section('css')
-
-{{-- Response --}}
-@include('include.plugins.load-response-css')
-@stop
-
-@section('js')
-{{-- Jquery --}}
-<script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
-{{-- Response --}}
-@include('include.plugins.load-response-js')
-{{-- init bs-custom-file --}}
 @stop

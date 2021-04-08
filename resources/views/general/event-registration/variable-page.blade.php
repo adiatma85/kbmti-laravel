@@ -34,45 +34,33 @@
             </div>
             <div class="flex-70">
                 <form action="{{route('guest.event-registration.storeEventRegistration', ['eventName' => str_replace(" ", "-", strtolower($event->name))])}}" method="post">
-                    {{-- For now, we will use static --}}
                     @csrf
-                    <div class="form-group row">
-                        <label for="inputNama">Nama</label>
-                        <input type="text" name="name" id="inputNama" class="form-control" placeholder="Nama" required>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputNim">NIM</label>
-                        <input type="text" name="nim" id="inputNim" class="form-control" placeholder="NIM" required>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputEmail">Email</label>
-                        <input type="text" name="email" id="inputEmail" class="form-control" placeholder="Email"
-                            required>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputAngkatan">Angkatan</label>
-                        <input type="text" name="angkatan" id="inputAngkatan" class="form-control"
-                            placeholder="Angkatan" required>
-                    </div>
-
                     {{-- Need to foreach the form --}}
                     @foreach ($event->eventFields as $field)
                         @if ($field->type == 'dropdown')
                             {{-- Dropdown type --}}
                             <div class="form-group row">
-                                <label for="input{{$field->name}}">{{ucfirst($field->name)}}</label>
-                                    <select name="{{strtolower($field->name)}}" id="input{{$field->name}}" class="form-control" required>
+                                <label for="input{{str_replace('_', ' ', $field->name)}}">{{ucfirst(str_replace('_', ' ', $field->name))}}</label>
+                                    <select name="{{strtolower(str_replace('_', ' ', $field->name))}}" id="input{{str_replace('_', ' ', $field->name)}}" class="form-control" required>
                                         <option value="" selected>Choose One</option>
-                                        @foreach ($field->eventFieldChoice as $choice)
+                                        @if (str_replace('_', ' ', $field->name) == 'Angkatan')
+                                            {{-- Beware, this is semi-static --}}
+                                            <option value="2017">2017</option>
+                                            <option value="2018">2018</option>
+                                            <option value="2019">2019</option>
+                                            <option value="2020">2020</option>
+                                        @else
+                                            @foreach ($field->eventFieldChoice as $choice)
                                             <option value="{{$choice->choice}}">{{$choice->choice}}</option>
-                                        @endforeach
+                                    @endforeach
+                                        @endif
                                     </select>
                             </div>
                         @else
                             <div class="form-group row">
-                                <label for="input{{$field->name}}">{{ucfirst($field->name)}}</label>
-                                <input type="{{$field->type}}" name="{{strtolower($field->name)}}" id="input{{$field->name}}" class="form-control"
-                                    placeholder="{{$field->name}}" required>
+                                <label for="input{{str_replace('_', ' ', $field->name)}}">{{ucfirst(str_replace('_', ' ', $field->name))}}</label>
+                                <input type="{{$field->type}}" name="{{strtolower(str_replace('_', ' ', $field->name))}}" id="input{{str_replace('_', ' ', $field->name)}}" class="form-control"
+                                    placeholder="{{ucfirst(str_replace('_', ' ', $field->name))}}" required>
                             </div>
                         @endif
                     

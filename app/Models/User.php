@@ -89,9 +89,13 @@ class User extends Authenticatable
                 break;
 
             case 11:
-                return 'Master Admon';
+                return 'Research and Development';
                 break;
-                
+            
+            case 12:
+                return 'Master Admon';
+                break;            
+
             default:
                 return 'Guest';
                 break;

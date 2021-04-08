@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 /* model */
 use App\Models\Event;
+use App\Models\EventRegistrationTypes as EventField;
 
 class EventController extends _AdminControllerBase
 {
@@ -39,7 +40,52 @@ class EventController extends _AdminControllerBase
      */
     public function store(Request $request)
     {
-        Event::create($request->except(['_token']));
+
+        // Event::create($request->except(['_token']));
+        $event = Event::create($request->only([
+            'name',
+            'description',
+            'bodyText',
+            'event_type',
+            'bodyText',
+            'link'
+        ]));
+
+        foreach ($request->field as $field) {
+            switch ($field) {
+                case 'email':
+                    $fieldTypes = 'email';
+                    break;
+
+                case 'Angkatan':
+                    $fieldTypes = 'dropdown';
+                    break;
+
+                case 'Nomor Telepon':
+                    $fieldTypes = 'number';
+                    break;
+
+                default:
+                    $fieldTypes = 'text';
+                    break;
+            }
+            EventField::create([
+                'name' => str_replace(' ', '_', $field),
+                'type' => $fieldTypes,
+                'event_id' => $event->id
+            ])->save();
+        }
+
+        if ($request->fieldTypes && $request->fieldNames) {
+            for ($i=0; $i < count($request->fieldTypes); $i++) { 
+                EventField::create([
+                    'name' => str_replace(' ', '_', $request->fieldNames[$i]),
+                    'type' => $request->fieldTypes[$i],
+                    'event_id' => $event->id
+                ])->save();
+            }
+        }
+        $event->save();
 
         return $this->generalSwalResponse(
             'Penambahan Event telah berhasil!',

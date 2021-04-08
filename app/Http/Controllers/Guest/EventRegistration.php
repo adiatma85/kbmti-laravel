@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\_GuestControllerBase;
 use Illuminate\Http\Request;
+use App\Http\Requests\Guest\EventRegistration\StoreEventRegistration as Store;
 
 // Model
 use App\Models\EventRegister; // This is the model where the applicants store their data
@@ -32,36 +33,39 @@ class EventRegistration extends _GuestControllerBase
         return view('general/event-registration/variable-page', compact('event'));
     }
 
-    public function storeEventRegistration(Request $request)
+    public function storeEventRegistration(Store $request)
     {
-        $isAlreadyExist = EventRegister::where('nim', $request->nim)->exists();
-        if ($isAlreadyExist) {
-            return $this->generalSwalResponse(
-                'Terjadi kesalahan dalam penyimpanan data!',
-                'Anda telah terdaftar dalam sistem untuk event ini!',
-                'error',
-                // 409
-            );
-        }
         $name = str_replace('-', ' ', explode('/', url()->current())[4]);
         $event = Event::where('name', $name)->first() ?? null;
         if (!$event) {
             // Masukan gk valid
+            return $this->generalSwalResponse(
+                'Not Found!',
+                'Anda berusaha mencari resource yang tidak ada di dalam sistem!',
+                'error',
+                // 404
+            );
         }
-        // else
         $newRegistrationItem = EventRegister::create([
-            'name' => $request->name ?? '',
-            'nim' => $request->nim ?? '',
-            'angkatan' => $request->angkatan ?? '',
-            'email' => $request->email ?? '',
-            'phone' => $request->phone ?? '',
-            'line_id' => $request->line_id ?? '',
             'event_id' => $event->id
             // For folder, need another time
         ]);
         for ($i = 0; $i < count($event->eventFields); $i++) {
             $field = $event->eventFields[$i];
             $fieldName = strtolower($field->name);
+            if ($fieldName == 'name' || $fieldName == 'nim' || $fieldName == 'email') {
+                $isAlreadyExist = EventFieldResponse::where('response', $request->$fieldName)
+                    ->where('eventField_id', $field->id)
+                    ->exists();
+                if ($isAlreadyExist) {
+                    return $this->generalSwalResponse(
+                        'Terjadi kesalahan dalam penyimpanan data!',
+                        'Anda telah terdaftar dalam sistem untuk event ini!',
+                        'error',
+                    );
+                }
+            }
+            // Else
             EventFieldResponse::create([
                 'response' => $request->$fieldName,
                 'eventRegistration_id' => $newRegistrationItem->id,
@@ -69,7 +73,8 @@ class EventRegistration extends _GuestControllerBase
             ])->save();
         }
         $newRegistrationItem->save();
-        // Maybe need a function to mailing the user?
+        // Emailing the user in here
+        $this->eventEmailResponse($request->email, $event->name, $request->name, $event->bodyText, $event->link);
         return $this->generalSwalResponse(
             'Pendaftaran berhasil!',
             'Terima kasih Anda telah mendaftar!',

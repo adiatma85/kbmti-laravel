@@ -32,23 +32,14 @@ use App\Http\Controllers\stafAhli as StaffAhliController;
 |
 */
 
-// Landing Page ketika membuka pertama kali
-Route::get('/', [GuestMiscController::class, 'landingPage'])->name('guest.landing.page');
-
-// Testing Ground
-Route::get('article-testing-card', function () {
-    return view('Admin.Article.testing-artcile-card');
-});
-
 // Staf Ahli Temporary
-Route::resource('staf_Ahli', StaffAhliController::class, []);
+// Route::resource('staf_Ahli', StaffAhliController::class, []);
 
 // Grouped Guest Routes
 Route::name('guest.')
     ->group(function () {
-        // Group of pages
-
-
+        // Landing Page
+        Route::get('/', [GuestMiscController::class, 'landingPage'])->name('landing.page');
         // event-registration -> Route Registrasi Event-event yang ada di KBMTI
         Route::name('event-registration.')
             ->prefix('event-registration')
@@ -79,7 +70,7 @@ Route::name('admin.')
         // Users Resource Controller
         Route::resource('users', AdminUserController::class)->names([
             // names if needed
-        ]);
+        ])->middleware(['isMasterAdmin']);
 
         // Event Controller
         Route::resource('events', AdminEventController::class);
@@ -88,18 +79,26 @@ Route::name('admin.')
         Route::get('download_komit_staff/{komitmen}', [AdminStaffAhliController::class, 'handlingDownloadFile'])->name('download.komit-staffAhli');
     });
 
-// Guest Side Group Route
-Route::name('guest.')
-    ->prefix('guest')
-    ->group(function () {
-        // Landing Page
-        Route::get('/', [GuestMiscController::class, 'index'])->name('guest.index');
-    });
-
-// Temporary 
+// Temporaries
+// Temporary Pengumuman
 Route::name('pengumuman.')
     ->prefix('pengumuman')
     ->group(function () {
         Route::get('/staf-ahli', [StaffAhliController::class, 'showPengumumanForm'])->name('stafAhliForm');
         Route::post('/staf-ahli', [StaffAhliController::class, 'postPengumumanForm'])->name('postPengumumanForm');
     });
+// Temporary Email Testing in Guest/MiscController
+Route::name('email.')
+    ->prefix('email')
+    ->group(function () {
+        Route::get('/testing-sending', [GuestMiscController::class, 'sendingEmail'])->name('sendingEmail');
+    });
+
+// Testing Ground
+Route::get('article-testing-card', function () {
+    return view('Admin.Article.testing-artcile-card');
+});
+
+Route::get('testing-open-tender-view', function () {
+    return view('general.event-registration.open-tender-page');
+});
