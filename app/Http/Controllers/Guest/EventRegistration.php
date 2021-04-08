@@ -74,7 +74,7 @@ class EventRegistration extends _GuestControllerBase
         }
         $newRegistrationItem->save();
         // Emailing the user in here
-        $this->eventEmailResponse($request->email, $event->name, $request->name, $event->bodyText, $event->link);
+        // $this->eventEmailResponse($request->email, $event->name, $request->name, $event->bodyText, $event->link);
         return $this->generalSwalResponse(
             'Pendaftaran berhasil!',
             'Terima kasih Anda telah mendaftar!',
