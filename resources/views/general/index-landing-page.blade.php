@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
 @section('custom-style')
-<link href="{{asset('css/Landing_Page.css')}}" rel="stylesheet">
-<link href="{{asset('css/landing-page.css')}}" rel="stylesheet">
+    {{-- SweetAlert2 CSS --}}
+    @include('include.plugins.load-swal2-guest-css')
+    <link href="{{asset('css/Landing_Page.css')}}" rel="stylesheet">
+    <link href="{{asset('css/landing-page.css')}}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -201,98 +203,101 @@
 @endsection
 
 @section('custom-script')
-<script>
-    function myFunction() {
-        var x = document.getElementById("myTopnav");
-        if (x.className === "topnav") {
-            x.className += " responsive";
-        } else {
-            x.className = "topnav";
+    <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+    {{-- SweetAlert2 JS --}}
+    @include('include.plugins.load-swal2-guest-js')
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
         }
-    }
 
-    function openCity(cityName) {
-        var i;
-        var x = document.getElementsByClassName("city");
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
+        function openCity(cityName) {
+            var i;
+            var x = document.getElementsByClassName("city");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            document.getElementById(cityName).style.display = "block";
         }
-        document.getElementById(cityName).style.display = "block";
-    }
-</script>
+    </script>
 
-<script>
-    window.dataLayer = window.dataLayer || [];
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
-        dataLayer.push(arguments)
-    }
-    gtag('js', new Date());
-    gtag('config', 'UA-140729121-1');
-</script>
-{{-- <script src="home/assets/show-on-scroll.js"></script> --}}
-<script>
-    var slideIndex = 1;
-    showDivs(slideIndex);
+        function gtag() {
+            dataLayer.push(arguments)
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-140729121-1');
+    </script>
+    {{-- <script src="home/assets/show-on-scroll.js"></script> --}}
+    <script>
+        var slideIndex = 1;
+        showDivs(slideIndex);
 
-    function plusDivs(n) {
-        showDivs(slideIndex += n);
-    }
+        function plusDivs(n) {
+            showDivs(slideIndex += n);
+        }
 
-    function currentDiv(n) {
-        showDivs(slideIndex = n);
-    }
+        function currentDiv(n) {
+            showDivs(slideIndex = n);
+        }
 
-    function showDivs(n) {
-        var i;
-        var x = document.getElementsByClassName("mySlides");
-        var y = document.getElementsByClassName("mySlides2")
-        var dots = document.getElementsByClassName("demo");
-        if (n > x.length) {
-            slideIndex = 1
+        function showDivs(n) {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            var y = document.getElementsByClassName("mySlides2")
+            var dots = document.getElementsByClassName("demo");
+            if (n > x.length) {
+                slideIndex = 1
+            }
+            if (n < 1) {
+                slideIndex = x.length
+            }
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            if (n > y.length) {
+                slideIndex = 1
+            }
+            if (n < 1) {
+                slideIndex = y.length
+            }
+            for (i = 0; i < y.length; i++) {
+                y[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" w3-white", "");
+            }
+            x[slideIndex - 1].style.display = "block";
+            y[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " w3-white";
         }
-        if (n < 1) {
-            slideIndex = x.length
-        }
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-        }
-        if (n > y.length) {
-            slideIndex = 1
-        }
-        if (n < 1) {
-            slideIndex = y.length
-        }
-        for (i = 0; i < y.length; i++) {
-            y[i].style.display = "none";
-        }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" w3-white", "");
-        }
-        x[slideIndex - 1].style.display = "block";
-        y[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].className += " w3-white";
-    }
-</script>
+    </script>
 
-<!-- For TOP -->
-<script>
-    // Function to Add and remove class
-    (function($) {
-        var $window = $(window),
-            $title = $('#title');
+    <!-- For TOP -->
+    <script>
+        // Function to Add and remove class
+        (function($) {
+            var $window = $(window),
+                $title = $('#title');
 
-        function resize() {
-            if ($window.width() < 598) {
-                return $title.addClass('text-nowrap');
+            function resize() {
+                if ($window.width() < 598) {
+                    return $title.addClass('text-nowrap');
+                }
+
+                $title.removeClass('text-nowrap');
             }
 
-            $title.removeClass('text-nowrap');
-        }
-
-        $window
-            .resize(resize)
-            .trigger('resize');
-    })(jQuery);
-</script>
+            $window
+                .resize(resize)
+                .trigger('resize');
+        })(jQuery);
+    </script>
 @endsection

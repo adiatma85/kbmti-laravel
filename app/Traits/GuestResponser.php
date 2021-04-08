@@ -10,8 +10,17 @@ use Symfony\Component\Mime\Test\Constraint\EmailAddressContains;
 trait GuestResponser{
 
     // General Response for swal response only
-    protected function generalSwalResponse($title = "", $text = "", $icon="success", $statusCode = 302){
+    protected function generalSwalResponse($title = "", $text = "", $icon="success", $statusCode = 302, $redirectedRoute = ''){
         // For default the response will return success message
+        if ($redirectedRoute) {
+            return redirect()
+            ->route($redirectedRoute)
+            ->with('response', [
+                'title' => $title,
+                'text' => $text,
+                'icon' => $icon
+            ]);
+        }
         return redirect()
             ->back($statusCode)
             ->with('response', [

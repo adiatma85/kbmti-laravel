@@ -15,6 +15,9 @@ class EventRegistrationTypes extends Model
     // Change the table name for rational reason
     protected $table = 'eventFields';
 
+    // Fillable
+    protected $fillable = ['name', 'type', 'event_id'];
+
     // Reference on Event
     public function toEvent()
     {

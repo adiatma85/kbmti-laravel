@@ -46,34 +46,26 @@ class EventRegistration extends _GuestControllerBase
                 // 404
             );
         }
-        $isAlreadyExist = EventRegister::
-            where('nim', $request->nim)
-            ->where('email', $request->email)
-            ->where('name', $request->name)
-            ->where('event_id', $event->id)
-            ->exists();
-        if ($isAlreadyExist) {
-            return $this->generalSwalResponse(
-                'Terjadi kesalahan dalam penyimpanan data!',
-                'Anda telah terdaftar dalam sistem untuk event ini!',
-                'error',
-                // 409
-            );
-        }
-        // else
         $newRegistrationItem = EventRegister::create([
-            'name' => $request->name ?? '',
-            'nim' => $request->nim ?? '',
-            'angkatan' => $request->angkatan ?? '',
-            'email' => $request->email ?? '',
-            'phone' => $request->phone ?? '',
-            'line_id' => $request->line_id ?? '',
             'event_id' => $event->id
             // For folder, need another time
         ]);
         for ($i = 0; $i < count($event->eventFields); $i++) {
             $field = $event->eventFields[$i];
             $fieldName = strtolower($field->name);
+            if ($fieldName == 'name' || $fieldName == 'nim' || $fieldName == 'email') {
+                $isAlreadyExist = EventFieldResponse::where('response', $request->$fieldName)
+                    ->where('eventField_id', $field->id)
+                    ->exists();
+                if ($isAlreadyExist) {
+                    return $this->generalSwalResponse(
+                        'Terjadi kesalahan dalam penyimpanan data!',
+                        'Anda telah terdaftar dalam sistem untuk event ini!',
+                        'error',
+                    );
+                }
+            }
+            // Else
             EventFieldResponse::create([
                 'response' => $request->$fieldName,
                 'eventRegistration_id' => $newRegistrationItem->id,

@@ -33,14 +33,8 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th class="is-using-setup">Nama</th>
-                                    <th class="is-using-setup">NIM</th>
-                                    <th class="is-using-setup">Angkatan</th>
-                                    <th class="is-using-setup">Email</th>
-                                    <th class="is-using-setup">Phone</th>
-                                    <th class="is-using-setup">ID LINE</th>
                                     @foreach ($event->eventFields as $field)
-                                        <th>{{$field->name}}</th>
+                                        <th class="is-using-setup">{{$field->name}}</th>
                                     @endforeach
                                     {{-- <th>Action</th> --}}
                                 </tr>
@@ -49,26 +43,14 @@
                                 @foreach ($event->eventRegistration as $item)
                                 <tr>
                                     <td>{{$item->id}}</td>
-                                    <td>{{$item->name}}</td>
-                                    <td>{{$item->nim}}</td>
-                                    <td>{{$item->angkatan}}</td>
-                                    <td>{{$item->email}}</td>
-                                    <td>{{$item->phone}}</td>
-                                    <td>{{$item->line_id}}</td>
                                     @foreach ($item->fieldResponses as $response)
-                                        <th>{{$response->response}}</th>
+                                        <td>{{$response->response}}</td>
                                     @endforeach
                                 </tr>
                                 @endforeach
                             </tbody>
                             <tfoot>
                                 <th>No</th>
-                                    <th>Nama</th>
-                                    <th>NIM</th>
-                                    <th>Angkatan</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>ID LINE</th>
                                     @foreach ($event->eventFields as $field)
                                         <th>{{$field->name}}</th>
                                     @endforeach
