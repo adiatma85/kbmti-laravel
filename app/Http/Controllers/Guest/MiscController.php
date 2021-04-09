@@ -15,17 +15,36 @@ class MiscController extends _GuestControllerBase
     }
 
     // Landing Page
-    public function landingPage(){
-        return view('general.index-landing-page');   
+    public function landingPage()
+    {
+        return view('general.index-landing-page');
     }
 
     // Form Pendafataran
-    public function pendaftaranStaff(){
+    public function pendaftaranStaff()
+    {
         return view('general.pendaftaran-staff');
     }
 
     // Testing email
-    public function sendingEmail(){
+    public function sendingEmail()
+    {
         return $this->eventEmailResponse('adiatma85@gmail.com', 'TESTING EMAIL IN FTP SERVER', 'lucky', 'ini bodi text', 'https://google.com');
+    }
+
+    // Accessing another server
+    public function accessingAnotherServer()
+    {
+        $ch = curl_init();
+
+        // set URL and other appropriate options
+        curl_setopt($ch, CURLOPT_URL, "https://google.com");
+        // curl_setopt($ch, CURLOPT_HEADER, 0);
+
+        // grab URL and pass it to the browser
+        curl_exec($ch);
+
+        // close cURL resource, and free up system resources
+        curl_close($ch);
     }
 }

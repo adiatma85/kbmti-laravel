@@ -104,6 +104,8 @@ Route::get('php-info', function () {
     phpinfo();
 });
 
+Route::get('accessing-google', [GuestMiscController::class,  'accessingAnotherServer']);
+
 Route::get('testing-open-tender-view', function () {
     return view('general.event-registration.open-tender-page');
 });
