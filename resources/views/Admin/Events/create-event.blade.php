@@ -65,7 +65,7 @@
                     <label>Daftar-Daftar Field yang Diperlukan</label>
                     <label>Default:</label>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-6" id="fieldsSlider">
                             {{-- Row 1 --}}
                             <div class="row">
                                 <div class="col-md-6">
@@ -174,11 +174,42 @@
     <script>
         let index = 0;
         $(document).ready(function() {
+                // Listener for Addfieldbutton
                 $("#addFieldButton").click(function(event) {
                     event.preventDefault();
                     $("#addFieldAppend").append(appendElement(index));
                     document.getElementById(`removeSign-${index}`).addEventListener('click', removeFunction);
                     index++;
+                });
+
+                // option-event handler
+                $("#option-event").change(function(event) {
+
+                    let value = this.value
+                    if (value == 'OPEN-TENDER') {
+                        $append = "<div class='row' id='appendOpenTender'>" +
+                                "<div class='col-md-6'>" +
+                                    "<div class='form-group'>" +
+                                        "<div class='custom-control custom-switch'>" +
+                                            "<input type='checkbox' class='custom-control-input' id='pesertaOrganisasi' value='Organisasi' name='field[]' checked>" +
+                                            "<label class='custom-control-label' for='pesertaOrganisasi'>Pengalaman Keorganisasian</label>" +
+                                        "</div>" +
+                                    "</div>" +
+                                "</div>" +
+                                "<div class='col-md-6'>" +
+                                    "<div class='form-group'>" +
+                                        "<div class='custom-control custom-switch'>" +
+                                            "<input type='checkbox' class='custom-control-input' id='pesertaKepanitiaan' value='Kepanitiaan' name='field[]' checked>" +
+                                            "<label class='custom-control-label' for='pesertaKepanitiaan'>Pengalaman Kepanitiaan</label>" +
+                                        "</div>" +
+                                    "</div>" +
+                                "</div>" +
+                            "</div>";
+                        $("#fieldsSlider").append($append);
+                    } else {
+                        let element = document.getElementById(`appendOpenTender`);
+                        element.remove();
+                    }
                 });
 
                 function appendElement(numerical){

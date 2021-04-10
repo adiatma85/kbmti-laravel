@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 // Model
 use App\Models\EventRegister as EventRegistration;
+use App\Models\EventRegistrationTypes as EventFields;
 
 class EventFieldResponse extends Model
 {
@@ -21,5 +22,11 @@ class EventFieldResponse extends Model
     public function toEventRegistration()
     {
         return $this->belongsTo(EventRegistration::class, 'eventRegistration_id');
+    }
+
+    // Reference to eventField
+    public function toEventField()
+    {
+        return $this->belongsTo(EventFields::class, 'eventField_id');
     }
 }

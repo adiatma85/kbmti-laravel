@@ -15,12 +15,12 @@ use App\Http\Controllers\admin\stafAhli as AdminStaffAhliController;
 // Guest Side Controller
 use App\Http\Controllers\Guest\MiscController as GuestMiscController;
 use App\Http\Controllers\Guest\EventRegistration as GuestEventRegistrationController;
+use App\Http\Controllers\Guest\OpenTenderController as GuestOpenTenderController;
 
 
 
 // Temporary Staff Ahli
 use App\Http\Controllers\stafAhli as StaffAhliController;
-use PhpParser\Node\Expr\FuncCall;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +34,7 @@ use PhpParser\Node\Expr\FuncCall;
 */
 
 // Staf Ahli Temporary
-// Route::resource('staf_Ahli', StaffAhliController::class, []);
+Route::resource('staf_Ahli', StaffAhliController::class, []);
 
 // Grouped Guest Routes
 Route::name('guest.')
@@ -51,6 +51,15 @@ Route::name('guest.')
                 Route::get('/{eventName}', [GuestEventRegistrationController::class, 'showFromName'])->name('showFromName');
                 Route::post('/{eventName}', [GuestEventRegistrationController::class, 'storeEventRegistration'])->name('storeEventRegistration');
             });
+        Route::name('open-tender.')
+            ->prefix('open-tender')
+            ->group( function () {
+                // Index page -> Redirect to lates updated, but for now, it will be the tester
+                Route::get('', [GuestEventRegistrationController::class, 'index'])->name('index');
+                // Get and Post Routes
+                Route::get('/{eventName}', [GuestOpenTenderController::class, 'showFromName'])->name('showFromName');
+                Route::post('/{eventName}', [GuestOpenTenderController::class, 'storeOpenTenderRegistration'])->name('storeOpenTenderRegistration');
+            } );
     });
 
 

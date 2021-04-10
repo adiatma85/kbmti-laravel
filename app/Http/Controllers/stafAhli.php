@@ -45,11 +45,8 @@ class stafAhli extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Store $request)
+    public function store(Request $request)
     {
-        // For testing purpose only
-        // return response()->json($request);
-
         $arrayData = [
             'name' => $request->name,
             'nim' => $request->nim,

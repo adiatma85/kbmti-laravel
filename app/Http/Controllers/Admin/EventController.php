@@ -40,7 +40,10 @@ class EventController extends _AdminControllerBase
      */
     public function store(Request $request)
     {
-
+        // if ($request->event_type == 'OPEN-TENDER') {
+        //     return $this->storeOpenTender($request);
+        // }
+        
         // Event::create($request->except(['_token']));
         $event = Event::create($request->only([
             'name',
@@ -77,13 +80,40 @@ class EventController extends _AdminControllerBase
         }
 
         if ($request->fieldTypes && $request->fieldNames) {
-            for ($i=0; $i < count($request->fieldTypes); $i++) { 
+            for ($i = 0; $i < count($request->fieldTypes); $i++) {
                 EventField::create([
                     'name' => str_replace(' ', '_', $request->fieldNames[$i]),
                     'type' => $request->fieldTypes[$i],
                     'event_id' => $event->id
                 ])->save();
             }
+        }
+        // Khusus Open Tender
+        if ($request->event_type == 'OPEN-TENDER') {
+
+            EventField::create([
+                'name' => 'Tahun_Organisasi',
+                'type' => 'text',
+                'event_id' => $event->id
+            ])->save();
+
+            EventField::create([
+                'name' => 'Tahun_Kepanitiaan',
+                'type' => 'text',
+                'event_id' => $event->id
+            ])->save();
+
+            EventField::create([
+                'name' => 'Inovasi',
+                'type' => 'textarea',
+                'event_id' => $event->id
+            ])->save();
+
+            EventField::create([
+                'name' => 'Pemberkasan',
+                'type' => 'text',
+                'event_id' => $event->id
+            ])->save();
         }
         $event->save();
 
@@ -102,6 +132,9 @@ class EventController extends _AdminControllerBase
     public function show($id)
     {
         $event = Event::findOrFail($id);
+        if ($event->event_type == 'OPEN-TENDER') {
+            return view('Admin/Events/detail-open-tender', compact('event'));
+        }
         return view('Admin/Events/detail-event', compact('event'));
     }
 

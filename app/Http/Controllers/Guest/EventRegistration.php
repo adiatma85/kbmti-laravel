@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\_GuestControllerBase;
-use Illuminate\Http\Request;
 use App\Http\Requests\Guest\EventRegistration\StoreEventRegistration as Store;
 
 // Model
@@ -21,7 +20,9 @@ class EventRegistration extends _GuestControllerBase
     public function showFromName($name)
     {
         $name = str_replace('-', ' ', $name);
-        $event = Event::where('name', $name)->first();
+        $event = Event::where('name', $name)
+                ->where('event_type', 'NORMAL-EVENT')
+                ->first();
         if (!$event) {
             return $this->generalSwalResponse(
                 'Halaman tidak ditemukan',
@@ -36,7 +37,9 @@ class EventRegistration extends _GuestControllerBase
     public function storeEventRegistration(Store $request)
     {
         $name = str_replace('-', ' ', explode('/', url()->current())[4]);
-        $event = Event::where('name', $name)->first() ?? null;
+        $event = Event::where('name', $name)
+                ->where('event_type', 'NORMAL-EVENT')
+                ->first() ?? null;
         if (!$event) {
             // Masukan gk valid
             return $this->generalSwalResponse(
@@ -48,8 +51,8 @@ class EventRegistration extends _GuestControllerBase
         }
         $newRegistrationItem = EventRegister::create([
             'event_id' => $event->id
-            // For folder, need another time
         ]);
+        // For better approachment, using queue is recomended
         for ($i = 0; $i < count($event->eventFields); $i++) {
             $field = $event->eventFields[$i];
             $fieldName = strtolower($field->name);

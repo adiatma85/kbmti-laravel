@@ -15,11 +15,12 @@
                     <div class="card card-chart">
                             <div class="card-header">
                                 <h5 class="card-category"></h5>
-                                <h4 class="card-title">Form Pendaftaran</h4>
+                                <h4 class="card-title">Form Pendaftaran Ketua Pelaksana {{$event->name}}</h4>
                             </div>
 
                             <div class="card-body">
-                                <form method="post" action="" enctype="multipart/form-data" onsubmit="return checkFile();">
+                                <form method="post" action="{{route('guest.open-tender.storeOpenTenderRegistration', ['eventName' => $event->name])}}" enctype="multipart/form-data" onsubmit="return checkFile();">
+                                    @csrf
                                     <div class="col-md-12">
                                         <div class="form-row mt-4">
                                             <div class="form-group col-md-6">
@@ -45,12 +46,12 @@
                                         <div class="form-row mt-4">
                                             <div class="form-group col-md-6">
                                                 <label for="idLine">ID Line</label>
-                                                <input type="text" name="idLine" class="form-control" name="idLine" id="diLine"
+                                                <input type="text" name="id_line" class="form-control" id="diLine"
                                                     placeholder="ID LINE">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="noHp">No. Handphone / WA</label>
-                                                <input type="telp" class="form-control" name="noHp" id="noHp"
+                                                <input type="telp" class="form-control" name="nomor_telepon" id="noHp"
                                                     placeholder="No Handphone / WA" required>
                                             </div>
                                         </div>
@@ -63,6 +64,12 @@
                                     </div>
 
                                     <div class="form-group col-md-12 mt-4">
+                                        <label for="inovasi">Inovasi untuk Kepanitiaan</label>
+                                        <textarea name="inovasi" id="inovasi" class="form-control" rows="3" placeholder="Inovasi..."></textarea>
+                                    </div>
+
+                                    {{-- Tahun Organisasi --}}
+                                    <div class="form-group col-md-12 mt-4">
                                         <label for="">Pengalaman Organisasi</label>
                                         <div class="form-row" id="organisasi">
                                             <div class="form-group col-md-6">
@@ -72,7 +79,7 @@
                                                             placeholder="Nama Organisasi">
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <input type="number" name="tahunOrganisasi[]" class="form-control"
+                                                        <input type="number" name="tahun_organisasi[]" class="form-control"
                                                             placeholder="Tahun">
                                                     </div>
                                                 </div>
@@ -84,7 +91,7 @@
                                                             placeholder="Nama Organisasi">
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <input type="number" name="tahunOrganisasi[]" class="form-control"
+                                                        <input type="number" name="tahun_organisasi[]" class="form-control"
                                                             placeholder="Tahun">
                                                     </div>
                                                 </div>
@@ -108,7 +115,7 @@
                                                             placeholder="Nama Kepanitiaan">
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <input type="number" name="tahunKepanitiaan[]" class="form-control"
+                                                        <input type="number" name="tahun_kepanitiaan[]" class="form-control"
                                                             placeholder="Tahun">
                                                     </div>
                                                 </div>
@@ -120,7 +127,7 @@
                                                             placeholder="Nama Kepanitiaan">
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <input type="number" name="tahunKepanitiaan[]" class="form-control"
+                                                        <input type="number" name="tahun_kepanitiaan[]" class="form-control"
                                                             placeholder="Tahun">
                                                     </div>
                                                 </div>
@@ -133,12 +140,27 @@
                                             </button>
                                         </div>
                                     </div>
+
                                     <div class="col-md-6">
                                         <br>
                                         <label for="ukuran">Upload Berkas ZIP/RAR</label><br>
-                                        <small>* Berisi Berkas Surat Pernyataan Komitmen dan Foto 3x4</small>
-                                        <input type="file" accept=".zip,.rar" class="form-control-file mr-1" id="komitmen"
-                                            style="margin: 10px;background-color: white;" name="komitmen" required><br>
+                                        <small>* Berisi Berkas - Berkas Penting</small>
+                                        <br>
+                                        <small>* Harap Menyiapkan Presentasu untuk Screening</small>
+                                        <div class="form-group col-md-12">
+                                            <input type="text" name="pemberkasan" class="form-control" id="pemberkasan" placeholder="https://drive.google.com/bla-bla-bla">
+                                        </div>
+                                        
+                                    </div>
+                                <div class="form-group col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-2 offset-md-10 ">
+                                            <button type="submit" id="submit" class="btn btn-primary btn-block"
+                                                style="background: #8265A7; border: black;">
+                                                <i class="now-ui-icons ui-1_simple-add"></i> Submit
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -155,7 +177,6 @@
 {{-- SweetAlert2 JS --}}
 @include('include.plugins.load-swal2-guest-js')
 
-
 {{-- Logic and Custom Scripts --}}
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -170,7 +191,7 @@
                 "<input type='text' name='organisasi[]' class='form-control' placeholder='Nama Organisasi'>" +
                 "</div>" +
                 "<div class='col-md-3'>" +
-                "<input type='number' name='tahunOrganisasi[]' class='form-control' placeholder='Tahun'>" +
+                "<input type='number' name='tahun_organisasi[]' class='form-control' placeholder='Tahun'>" +
                 "</div>" +
                 "</div>" +
                 "</div>";
@@ -185,7 +206,7 @@
                 "<input type='text' name='kepanitiaan[]' class='form-control' placeholder='Nama Kepanitiaan'>" +
                 "</div>" +
                 "<div class='col-md-3'>" +
-                "<input type='number' name='tahunKepanitiaan[]' class='form-control' placeholder='Tahun'>" +
+                "<input type='number' name='tahun_kepanitiaan[]' class='form-control' placeholder='Tahun'>" +
                 "</div>" +
                 "</div>" +
                 "</div>";
@@ -197,22 +218,6 @@
                 $("#portfolio").click();
             });
         });
-</script>
-
-<script type="text/javascript">
-    function checkFile() {
-            var fileElement = document.getElementById("komitmen");
-            var fileExtension = "";
-            if (fileElement.value.lastIndexOf(".") > 0) {
-                fileExtension = fileElement.value.substring(fileElement.value.lastIndexOf(".") + 1, fileElement.value.length);
-            }
-            if (fileExtension.toLowerCase() == "zip" || fileExtension.toLowerCase() == "rar") {
-                return true;
-            } else {
-                alert("Upload menggunakan ZIP/RAR");
-                return false;
-            }
-        }
 </script>
 
 @endsection
