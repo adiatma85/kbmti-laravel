@@ -9,6 +9,29 @@
 @endsection
 
 @section('content')
+<section id="form">
+    <div class="flex-container">
+        <div class="flex-15">
+            <p></p>
+        </div>
+        <div class="flex-70">
+            <div class='card card-small mb-3' style="padding-bottom: 0px;">
+                <div class="card-header border-bottom">
+                    <h6 class="m-0">Download Berkas</h6>
+                </div>
+                <div class='card-body p-0 text-center'>
+                    {{-- Berkas --}}
+                    <a href="{{$event->link}}"
+                        download target="_blank">
+                        <button class="btn"><i class="fa fa-download"></i>Tautan Download Berkas</button></a><br>
+                </div>
+                <div class="flex-15">
+                    <img src="{{asset('images/Siperat/siperat-big.svg')}}" alt="" srcset="" data-aos="fade-left"
+                        data-aos-anchor-placement="center-bottom">
+                </div>
+            </div>
+        </div>
+</section>
 <div class="content" style="margin-left: 50px;margin-right: 50px">
     <div class="row">
         <div class="col-lg-12">
