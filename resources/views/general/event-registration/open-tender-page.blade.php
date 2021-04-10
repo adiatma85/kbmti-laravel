@@ -76,11 +76,11 @@
                                                 <div class="row">
                                                     <div class="col-md-9">
                                                         <input type="text" name="organisasi[]" class="form-control"
-                                                            placeholder="Nama Organisasi">
+                                                            placeholder="Nama Organisasi" required>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <input type="number" name="tahun_organisasi[]" class="form-control"
-                                                            placeholder="Tahun">
+                                                            placeholder="Tahun" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -88,11 +88,11 @@
                                                 <div class="row">
                                                     <div class="col-md-9">
                                                         <input type="text" name="organisasi[]" class="form-control"
-                                                            placeholder="Nama Organisasi">
+                                                            placeholder="Nama Organisasi" required>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <input type="number" name="tahun_organisasi[]" class="form-control"
-                                                            placeholder="Tahun">
+                                                            placeholder="Tahun" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -112,11 +112,11 @@
                                                 <div class="row">
                                                     <div class="col-md-9">
                                                         <input type="text" name="kepanitiaan[]" class="form-control"
-                                                            placeholder="Nama Kepanitiaan">
+                                                            placeholder="Nama Kepanitiaan" required>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <input type="number" name="tahun_kepanitiaan[]" class="form-control"
-                                                            placeholder="Tahun">
+                                                            placeholder="Tahun" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -124,11 +124,11 @@
                                                 <div class="row">
                                                     <div class="col-md-9">
                                                         <input type="text" name="kepanitiaan[]" class="form-control"
-                                                            placeholder="Nama Kepanitiaan">
+                                                            placeholder="Nama Kepanitiaan" required>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <input type="number" name="tahun_kepanitiaan[]" class="form-control"
-                                                            placeholder="Tahun">
+                                                            placeholder="Tahun" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -188,10 +188,10 @@
             $org = "<div class='form-group col-md-6'>" +
                 "<div class='row'>" +
                 "<div class='col-md-9'>" +
-                "<input type='text' name='organisasi[]' class='form-control' placeholder='Nama Organisasi'>" +
+                "<input type='text' name='organisasi[]' class='form-control' placeholder='Nama Organisasi' required>" +
                 "</div>" +
                 "<div class='col-md-3'>" +
-                "<input type='number' name='tahun_organisasi[]' class='form-control' placeholder='Tahun'>" +
+                "<input type='number' name='tahun_organisasi[]' class='form-control' placeholder='Tahun' required>" +
                 "</div>" +
                 "</div>" +
                 "</div>";
@@ -203,10 +203,10 @@
             $panitia = "<div class='form-group col-md-6'>" +
                 "<div class='row'>" +
                 "<div class='col-md-9'>" +
-                "<input type='text' name='kepanitiaan[]' class='form-control' placeholder='Nama Kepanitiaan'>" +
+                "<input type='text' name='kepanitiaan[]' class='form-control' placeholder='Nama Kepanitiaan' required>" +
                 "</div>" +
                 "<div class='col-md-3'>" +
-                "<input type='number' name='tahun_kepanitiaan[]' class='form-control' placeholder='Tahun'>" +
+                "<input type='number' name='tahun_kepanitiaan[]' class='form-control' placeholder='Tahun' required>" +
                 "</div>" +
                 "</div>" +
                 "</div>";
