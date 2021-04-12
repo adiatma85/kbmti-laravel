@@ -70,10 +70,17 @@ class OpenTenderController extends _GuestControllerBase
                     continue;
                 }
                 // File
-                // if ($fieldName == 'pemberkasan') {
-                //     $this->handlingStoringFiles($request, $newRegistrationItem->id, $field->id);
-                //     continue;
-                // }
+                if ($fieldName == 'pemberkasan') {
+                    // $this->handlingStoringFiles($request, $newRegistrationItem->id, $field->id);
+                    $pemberkasanName = Carbon::now() . ' ' . $request->name . '.' . $request->pemberkasan->extension();
+                    $request->pemberkasan->storeAs('rar/open-tender', $pemberkasanName);
+                    EventFieldResponse::create([
+                        'response' => $pemberkasanName,
+                        'eventRegistration_id' => $newRegistrationItem->id,
+                        'eventField_id' => $field->id
+                    ])->save();
+                    continue;
+                }
 
                 // DEFAULT
                 // Else
@@ -131,9 +138,9 @@ class OpenTenderController extends _GuestControllerBase
     private function handlingStoringFiles($requestItem, $newRegistrationItemId, $fieldId)
     {
         $imageName = Carbon::now() . '.' . $requestItem->pemberkasan->extension();
-        return response()->json([
-            'dijobou' => true,
-        ]);
+        // return response()->json([
+        //     'dijobou' => true,
+        // ]);
         $requestItem->storeAs('rar/open-tender', $imageName);
 
         EventFieldResponse::create([

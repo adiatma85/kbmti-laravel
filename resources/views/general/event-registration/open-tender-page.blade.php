@@ -87,7 +87,7 @@
                                     </div>
 
                                     <div class="form-group col-md-12 mt-4">
-                                        <label for="inovasi">Inovasi untuk Kepanitiaan</label>
+                                        <label for="inovasi">Inovasi untuk {{$event->name}} </label>
                                         <textarea name="inovasi" id="inovasi" class="form-control" rows="3" placeholder="Inovasi..."></textarea>
                                     </div>
 
@@ -165,16 +165,17 @@
                                     </div>
 
                                     <div class="col-md-6">
+                                        {{-- Need Progress Bar to see --}}
                                         <br>
                                         <label for="ukuran">Upload Berkas ZIP/RAR</label><br>
                                         <small>* Berisi Berkas - Berkas Penting</small>
                                         <br>
-                                        <small>* Harap Menyiapkan Presentasu untuk Screening</small>
+                                        <small>* Harap Menyiapkan Presentasi untuk Screening</small>
                                         <div class="form-group col-md-12">
-                                            <input type="text" name="pemberkasan" class="form-control" id="pemberkasan" placeholder="https://drive.google.com/bla-bla-bla">
+                                            <input type="file" name="pemberkasan" class="form-control" id="pemberkasan">
                                         </div>
-                                        
                                     </div>
+
                                 <div class="form-group col-md-12">
                                     <div class="row">
                                         <div class="col-md-2 offset-md-10 ">

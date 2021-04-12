@@ -60,10 +60,13 @@
                                     <td>
                                         <ul>
                                             @for ($i = 0; $i < count($item->getOrganisasiArrayAttribute($item->id)) / 2; $i++)
-                                                <li>
+                                                @php
+                                                    $gap = count($item->getOrganisasiArrayAttribute($item->id)) / 2;
+                                                @endphp
+                                                <li>   
                                                      {{ $item->getOrganisasiArrayAttribute($item->id)[$i]->response }} 
                                                      :
-                                                     {{ $item->getOrganisasiArrayAttribute($item->id)[$i+2]->response }} 
+                                                     {{ $item->getOrganisasiArrayAttribute($item->id)[$i+$gap]->response }} 
                                                     </li>
                                             @endfor
                                         </ul>
@@ -72,10 +75,13 @@
                                     <td>
                                         <ul>
                                             @for ($i = 0; $i < count($item->getKepanitiaanArrayAttribute($item->id)) / 2; $i++)
+                                                @php
+                                                    $gap = count($item->getKepanitiaanArrayAttribute($item->id)) / 2;
+                                                @endphp
                                                 <li>
                                                      {{ $item->getKepanitiaanArrayAttribute($item->id)[$i]->response }} 
                                                      :
-                                                     {{ $item->getKepanitiaanArrayAttribute($item->id)[$i+2]->response }} 
+                                                     {{ $item->getKepanitiaanArrayAttribute($item->id)[$i+$gap]->response }} 
                                                     </li>
                                             @endfor
                                         </ul>
