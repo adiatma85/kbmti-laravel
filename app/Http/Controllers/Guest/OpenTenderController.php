@@ -40,6 +40,10 @@ class OpenTenderController extends _GuestControllerBase
         $event = Event::where('name', $name)
             ->where('event_type', 'OPEN-TENDER')
             ->first() ?? null;
+        return response()->json([
+            'name' => $name,
+            'event' => $event
+        ]);
         if (!$event) {
             // Masukan gk valid
             return $this->generalSwalResponse(
