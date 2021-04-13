@@ -69,9 +69,11 @@
                                     <td>
                                         {{-- {{$item->getPemberkasanAttribute($item->id)}} --}}
                                         <a href="{{route('guest.open-tender.downloadBerkas', [ 'stringName' => $item->getPemberkasanAttribute($item->id)->response ])}}" target="blank">
-                                            <button class="btn btn-success" onclick="clickedPemberkasan($item->getPemberkasanAttribute($item->id)->response)">
-                                                ini
-                                            </button>
+                                            <div class="col-md-6">
+                                                <button class="btn btn-success" onclick="clickedPemberkasan($item->getPemberkasanAttribute($item->id)->response)">
+                                                    <i class="fa fa-download"></i>
+                                                </button>
+                                            </div>
                                         </a>
                                     </td>
                                     {{-- Organisasi --}}
@@ -139,17 +141,6 @@
 
 @section('custom-scripts')
     <script>
-        function clickedPemberkasan() {
-            console.log('clicked')
-            // $.ajax({
-            //     type: "POST",
-            //     url: "{{route('guest.open-tender.downloadBerkas', [ 'stringName' => $item->getPemberkasanAttribute($item->id)->response ])}}',
-            //     success: function (response) {
-            //         console.log('success')
-            //     },
-            //     dataType: 'application/json'
-            // });
-        }
         // Append
         let index = 0;
         $(document).ready(function() {
