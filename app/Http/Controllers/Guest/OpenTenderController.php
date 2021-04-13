@@ -37,17 +37,9 @@ class OpenTenderController extends _GuestControllerBase
     public function storeOpenTenderRegistration(Request $request)
     {
         $name = str_replace('-', ' ', explode('/', url()->current())[4]);
-        $stringContainer = explode('/', url()->current());
         $event = Event::where('name', $name)
             ->where('event_type', 'OPEN-TENDER')
             ->first() ?? null;
-        return response()->json([
-            'name' => $name,
-            'event' => $event,
-            'arrayedString' => $stringContainer,
-            'experiment' => str_replace('-', ' ', $stringContainer[3])
-
-        ]);
         if (!$event) {
             // Masukan gk valid
             return $this->generalSwalResponse(
