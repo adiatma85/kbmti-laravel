@@ -72,7 +72,7 @@
                                     {{-- FIELD NIM --}}
                                     <div class="form-group">
                                         <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="pesertaNim" value="NIM" name="field[]" checked>
+                                            <input type="checkbox" class="custom-control-input onChangeDisabled" id="pesertaNim" value="NIM" name="field[]" checked >
                                             <label class="custom-control-label" for="pesertaNim">NIM Peserta</label>
                                         </div>
                                     </div>
@@ -81,7 +81,7 @@
                                     {{-- FIELD NAMA --}}
                                     <div class="form-group">
                                         <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="pesertaName" value="Nama" name="field[]" checked>
+                                            <input type="checkbox" class="custom-control-input onChangeDisabled" id="pesertaName" value="Nama" name="field[]" checked >
                                             <label class="custom-control-label" for="pesertaName">Nama Lengkap Peserta</label>
                                         </div>
                                     </div>
@@ -94,7 +94,7 @@
                                     {{-- FIELD EMAIL --}}
                                     <div class="form-group">
                                         <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="pesertaEmail" value="Email" name="field[]" checked>
+                                            <input type="checkbox" class="custom-control-input onChangeDisabled" id="pesertaEmail" value="Email" name="field[]" checked >
                                             <label class="custom-control-label" for="pesertaEmail">Email Peserta</label>
                                         </div>
                                     </div>
@@ -103,7 +103,7 @@
                                     {{-- FIELD ID LINE --}}
                                     <div class="form-group">
                                         <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="pesertaLineId" value="Id Line" name="field[]" checked>
+                                            <input type="checkbox" class="custom-control-input onChangeDisabled" id="pesertaLineId" value="Id Line" name="field[]" checked >
                                             <label class="custom-control-label" for="pesertaLineId">ID Line Peserta</label>
                                         </div>
                                     </div>
@@ -116,7 +116,7 @@
                                     {{-- FIELD NOMOR TELEPON --}}
                                     <div class="form-group">
                                         <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="pesertaPhone" value="Nomor Telepon" name="field[]" checked>
+                                            <input type="checkbox" class="custom-control-input onChangeDisabled" id="pesertaPhone" value="Nomor Telepon" name="field[]" checked >
                                             <label class="custom-control-label" for="pesertaPhone">No. Telepon Peserta</label>
                                         </div>
                                     </div>
@@ -125,7 +125,7 @@
                                     {{-- FIELD Email --}}
                                     <div class="form-group">
                                         <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="pesertaAngkatan" value="Angkatan" name="field[]" checked>
+                                            <input type="checkbox" class="custom-control-input onChangeDisabled" id="pesertaAngkatan" value="Angkatan" name="field[]" checked >
                                             <label class="custom-control-label" for="pesertaAngkatan">Angkatan Peserta</label>
                                         </div>
                                     </div>
@@ -184,31 +184,40 @@
 
                 // option-event handler
                 $("#option-event").change(function(event) {
-
                     let value = this.value
                     if (value == 'OPEN-TENDER') {
                         $append = "<div class='row' id='appendOpenTender'>" +
                                 "<div class='col-md-6'>" +
                                     "<div class='form-group'>" +
                                         "<div class='custom-control custom-switch'>" +
-                                            "<input type='checkbox' class='custom-control-input' id='pesertaOrganisasi' value='Organisasi' name='field[]' checked>" +
+                                            "<input type='checkbox' class='custom-control-input' id='pesertaOrganisasi' value='Organisasi' name='field[]' checked disabled>" +
                                             "<label class='custom-control-label' for='pesertaOrganisasi'>Pengalaman Keorganisasian</label>" +
                                         "</div>" +
                                     "</div>" +
                                 "</div>" +
                                 "<div class='col-md-6'>" +
                                     "<div class='form-group'>" +
-                                        "<div class='custom-control custom-switch'>" +
-                                            "<input type='checkbox' class='custom-control-input' id='pesertaKepanitiaan' value='Kepanitiaan' name='field[]' checked>" +
+                                        "<div class='custom-control custom-switch' disabled>" +
+                                            "<input type='checkbox' class='custom-control-input' id='pesertaKepanitiaan' value='Kepanitiaan' name='field[]' checked disabled>" +
                                             "<label class='custom-control-label' for='pesertaKepanitiaan'>Pengalaman Kepanitiaan</label>" +
+                                        "</div>" +
+                                    "</div>" +
+                                "</div>" +
+                                "<div class='col-md-6'>" +
+                                    "<div class='form-group'>" +
+                                        "<div class='custom-control custom-switch' disabled>" +
+                                            "<input type='checkbox' class='custom-control-input' id='pesertaInovasi' value='Inovasi' name='field[]' checked disabled>" +
+                                            "<label class='custom-control-label' for='pesertaInovasi'>Inovasi</label>" +
                                         "</div>" +
                                     "</div>" +
                                 "</div>" +
                             "</div>";
                         $("#fieldsSlider").append($append);
+                        $(".onChangeDisabled").prop('disabled', true)
                     } else {
                         let element = document.getElementById(`appendOpenTender`);
                         element.remove();
+                        $(".onChangeDisabled").prop('disabled', false)
                     }
                 });
 

@@ -56,6 +56,7 @@ Route::name('guest.')
             ->group( function () {
                 // Index page -> Redirect to lates updated, but for now, it will be the tester
                 Route::get('', [GuestEventRegistrationController::class, 'index'])->name('index');
+                Route::get('berkas/{stringName}', [GuestOpenTenderController::class, 'downloadBerkas'])->name('downloadBerkas');
                 // Get and Post Routes
                 Route::get('/{eventName}', [GuestOpenTenderController::class, 'showFromName'])->name('showFromName');
                 Route::post('/{eventName}', [GuestOpenTenderController::class, 'storeOpenTenderRegistration'])->name('storeOpenTenderRegistration');

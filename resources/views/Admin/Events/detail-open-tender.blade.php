@@ -19,6 +19,13 @@
     $topic = 'Pendaftaran Event';
     $domFormId = 'eventRegistration-form';
     $itemName = 'title-eventRegistration';
+    $specialFields = [
+        'Organisasi',
+        'Kepanitiaan',
+        'Tahun_Organisasi',
+        'Tahun_Kepanitiaan',
+        'Pemberkasan'
+    ];
     @endphp
 
     <div class="container-fluid">
@@ -34,11 +41,13 @@
                                 <tr>
                                     <th>No</th>
                                     @foreach ($event->eventFields as $field)
-                                        @if ( $field->name == 'Organisasi' || $field->name == 'Kepanitiaan' || $field->name == 'Tahun_Organisasi' || $field->name == 'Tahun_Kepanitiaan')
+                                        @if ( in_array($field->name, $specialFields) )
                                             @continue
                                         @endif
                                         <th>{{$field->name}}</th>
                                     @endforeach
+                                    {{-- Pemberkasan --}}
+                                    <th>Pemberkasan</th>
                                     {{-- Organisasi --}}
                                     <th>Organisasi</th>
                                     {{-- Kepanitiaan --}}
@@ -51,11 +60,22 @@
                                 <tr>
                                     <td>{{$item->id}}</td>
                                     @foreach ($item->fieldResponses as $response)
-                                        @if ( $response->toEventField->name == 'Organisasi' || $response->toEventField->name == 'Kepanitiaan' || $response->toEventField->name == 'Tahun_Organisasi' || $response->toEventField->name == 'Tahun_Kepanitiaan')
+                                        @if ( in_array($response->toEventField->name, $specialFields) )
                                                 @continue
                                         @endif
                                         <td>{{$response->response}}</td>
                                     @endforeach
+                                    {{-- Pemberkasan --}}
+                                    <td>
+                                        {{-- {{$item->getPemberkasanAttribute($item->id)}} --}}
+                                        <a href="{{route('guest.open-tender.downloadBerkas', [ 'stringName' => $item->getPemberkasanAttribute($item->id)->response ])}}" target="blank">
+                                            <div class="col-md-6">
+                                                <button class="btn btn-success" onclick="clickedPemberkasan($item->getPemberkasanAttribute($item->id)->response)">
+                                                    <i class="fa fa-download"></i>
+                                                </button>
+                                            </div>
+                                        </a>
+                                    </td>
                                     {{-- Organisasi --}}
                                     <td>
                                         <ul>
@@ -92,11 +112,13 @@
                             <tfoot>
                                 <th>No</th>
                                 @foreach ($event->eventFields as $field)
-                                    @if ( $field->name == 'Organisasi' || $field->name == 'Kepanitiaan' || $field->name == 'Tahun_Organisasi' || $field->name == 'Tahun_Kepanitiaan')
+                                    @if ( in_array($field->name, $specialFields) )
                                         @continue
                                     @endif
                                     <th>{{$field->name}}</th>
                                 @endforeach
+                                {{-- Pemberkasan --}}
+                                <th>Pemberkasan</th>
                                 {{-- Organisasi --}}
                                 <th>Organisasi</th>
                                 {{-- Kepanitiaan --}}

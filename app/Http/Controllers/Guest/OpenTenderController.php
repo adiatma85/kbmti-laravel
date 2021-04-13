@@ -60,25 +60,25 @@ class OpenTenderController extends _GuestControllerBase
                 $fieldName = strtolower($field->name);
 
                 // Better approachment. There are some concern as to why doesn't use switch
-                if ( in_array($fieldName, $this->credentialsFields) ) {
+                if (in_array($fieldName, $this->credentialsFields)) {
                     $this->handlingCredentialFields($request->$fieldName, $field->id);
                 }
                 // Arrayed
-                if ( in_array($fieldName, $this->arrayedFields) ) {
+                if (in_array($fieldName, $this->arrayedFields)) {
                     $items = $request->$fieldName;
                     $this->handlingArrayedFields($items, $newRegistrationItem->id, $field->id);
                     continue;
                 }
                 // File
                 if ($fieldName == 'pemberkasan') {
-                    // $this->handlingStoringFiles($request, $newRegistrationItem->id, $field->id);
-                    $pemberkasanName = Carbon::now() . ' ' . $request->name . '.' . $request->pemberkasan->extension();
-                    $request->pemberkasan->storeAs('rar/open-tender', $pemberkasanName);
-                    EventFieldResponse::create([
-                        'response' => $pemberkasanName,
-                        'eventRegistration_id' => $newRegistrationItem->id,
-                        'eventField_id' => $field->id
-                    ])->save();
+                    $this->handlingStoringFiles($request, $newRegistrationItem->id, $field->id);
+                    // $pemberkasanName = Carbon::now() . ' ' . $request->name . '.' . $request->pemberkasan->extension();
+                    // $request->pemberkasan->storeAs('rar/open-tender', $pemberkasanName);
+                    // EventFieldResponse::create([
+                    //     'response' => $pemberkasanName,
+                    //     'eventRegistration_id' => $newRegistrationItem->id,
+                    //     'eventField_id' => $field->id
+                    // ])->save();
                     continue;
                 }
 
@@ -105,6 +105,11 @@ class OpenTenderController extends _GuestControllerBase
             'Terima kasih Anda telah mendaftar!',
             'success',
         );
+    }
+
+    public function downloadBerkas($stringName)
+    {
+        return response()->download(storage_path('/app/rar/open-tender/'.$stringName));
     }
 
 
@@ -138,9 +143,6 @@ class OpenTenderController extends _GuestControllerBase
     private function handlingStoringFiles($requestItem, $newRegistrationItemId, $fieldId)
     {
         $imageName = Carbon::now() . '.' . $requestItem->pemberkasan->extension();
-        // return response()->json([
-        //     'dijobou' => true,
-        // ]);
         $requestItem->storeAs('rar/open-tender', $imageName);
 
         EventFieldResponse::create([

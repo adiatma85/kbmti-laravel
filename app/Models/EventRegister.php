@@ -32,7 +32,7 @@ class EventRegister extends Model
     }
 
     // Helper Organisasi
-    public function getOrganisasiArrayAttribute( $eventRegistrationId )
+    public function getOrganisasiArrayAttribute($eventRegistrationId)
     {
         $query = $this->query()
             ->join('eventFieldResponse', 'eventFieldResponse.eventRegistration_id', '=', 'eventRegistration.id')
@@ -48,18 +48,31 @@ class EventRegister extends Model
     }
 
     // Helper Kepanitiaan
-    public function getKepanitiaanArrayAttribute( $eventRegistrationId )
+    public function getKepanitiaanArrayAttribute($eventRegistrationId)
     {
         $query = $this->query()
             ->join('eventFieldResponse', 'eventFieldResponse.eventRegistration_id', '=', 'eventRegistration.id')
             ->join('eventFields', 'eventFieldResponse.eventField_id', '=', 'eventFields.id')
             ->select('eventRegistration.id', 'eventFields.name', 'eventFieldResponse.response')
-            ->where( function ($q) {
+            ->where(function ($q) {
                 $q->where('name', '=', 'Kepanitiaan')
                     ->orWhere('name', '=', 'Tahun_Kepanitiaan');
-            } )
+            })
             ->where('eventRegistration.id', '=', $eventRegistrationId)
             ->get();
         return $query;
+    }
+
+    // Helper pemberkasan
+    public function getPemberkasanAttribute($eventRegistrationId)
+    {
+        $query = $this->query()
+            ->join('eventFieldResponse', 'eventFieldResponse.eventRegistration_id', '=', 'eventRegistration.id')
+            ->join('eventFields', 'eventFieldResponse.eventField_id', '=', 'eventFields.id')
+            ->select('eventRegistration.id', 'eventFields.name', 'eventFieldResponse.response')
+            ->where('name', '=', 'Pemberkasan')
+            ->where('eventRegistration.id', '=', $eventRegistrationId)
+            ->get();
+        return $query[0];
     }
 }
