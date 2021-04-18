@@ -7369,7 +7369,6 @@ button.bg-dark:focus {
 }
 
 .position-sticky {
-  position: -webkit-sticky !important;
   position: sticky !important;
 }
 
@@ -7389,9 +7388,8 @@ button.bg-dark:focus {
   z-index: 1030;
 }
 
-@supports ((position: -webkit-sticky) or (position: sticky)) {
+@supports (position: sticky) {
   .sticky-top {
-    position: -webkit-sticky;
     position: sticky;
     top: 0;
     z-index: 1020;
@@ -10122,5 +10120,80 @@ URUTAN Menambah media query: base + typography -> layout & grid -> page layout -
 @media only screen and (max-width: 37.5em) {
   .landing-page__selamat {
     margin-right: 4em;
+  }
+}
+
+.department__heading {
+  margin-top: 10vh;
+  margin-bottom: 5vh;
+}
+.department__heading-title {
+  font-weight: 800;
+  font-size: 3rem;
+  text-align: end;
+  padding-right: 2em;
+}
+@media only screen and (max-width: 56.25em) {
+  .department__heading-title {
+    text-align: center;
+    padding: 0;
+  }
+}
+.department__heading-sub {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: 1fr 2fr;
+  padding: 3rem;
+  -moz-column-gap: 2rem;
+       column-gap: 2rem;
+}
+@media only screen and (max-width: 56.25em) {
+  .department__heading-sub {
+    grid-template-columns: 1fr;
+    row-gap: 2rem;
+  }
+}
+.department__heading-sub-img {
+  background-color: #F1E4FF;
+  height: auto;
+  width: 20rem;
+}
+@media only screen and (max-width: 37.5em) {
+  .department__heading-sub-img {
+    width: 100%;
+  }
+}
+.department__heading-sub-description {
+  font-size: 1.5rem;
+}
+@media only screen and (max-width: 37.5em) {
+  .department__heading {
+    margin-bottom: 0;
+  }
+}
+.department__content {
+  margin-bottom: 10vh;
+}
+.department__content-title {
+  text-align: center;
+  font-weight: 800;
+  font-size: 3rem;
+  margin-bottom: 5vh;
+}
+.department__content-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  row-gap: 3rem;
+}
+@media only screen and (max-width: 56.25em) {
+  .department__content-group {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .department__content-group {
+    grid-template-columns: 1fr;
   }
 }
