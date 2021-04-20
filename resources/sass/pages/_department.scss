@@ -1,0 +1,68 @@
+.department {
+    &__heading {
+        &-title {
+            font-weight: 800;
+            font-size: 3rem;
+            text-align: end;
+            padding-right: 2em;
+            @include respon(tb-pot) {
+                text-align: center;
+                padding: 0;
+            }
+        }
+
+        &-sub {
+            display: grid;
+            align-items: center;
+            justify-items: center;
+            grid-template-columns: 1fr 2fr;
+            padding: 3rem;
+            column-gap: 2rem;
+            @include respon(tb-pot) {
+                grid-template-columns: 1fr;
+                row-gap: 2rem;
+            }
+
+            &-img {
+                background-color: $lightpurple;
+                height: auto;
+                width: 20rem;
+                @include respon(phone) {
+                    width: 100%;
+                }
+            }
+
+            &-description {
+                font-size: 1.5rem;
+            }
+        }
+        margin-top: 10vh;
+        margin-bottom: 5vh;
+        @include respon(phone) {
+            margin-bottom: 0;
+        }
+    }
+
+    &__content {
+        &-title {
+            text-align: center;
+            font-weight: 800;
+            font-size: 3rem;
+            margin-bottom: 5vh;
+        }
+
+        &-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            justify-items: center;
+            row-gap: 3rem;
+            @include respon(tb-pot) {
+                grid-template-columns: 1fr 1fr;
+            }
+            @include respon(phone) {
+                grid-template-columns: 1fr;
+            }
+        }
+        margin-bottom: 10vh;
+    }
+}

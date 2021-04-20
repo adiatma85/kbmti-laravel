@@ -41,6 +41,8 @@ Route::name('guest.')
     ->group(function () {
         // Landing Page
         Route::get('/', [GuestMiscController::class, 'landingPage'])->name('landing.page');
+        // Department Testing Purpose
+        Route::get('/department', [GuestMiscController::class, 'departmentTesting'])->name('departmentTesting');
         // event-registration -> Route Registrasi Event-event yang ada di KBMTI
         Route::name('event-registration.')
             ->prefix('event-registration')

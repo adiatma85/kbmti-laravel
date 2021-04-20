@@ -19,6 +19,11 @@ class MiscController extends _GuestControllerBase
     {
         return view('general.index-landing-page');
     }
+    // Department
+    public function departmentTesting()
+    {
+        return view('general.department.rnc');
+    }
 
     // Form Pendafataran
     public function pendaftaranStaff()
