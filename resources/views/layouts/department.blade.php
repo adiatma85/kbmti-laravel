@@ -19,42 +19,42 @@
             @else
                 {{asset('images/misc/department/empty.png')}}
             @endif
-            " alt="">
+            " alt="" class="department__content-group-img">
             <img src="
             @if(View::hasSection('picture-2'))
                 @yield('picture-2')
             @else
                 {{asset('images/misc/department/empty.png')}}
             @endif
-            " alt="">
+            " alt="" class="department__content-group-img">
             <img src="
             @if(View::hasSection('picture-3'))
                 @yield('picture-3')
             @else
                 {{asset('images/misc/department/empty.png')}}
             @endif
-            " alt="">
+            " alt="" class="department__content-group-img">
             <img src="
             @if(View::hasSection('picture-4'))
                 @yield('picture-4')
             @else
                 {{asset('images/misc/department/empty.png')}}
             @endif
-            " alt="">
+            " alt="" class="department__content-group-img">
             <img src="
             @if(View::hasSection('picture-5'))
                 @yield('picture-5')
             @else
                 {{asset('images/misc/department/empty.png')}}
             @endif
-            " alt="">
+            " alt="" class="department__content-group-img">
             <img src="
             @if(View::hasSection('picture-6'))
                 @yield('picture-6')
             @else
                 {{asset('images/misc/department/empty.png')}}
             @endif
-            " alt="">
+            " alt="" class="department__content-group-img">
         </div>
     </section>
 </article>

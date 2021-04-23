@@ -16,6 +16,7 @@ use App\Http\Controllers\admin\stafAhli as AdminStaffAhliController;
 use App\Http\Controllers\Guest\MiscController as GuestMiscController;
 use App\Http\Controllers\Guest\EventRegistration as GuestEventRegistrationController;
 use App\Http\Controllers\Guest\OpenTenderController as GuestOpenTenderController;
+use App\Http\Controllers\Guest\DepartmentController as GuestDepartmentController;
 
 
 
@@ -41,8 +42,13 @@ Route::name('guest.')
     ->group(function () {
         // Landing Page
         Route::get('/', [GuestMiscController::class, 'landingPage'])->name('landing.page');
-        // Department Testing Purpose
-        Route::get('/department', [GuestMiscController::class, 'departmentTesting'])->name('departmentTesting');
+        // Department
+        Route::name('department')
+            ->prefix('department')
+            ->group(function () {
+                Route::get('', [GuestDepartmentController::class, 'index'])->name('index');
+                Route::get('/{deptName}', [GuestDepartmentController::class, 'showDepartment'])->name('showDepartment');
+            });
         // event-registration -> Route Registrasi Event-event yang ada di KBMTI
         Route::name('event-registration.')
             ->prefix('event-registration')

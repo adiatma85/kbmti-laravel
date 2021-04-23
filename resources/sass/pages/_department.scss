@@ -62,6 +62,10 @@
             @include respon(phone) {
                 grid-template-columns: 1fr;
             }
+            &-img {
+                width: 200px;
+                height: auto;
+            }
         }
         margin-bottom: 10vh;
     }
