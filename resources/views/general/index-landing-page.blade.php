@@ -23,7 +23,7 @@
         {{-- <div class="col-md-6 col-12 mt-5 d-sm-inline-flex justify-content-center"> --}}
         <div class="col-md-5 col-12 mt-3 d-md-flex d-md-block justify-content-center align-self-center landing-page__gambar-alfa-reza">
             {{-- <img id="img-top" src="landing/home/assets/image/Landing_Page/alfa-reza.svg" style="top: -20em;"> --}}
-            <img id="img-top" src="{{asset('images/Landing_Page/alfa-reza.svg')}}" style="top: -20em;">
+            <img id="img-top" src="{{asset('images/Landing_Page/patung.png')}}" style="top: -20em;">
         </div>
     </div>
     <div class="row ml-md-5 ml-3 d-none d-md-block socmed-row" style="height: 10px">
@@ -80,7 +80,7 @@
     </section>
 </div>
 
-<div class="container">
+{{--<div class="container">
     <div class="lp__berita-title" data-aos="fade-right">Berita.</div>
 </div>
 <section id="carouselBerita">
@@ -129,7 +129,7 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-</section>
+</section>--}}
 
 <div class="container">
     <section id="timeline">
@@ -158,7 +158,7 @@
     </section>
 </div>
 
-<div class="container">
+{{--<div class="container">
     <div class="lp__berita-title" data-aos="fade-right">Budaya Kerja.</div>
     <div class="row site-section ">
         <div class="col-lg-7 pr-lg-5 mt-5 order-2">
@@ -199,7 +199,7 @@
     </div>
 
 
-</div>
+</div>--}}
 @endsection
 
 @section('custom-script')
