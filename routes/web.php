@@ -46,7 +46,9 @@ Route::name('guest.')
         Route::name('department')
             ->prefix('department')
             ->group(function () {
+                // For testing purpose
                 Route::get('', [GuestDepartmentController::class, 'index'])->name('index');
+                // For specificaly departemen name
                 Route::get('/{deptName}', [GuestDepartmentController::class, 'showDepartment'])->name('showDepartment');
             });
         // event-registration -> Route Registrasi Event-event yang ada di KBMTI

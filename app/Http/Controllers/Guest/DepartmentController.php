@@ -9,9 +9,7 @@ class DepartmentController extends Controller
 {
     public function index()
     {
-        return response()->json([
-            'msg' => 'Digunakan untuk profil EMTI'
-        ]);
+        return view('layouts.department');
     }
 
     public function showDepartment($name)
