@@ -113,16 +113,9 @@ Route::name('email.')
         Route::get('/testing-sending', [GuestMiscController::class, 'sendingEmail'])->name('sendingEmail');
     });
 
-// Testing Ground
-Route::get('article-testing-card', function () {
-    return view('Admin.Article.testing-artcile-card');
-});
-
 Route::get('php-info', function () {
     phpinfo();
 });
-
-Route::get('accessing-google', [GuestMiscController::class,  'accessingAnotherServer']);
 
 Route::get('testing-open-tender-view', function () {
     return view('general.event-registration.open-tender-page');

@@ -7369,6 +7369,7 @@ button.bg-dark:focus {
 }
 
 .position-sticky {
+  position: -webkit-sticky !important;
   position: sticky !important;
 }
 
@@ -7388,8 +7389,9 @@ button.bg-dark:focus {
   z-index: 1030;
 }
 
-@supports (position: sticky) {
+@supports ((position: -webkit-sticky) or (position: sticky)) {
   .sticky-top {
+    position: -webkit-sticky;
     position: sticky;
     top: 0;
     z-index: 1020;
@@ -10196,4 +10198,8 @@ URUTAN Menambah media query: base + typography -> layout & grid -> page layout -
   .department__content-group {
     grid-template-columns: 1fr;
   }
+}
+.department__content-group-img {
+  width: 200px;
+  height: auto;
 }
