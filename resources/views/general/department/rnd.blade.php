@@ -9,33 +9,33 @@ Research and Development Bureau merupakan departemen yang bertanggung jawab meng
 @endsection
 
 @section('picture-title')
-{{asset('images/misc/department/RnD/rnd.png')}}
+{{asset('images/misc/department/rnd/rnd.png')}}
 @endsection
 
 @section('picture-1')
-{{asset('images/misc/department/RnD/ngobar.png')}}
+{{asset('images/misc/department/rnd/ngobar.png')}}
 @endsection
 
 @section('picture-2')
-{{asset('images/misc/department/RnD/bank soal.png')}}
+{{asset('images/misc/department/rnd/bank soal.png')}}
 @endsection
 
 @section('picture-3')
-{{asset('images/misc/department/RnD/fun fact.png')}}
+{{asset('images/misc/department/rnd/fun fact.png')}}
 @endsection
 
 @section('picture-4')
-{{asset('images/misc/department/RnD/info lomba.png')}}
+{{asset('images/misc/department/rnd/info lomba.png')}}
 @endsection
 
 @section('picture-5')
-{{asset('images/misc/department/RnD/OSI.png')}}
+{{asset('images/misc/department/rnd/OSI.png')}}
 @endsection
 
 @section('picture-6')
-{{asset('images/misc/department/RnD/sinau bareng.png')}}
+{{asset('images/misc/department/rnd/sinau bareng.png')}}
 @endsection
 
 @section('picture-7')
-{{asset('images/misc/department/RnD/web event.png')}}
+{{asset('images/misc/department/rnd/web event.png')}}
 @endsection

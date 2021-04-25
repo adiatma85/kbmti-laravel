@@ -1,11 +1,11 @@
 @extends('layouts.department')
 
 @section('title')
-Research and Development
+Advocacy
 @endsection
 
 @section('description')
-Research and Development Bureau merupakan departemen yang bertanggung jawab mengakomodasi dan mengembangkan potensi mahasiswa dalam bidang keilmuan serta menampung minat bakat mahasiswa di ranah Teknologi Informasi.
+Advocacy merupakan departemen yang bertanggung jawab menghimpun permasalahan administrasi mahasiswa baik permasalahan akademik atau keuangan.
 @endsection
 
 @section('picture-title')
