@@ -17,20 +17,19 @@
                                 <div class="text-center col-sm-4">
                                     <!-- <h3 class="border border-top-0 border-right-0 border-left-0">For Individuals</h3> -->
                                     <a href="#" class="dropdown-item megadrown__dropdown-hamburger" style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;padding-top:20px;">Profile EMTI</a>
-                                    <a href="#" title="Windows Application"  class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;">Entrepeneur</a>
-                                    <a href="#" title="Android App"  class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;"><span class="megadrown__desktop-emti">Relation and Creative</span><span class="megadrown__mobile-emti">RnC</span></a>
+                                    <a href="{{route('guest.department.showDepartment', ['deptName' => 'entre'])}}" title="Windows Application"  class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;">Entrepeneur</a>
+                                    <a href="{{route('guest.department.showDepartment', ['deptName' => 'rnc'])}}" title="Android App"  class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;"><span class="megadrown__desktop-emti">Relation and Creative</span><span class="megadrown__mobile-emti">RnC</span></a>
                                    <!--  <a href="http://kbmti.filkom.ub.ac.id/landing/bank_soal" title="FireFox Extension"  class="dropdown-item megadrown__dropdown-hamburger"style="color:white">HRD</a> -->
                                 </div>
                                 <div class="text-center col-sm-4">
                                     <!-- <h3 class="border border-top-0 border-right-0 border-left-0">For Website Owners</h3> -->
-                                    <a title="WordPress Plugin" href="#" class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;padding-top:20px;">Advocacy</a>
-                                    <a title="Drupal Module" href="#" class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;"><span class="megadrown__desktop-emti">Research and Development</span><span class="megadrown__mobile-emti">RnD</span></a>
-                                    <a href="#" title="Android App"  class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;">Administrative</a>
+                                    <a title="WordPress Plugin" href="{{route('guest.department.showDepartment', ['deptName' => 'advo'])}}" class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;padding-top:20px;">Advocacy</a>
+                                    <a title="Drupal Module" href="{{route('guest.department.showDepartment', ['deptName' => 'rnd'])}}" class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;"><span class="megadrown__desktop-emti">Research and Development</span><span class="megadrown__mobile-emti">RnD</span></a>
                                 </div>
                                 <div class="text-center col-sm-4">
                                     <!-- <h3 class="border border-top-0 border-right-0 border-left-0">For Developers</h3> -->
-                                    <a href="#" title="JavaScript Library"  class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;padding-top:20px;"><span class="megadrown__desktop-emti">Human Resource Development</span><span class="megadrown__mobile-emti">HRD</span></a>
-                                    <a href="#" title="TinyMCE Plugin"  class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;"><span class="megadrown__desktop-emti">Social Environment</span><span class="megadrown__mobile-emti">SE</span></a>
+                                    <a href="{{route('guest.department.showDepartment', ['deptName' => 'hrd'])}}" title="JavaScript Library"  class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;padding-top:20px;"><span class="megadrown__desktop-emti">Human Resource Development</span><span class="megadrown__mobile-emti">HRD</span></a>
+                                    <a href="{{route('guest.department.showDepartment', ['deptName' => 'se'])}}" title="TinyMCE Plugin"  class="dropdown-item megadrown__dropdown-hamburger"style="color:white;padding-bottom: 20px;font-size: 20px;text-align: left;"><span class="megadrown__desktop-emti">Social Environment</span><span class="megadrown__mobile-emti">SE</span></a>
                                 </div>
                             </div>
                         </div>
@@ -43,7 +42,7 @@
             </ul>
 
             <ul class="navbar-nav" >
-            <li class="nav-item dropdown position-static"><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="#"><img class="megadrown__dropdown-burger" src="http://kbmti.filkom.ub.ac.id/landing/home/assets/burger-ico.svg"> <span class="megadrown__dropdown-text">More</span></a>
+            <li class="nav-item dropdown position-static"><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="#"><img class="megadrown__dropdown-burger" src="{{asset('images/misc/burger-ico.svg')}}"> <span class="megadrown__dropdown-text">More</span></a>
                     <div class="dropdown-menu w-100 megadrown__top-auto megadrown__dropdown-list" style="background-color:#2A1B3C;opacity: 0.9;top:0px">
                         <div class="container">
                             <div class="row w-100">

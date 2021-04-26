@@ -18,6 +18,7 @@
                 @yield('picture-1')
             @else
                 {{asset('images/misc/department/empty.png')}}
+                " style="display: none
             @endif
             " alt="" class="department__content-group-img">
             <img src="
@@ -25,6 +26,7 @@
                 @yield('picture-2')
             @else
                 {{asset('images/misc/department/empty.png')}}
+                " style="display: none
             @endif
             " alt="" class="department__content-group-img">
             <img src="
@@ -32,6 +34,7 @@
                 @yield('picture-3')
             @else
                 {{asset('images/misc/department/empty.png')}}
+                " style="display: none
             @endif
             " alt="" class="department__content-group-img">
             <img src="
@@ -39,6 +42,7 @@
                 @yield('picture-4')
             @else
                 {{asset('images/misc/department/empty.png')}}
+                " style="display: none
             @endif
             " alt="" class="department__content-group-img">
             <img src="
@@ -46,6 +50,7 @@
                 @yield('picture-5')
             @else
                 {{asset('images/misc/department/empty.png')}}
+                " style="display: none
             @endif
             " alt="" class="department__content-group-img">
             <img src="
@@ -53,6 +58,7 @@
                 @yield('picture-6')
             @else
                 {{asset('images/misc/department/empty.png')}}
+                " style="display: none
             @endif
             " alt="" class="department__content-group-img">
         </div>

@@ -24,7 +24,7 @@
                     </div>
                     <div class="row" style="max-width: 80%;">
                         <div class="icon-sosmed-group col-lg-6 col-12">
-                            <a href="https://www.instagram.com/kbmti_ub">
+                            <a href="https://www.instagram.com/kbmti_ub" target="blank">
                             <div class="row">
 
                                 <div class="iconsosmed col-md-6 col-2">
@@ -40,7 +40,7 @@
                             </div>
                         </a>
                         </div>
-                        <a href="https://twitter.com/kbmti_ub">
+                        <a href="https://twitter.com/kbmti_ub" target="blank">
                         <div class="icon-sosmed-group col-lg-6 col-12">
                             <div class="row">
                                 <div class="iconsosmed col-md-6 col-2">

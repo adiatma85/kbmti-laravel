@@ -34,23 +34,30 @@ use App\Http\Controllers\stafAhli as StaffAhliController;
 |
 */
 
+// Php info to know about the server
+Route::get('php-info', function () {
+    phpinfo();
+});
+
 // Staf Ahli Temporary
-Route::resource('staf_Ahli', StaffAhliController::class, []);
+// Route::resource('staf_Ahli', StaffAhliController::class, []);
 
 // Grouped Guest Routes
 Route::name('guest.')
     ->group(function () {
         // Landing Page
         Route::get('/', [GuestMiscController::class, 'landingPage'])->name('landing.page');
-        // Department
-        Route::name('department')
+
+        // department -> Route untuk show per departement yang ada di KBMTI
+        Route::name('department.')
             ->prefix('department')
             ->group(function () {
                 // For testing purpose
-                Route::get('', [GuestDepartmentController::class, 'index'])->name('index');
+                // Route::get('', [GuestDepartmentController::class, 'index'])->name('index');
                 // For specificaly departemen name
                 Route::get('/{deptName}', [GuestDepartmentController::class, 'showDepartment'])->name('showDepartment');
             });
+
         // event-registration -> Route Registrasi Event-event yang ada di KBMTI
         Route::name('event-registration.')
             ->prefix('event-registration')
@@ -61,6 +68,7 @@ Route::name('guest.')
                 Route::get('/{eventName}', [GuestEventRegistrationController::class, 'showFromName'])->name('showFromName');
                 Route::post('/{eventName}', [GuestEventRegistrationController::class, 'storeEventRegistration'])->name('storeEventRegistration');
             });
+        // open-tender -> Rount untuk membuka open tender kalau ada yang mau jadi kapel atau apapun itu
         Route::name('open-tender.')
             ->prefix('open-tender')
             ->group( function () {
@@ -100,7 +108,7 @@ Route::name('admin.')
         Route::get('download_komit_staff/{komitmen}', [AdminStaffAhliController::class, 'handlingDownloadFile'])->name('download.komit-staffAhli');
     });
 
-// Temporaries
+// Temporaries dan testing
 // Temporary Pengumuman
 Route::name('pengumuman.')
     ->prefix('pengumuman')
@@ -114,10 +122,6 @@ Route::name('email.')
     ->group(function () {
         Route::get('/testing-sending', [GuestMiscController::class, 'sendingEmail'])->name('sendingEmail');
     });
-
-Route::get('php-info', function () {
-    phpinfo();
-});
 
 Route::get('testing-open-tender-view', function () {
     return view('general.event-registration.open-tender-page');

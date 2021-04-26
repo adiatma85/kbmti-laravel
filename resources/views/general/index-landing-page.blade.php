@@ -33,10 +33,14 @@
                     <img id="Text-Socmed" src="{{asset('images/Landing_Page/Text-Socmed.svg')}}">
                 </div>
                 <div class="row my-md-3">
-                    <img id="img-Twitter" src="{{asset('images/Landing_Page/Img-Twitter.svg')}}">
+                    <a href="https://twitter.com/kbmti_ub"  target="blank">
+                        <img id="img-Twitter" src="{{asset('images/Landing_Page/Img-Twitter.svg')}}">
+                    </a>
                 </div>
                 <div class="row my-md-3">
-                    <img id="img-Insta" src="{{asset('images/Landing_Page/Img-Insta.svg')}}">
+                    <a href="https://www.instagram.com/kbmti_ub" target="blank">
+                        <img id="img-Insta" src="{{asset('images/Landing_Page/Img-Insta.svg')}}">
+                    </a>
                 </div>
             </div>
         </div>
@@ -131,7 +135,8 @@
     </div>
 </section>--}}
 
-<div class="container">
+{{-- Waht are we working --}}
+{{-- <div class="container">
     <section id="timeline">
         <div class="row">
             <div class="col-6">
@@ -156,9 +161,10 @@
         </div>
 
     </section>
-</div>
+</div> --}}
 
-{{--<div class="container">
+{{-- Budaya 4R --}}
+{{-- <div class="container">
     <div class="lp__berita-title" data-aos="fade-right">Budaya Kerja.</div>
     <div class="row site-section ">
         <div class="col-lg-7 pr-lg-5 mt-5 order-2">
@@ -198,8 +204,7 @@
         </div>
     </div>
 
-
-</div>--}}
+</div> --}}
 @endsection
 
 @section('custom-script')
