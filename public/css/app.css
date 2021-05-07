@@ -7369,7 +7369,6 @@ button.bg-dark:focus {
 }
 
 .position-sticky {
-  position: -webkit-sticky !important;
   position: sticky !important;
 }
 
@@ -7389,9 +7388,8 @@ button.bg-dark:focus {
   z-index: 1030;
 }
 
-@supports ((position: -webkit-sticky) or (position: sticky)) {
+@supports (position: sticky) {
   .sticky-top {
-    position: -webkit-sticky;
     position: sticky;
     top: 0;
     z-index: 1020;
@@ -10202,4 +10200,77 @@ URUTAN Menambah media query: base + typography -> layout & grid -> page layout -
 .department__content-group-img {
   width: 200px;
   height: auto;
+}
+
+.profile-top__first-title {
+  margin-top: 5rem;
+}
+.profile-top__first-img {
+  width: 35vw;
+}
+@media only screen and (max-width: 56.25em) {
+  .profile-top__first-img {
+    width: 50vw;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .profile-top__first-img {
+    width: 100vw;
+  }
+}
+.profile-top__first-desc {
+  display: grid;
+  grid-template-columns: 1.5fr 1.5fr;
+  -moz-column-gap: 2rem;
+       column-gap: 2rem;
+  height: 25rem;
+  margin-top: 2rem;
+}
+@media only screen and (max-width: 75em) {
+  .profile-top__first-desc {
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+}
+@media only screen and (max-width: 56.25em) {
+  .profile-top__first-desc {
+    grid-template-columns: 1fr;
+  }
+}
+.profile-top__first-desc-p {
+  text-align: justify;
+  font-size: 1.5rem;
+}
+.profile-top__first-desc-img {
+  width: 100%;
+  height: auto;
+}
+@media only screen and (max-width: 56.25em) {
+  .profile-top__first-desc-img {
+    display: none;
+  }
+}
+.profile-top__second-title {
+  font-size: 4rem;
+  font-weight: bolder;
+}
+.profile-top__second-visi-title {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 3rem;
+  font-weight: bolder;
+}
+.profile-top__second-visi-content {
+  text-align: center;
+  font-size: 1.5rem;
+}
+.profile-top__second-misi-title {
+  font-size: 3rem;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bolder;
+}
+.profile-top__second-misi-content {
+  font-size: 1.5rem;
 }
