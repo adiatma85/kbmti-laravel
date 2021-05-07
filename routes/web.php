@@ -17,6 +17,7 @@ use App\Http\Controllers\Guest\MiscController as GuestMiscController;
 use App\Http\Controllers\Guest\EventRegistration as GuestEventRegistrationController;
 use App\Http\Controllers\Guest\OpenTenderController as GuestOpenTenderController;
 use App\Http\Controllers\Guest\DepartmentController as GuestDepartmentController;
+use App\Http\Controllers\Guest\ProfileController as GuestProfileController;
 
 
 
@@ -56,6 +57,13 @@ Route::name('guest.')
                 // Route::get('', [GuestDepartmentController::class, 'index'])->name('index');
                 // For specificaly departemen name
                 Route::get('/{deptName}', [GuestDepartmentController::class, 'showDepartment'])->name('showDepartment');
+            });
+
+        // profile -> Route untuk show profile EMTI dan BPMTI
+        Route::name('profile.')
+            ->prefix('profile')
+            ->group(function () {
+                Route::get('/{sub}', [GuestProfileController::class, 'showProfile'])->name('showProfile');
             });
 
         // event-registration -> Route Registrasi Event-event yang ada di KBMTI
