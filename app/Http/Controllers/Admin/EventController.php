@@ -90,6 +90,18 @@ class EventController extends _AdminControllerBase
         if ($request->event_type == 'OPEN-TENDER' || $request->event_type == 'KEPANITIAAN') {
 
             EventField::create([
+                'name' => 'Organisasi',
+                'type' => 'text',
+                'event_id' => $event->id
+            ])->save();
+
+            EventField::create([
+                'name' => 'Kepanitiaan',
+                'type' => 'text',
+                'event_id' => $event->id
+            ])->save();
+
+            EventField::create([
                 'name' => 'Tahun_Organisasi',
                 'type' => 'text',
                 'event_id' => $event->id
