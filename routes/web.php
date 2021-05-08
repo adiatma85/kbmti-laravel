@@ -22,6 +22,8 @@ use App\Http\Controllers\Guest\DepartmentController as GuestDepartmentController
 
 // Temporary Staff Ahli
 use App\Http\Controllers\stafAhli as StaffAhliController;
+// Temporary for Testing
+use App\Http\Controllers\Testing\UploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,14 +73,25 @@ Route::name('guest.')
         // open-tender -> Rount untuk membuka open tender kalau ada yang mau jadi kapel atau apapun itu
         Route::name('open-tender.')
             ->prefix('open-tender')
-            ->group( function () {
+            ->group(function () {
                 // Index page -> Redirect to lates updated, but for now, it will be the tester
                 Route::get('', [GuestEventRegistrationController::class, 'index'])->name('index');
+                // Route::post('/item-store', [GuestEventRegistrationController::class, 'preStoreItem'])->name('preStoreItem');
                 Route::get('berkas/{stringName}', [GuestOpenTenderController::class, 'downloadBerkas'])->name('downloadBerkas');
                 // Get and Post Routes
                 Route::get('/{eventName}', [GuestOpenTenderController::class, 'showFromName'])->name('showFromName');
                 Route::post('/{eventName}', [GuestOpenTenderController::class, 'storeOpenTenderRegistration'])->name('storeOpenTenderRegistration');
-            } );
+            });
+
+        Route::name('pendaftaran-kepanitiaan.')
+            ->prefix('pendaftaran-kepanitiaan')
+            ->group(function () {
+                // Index page -> Redirect to lates updated, but for now, it will be the tester
+                Route::get('berkas/{stringName}', [GuestOpenTenderController::class, 'downloadBerkas'])->name('downloadBerkas');
+                // Get and Post Routes
+                Route::get('/{eventName}', [GuestOpenTenderController::class, 'showFromName'])->name('showFromName');
+                Route::post('/{eventName}', [GuestOpenTenderController::class, 'storeOpenTenderRegistration'])->name('storeOpenTenderRegistration');
+            });
     });
 
 
@@ -126,3 +139,13 @@ Route::name('email.')
 Route::get('testing-open-tender-view', function () {
     return view('general.event-registration.open-tender-page');
 });
+
+// Testing view for progress bar upload
+Route::name('progress-bar.')
+    ->prefix('testing-upload-progress-bar')
+    ->group(function () {
+        // Return view
+        Route::view('/', 'testing/form-upload')->name('view');
+        Route::post('/upload', [UploadController::class, 'uploadSubmit'])->name('upload');
+        Route::post('/', [UploadController::class, 'storeData'])->name('post');
+    });

@@ -38,7 +38,7 @@
                     <div class="card card-chart">
                             <div class="card-header">
                                 <h5 class="card-category"></h5>
-                                <h4 class="card-title">Form Pendaftaran Ketua Pelaksana {{$event->name}}</h4>
+                                <h4 class="card-title">Form Pendaftaran {{$labelName}} {{$event->name}}</h4>
                             </div>
 
                             <div class="card-body">
@@ -91,6 +91,12 @@
                                         <textarea name="inovasi" id="inovasi" class="form-control" rows="3" placeholder="Inovasi..."></textarea>
                                     </div>
 
+                                    <div class="form-group col-md-12 mt-4">
+                                        <label for="swot">Analisis SWOT <small><b>(Singkat)</b></small> </label>
+                                        <textarea name="swot" id="swot" class="form-control" rows="3" placeholder="Analisis SWOT"></textarea>
+                                    </div>
+
+                                    {{-- For Better Approcahment, need an array! --}}
                                     {{-- Tahun Organisasi --}}
                                     <div class="form-group col-md-12 mt-4">
                                         <label for="">Pengalaman Organisasi</label>
@@ -238,9 +244,6 @@
                 $("#kepanitiaan").append($panitia);
             });
 
-            $("#uploadPortfolio").click(function() {
-                $("#portfolio").click();
-            });
         });
 </script>
 

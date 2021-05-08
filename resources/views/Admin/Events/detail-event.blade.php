@@ -36,7 +36,6 @@
                                         @foreach ($event->eventFields as $field)
                                             <th class="is-using-setup">{{$field->name}}</th>
                                         @endforeach    
-                                    @endif
                                     {{-- <th>Action</th> --}}
                                 </tr>
                             </thead>
