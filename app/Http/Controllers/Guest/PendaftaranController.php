@@ -12,11 +12,12 @@ use App\Models\EventRegister; // This is the model where the applicants store th
 use App\Models\Event; // This is the model for event
 use App\Models\EventFieldResponse;
 
-class OpenTenderController extends _GuestControllerBase
+class PendaftaranController extends _GuestControllerBase
 {
 
     private $credentialsFields = ['name', 'nim', 'email'];
     private $arrayedFields = ['organisasi', 'kepanitiaan', 'tahun_organisasi', 'tahun_kepanitiaan'];
+    // Rencana arrayed fields akan ditambahi dengan swot
 
 
     public function showFromName($name)
@@ -35,13 +36,15 @@ class OpenTenderController extends _GuestControllerBase
         return view('general/event-registration/open-tender-page', compact('event', 'labelName'));
     }
 
-
-    public function storeOpenTenderRegistration(Request $request)
+    // Store dari hasil pendaftaran
+    public function storePendaftaran(Request $request)
     {
         $name = str_replace('-', ' ', explode('/', url()->current())[4]);
         $event = Event::where('name', $name)
-            ->where('event_type', 'OPEN-TENDER')
-            ->orWhere('event_type', 'KEPANITIAAN')
+            ->where(function ($q) {
+                $q->where('event_type', 'OPEN-TENDER')
+                    ->orWhere('event_type', 'KEPANITIAAN');
+            })
             ->first() ?? null;
         if (!$event) {
             // Masukan gk valid
@@ -57,44 +60,48 @@ class OpenTenderController extends _GuestControllerBase
         ]);
         // Array of responses that needed to created
         // For better approachment, using queue is recomended
-        for ($i = 0; $i < count($event->eventFields); $i++) {
-            // try {
-            $field = $event->eventFields[$i];
-            $fieldName = strtolower($field->name);
+        try {
+            $queueResponse = [];
+            for ($i = 0; $i < count($event->eventFields); $i++) {
+                $field = $event->eventFields[$i];
+                $fieldName = strtolower($field->name);
 
-            // Better approachment. There are some concern as to why doesn't use switch
-            if (in_array($fieldName, $this->credentialsFields)) {
-                $this->handlingCredentialFields($request->$fieldName, $field->id);
-            }
-            // Arrayed
-            if (in_array($fieldName, $this->arrayedFields)) {
-                $items = $request->$fieldName;
-                $this->handlingArrayedFields($items, $newRegistrationItem->id, $field->id);
-                continue;
-            }
-            // File
-            if ($fieldName == 'pemberkasan') {
-                $this->handlingStoringFiles($request, $newRegistrationItem->id, $field->id);
-                // QUICK FIX -> Bug nya di sini boi
-                continue;
-            }
+                // Better approachment. There are some concern as to why doesn't use switch
+                if (in_array($fieldName, $this->credentialsFields)) {
+                    $this->handlingCredentialFields($request->$fieldName, $field->id);
+                }
+                // Arrayed
+                if (in_array($fieldName, $this->arrayedFields)) {
+                    $items = $request->$fieldName;
+                    $itemResponse = $this->handlingArrayedFields($items, $newRegistrationItem->id, $field->id);
+                    array_push($queueResponse, $itemResponse);
+                    continue;
+                }
+                // File
+                if ($fieldName == 'pemberkasan') {
+                    $itemResponse = $this->handlingStoringFiles($request, $newRegistrationItem->id, $field->id);
+                    array_push($queueResponse, $itemResponse);
+                    continue;
+                }
 
-            // DEFAULT
-            // Else
-            EventFieldResponse::create([
-                'response' => $request->$fieldName,
-                'eventRegistration_id' => $newRegistrationItem->id,
-                'eventField_id' => $field->id
-            ])->save();
-            // } catch (\Throwable $th) {
-            //     return $this->generalSwalResponse(
-            //         'Terjadi kesalahan dalam penyimpanan data!',
-            //         'Harap periksa koneksi Anda atau hubungi Administrasi perihal hal ini!',
-            //         'error',
-            //     );
-            // }
+                // DEFAULT
+                // Else
+                $itemResponse = [
+                    'response' => $request->$fieldName,
+                    'eventRegistration_id' => $newRegistrationItem->id,
+                    'eventField_id' => $field->id
+                ];
+                array_push($queueResponse, $itemResponse);
+            }
+            $this->queueResolver($queueResponse);
+        } catch (\Throwable $th) {
+            return $this->generalSwalResponse(
+                'Terjadi kesalahan dalam penyimpanan data!',
+                'Harap periksa koneksi Anda atau hubungi Administrasi perihal hal ini!',
+                'error',
+            );
         }
-        // $newRegistrationItem->save();
+        $newRegistrationItem->save();
         // Emailing the user in here
         // $this->eventEmailResponse($request->email, $event->name, $request->name, $event->bodyText, $event->link);
         return $this->generalSwalResponse(
@@ -136,6 +143,7 @@ class OpenTenderController extends _GuestControllerBase
 
 
     // HELPER FUNCTIONS DEFINED BELOW
+    // Handling the Credentdial Fields as defined in $credentialsFields
     private function handlingCredentialFields($response, $fieldId)
     {
         $isAlreadyExist = EventFieldResponse::where('response', $response)
@@ -150,40 +158,37 @@ class OpenTenderController extends _GuestControllerBase
         }
     }
 
+    // Handling the Arrayed Fields as defined in $arrayedFields
     private function handlingArrayedFields($items, $newRegistrationItemId, $fieldId)
     {
         for ($j = 0; $j < count($items); $j++) {
-            EventFieldResponse::create([
+            $item = [
                 'response' => $items[$j],
                 'eventRegistration_id' => $newRegistrationItemId,
                 'eventField_id' => $fieldId
-            ])->save();
-            // $item = [
-            //     'response' => $items[$j],
-            //     'eventRegistration_id' => $newRegistrationItemId,
-            //     'eventField_id' => $fieldId
-            // ];
-
+            ];
+            return $item;
         }
     }
 
     // Handling Storing Files
     private function handlingStoringFiles($requestItem, $newRegistrationItemId, $fieldId)
     {
-        $imageName = Carbon::now() . '.' . $requestItem->pemberkasan->extension();
-        $requestItem->pemberkasan->storeAs('rar/open-tender', $imageName);
-
-        EventFieldResponse::create([
-            'response' => $imageName,
+        $itemName = Carbon::now() . '.' . $requestItem->pemberkasan->extension();
+        $requestItem->pemberkasan->storeAs('rar/open-tender', $itemName);
+        $itemResponse = [
+            'response' => $itemName,
             'eventRegistration_id' => $newRegistrationItemId,
             'eventField_id' => $fieldId
-        ])->save();
+        ];
+        return $itemResponse;
+    }
 
-        // EventFieldResponse::whereIn('id', explode(",", $requestItem->file_ids))
-        //     ->update([
-        //             'eventRegistration_id' => $newRegistrationItemId,
-        //             'eventField_id' => $fieldId
-        //     ]);
-        return;
+    // Handle the queue in Response
+    private function queueResolver($array)
+    {
+        foreach ($array as $item) {
+            EventFieldResponse::create( $item )->save();
+        }
     }
 }

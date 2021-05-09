@@ -35,7 +35,7 @@
                                     <th>No</th>
                                         @foreach ($event->eventFields as $field)
                                             <th class="is-using-setup">{{$field->name}}</th>
-                                        @endforeach    
+                                        @endforeach
                                     {{-- <th>Action</th> --}}
                                 </tr>
                             </thead>
@@ -67,9 +67,9 @@
 @endsection
 
 @section('custom-style')
-    
+
 @endsection
 
 @section('custom-scripts')
-    
+
 @endsection

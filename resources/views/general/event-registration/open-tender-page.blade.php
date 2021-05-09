@@ -42,7 +42,7 @@
                             </div>
 
                             <div class="card-body">
-                                <form method="post" action="{{route('guest.open-tender.storeOpenTenderRegistration', ['eventName' => str_replace(' ', '-', $event->name)])}}" enctype="multipart/form-data" onsubmit="return checkFile();">
+                                <form method="post" action="{{route('guest.open-tender.storePendaftaran', ['eventName' => str_replace(' ', '-', $event->name)])}}" enctype="multipart/form-data" onsubmit="return checkFile();">
                                     @csrf
                                     <div class="col-md-12">
                                         <div class="form-row mt-4">

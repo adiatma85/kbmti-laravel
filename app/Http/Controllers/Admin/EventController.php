@@ -41,6 +41,7 @@ class EventController extends _AdminControllerBase
      */
     public function store(Request $request)
     {
+        // Instance event
         $event = Event::create($request->only([
             'name',
             'description',
@@ -50,33 +51,33 @@ class EventController extends _AdminControllerBase
             'link'
         ]));
 
-        if ($request->field) {
-            foreach ($request->field as $field) {
-                switch ($field) {
-                    case 'email':
-                        $fieldTypes = 'email';
-                        break;
-    
-                    case 'Angkatan':
-                        $fieldTypes = 'dropdown';
-                        break;
-    
-                    case 'Nomor Telepon':
-                        $fieldTypes = 'number';
-                        break;
-    
-                    default:
-                        $fieldTypes = 'text';
-                        break;
-                }
-                EventField::create([
-                    'name' => str_replace(' ', '_', $field),
-                    'type' => $fieldTypes,
-                    'event_id' => $event->id
-                ])->save();
+        // Instance default field
+        foreach ($request->field as $field) {
+            switch ($field) {
+                case 'email':
+                    $fieldTypes = 'email';
+                    break;
+
+                case 'Angkatan':
+                    $fieldTypes = 'dropdown';
+                    break;
+
+                case 'Nomor Telepon':
+                    $fieldTypes = 'number';
+                    break;
+
+                default:
+                    $fieldTypes = 'text';
+                    break;
             }
+            EventField::create([
+                'name' => str_replace(' ', '_', $field),
+                'type' => $fieldTypes,
+                'event_id' => $event->id
+            ])->save();
         }
 
+        // Instance Field tambahan
         if ($request->fieldTypes && $request->fieldNames) {
             for ($i = 0; $i < count($request->fieldTypes); $i++) {
                 EventField::create([
@@ -151,7 +152,7 @@ class EventController extends _AdminControllerBase
     public function show($id)
     {
         $event = Event::findOrFail($id);
-        if ($event->event_type == 'OPEN-TENDER') {
+        if ($event->event_type == 'OPEN-TENDER' || $event->event_type == 'KEPANITIAAN') {
             return view('Admin/Events/detail-open-tender', compact('event'));
         }
         return view('Admin/Events/detail-event', compact('event'));
@@ -178,6 +179,7 @@ class EventController extends _AdminControllerBase
      */
     public function update(Request $request, $id)
     {
+        // Perlu mengganti preosedur update agar lebih enak digunakan
         $event = Event::find($id);
         $event->name = $request->name;
         $event->description = $request->description;

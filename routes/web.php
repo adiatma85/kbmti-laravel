@@ -15,7 +15,7 @@ use App\Http\Controllers\admin\stafAhli as AdminStaffAhliController;
 // Guest Side Controller
 use App\Http\Controllers\Guest\MiscController as GuestMiscController;
 use App\Http\Controllers\Guest\EventRegistration as GuestEventRegistrationController;
-use App\Http\Controllers\Guest\OpenTenderController as GuestOpenTenderController;
+use App\Http\Controllers\Guest\PendaftaranController as GuestPendaftaranController;
 use App\Http\Controllers\Guest\DepartmentController as GuestDepartmentController;
 
 
@@ -77,20 +77,21 @@ Route::name('guest.')
                 // Index page -> Redirect to lates updated, but for now, it will be the tester
                 Route::get('', [GuestEventRegistrationController::class, 'index'])->name('index');
                 // Route::post('/item-store', [GuestEventRegistrationController::class, 'preStoreItem'])->name('preStoreItem');
-                Route::get('berkas/{stringName}', [GuestOpenTenderController::class, 'downloadBerkas'])->name('downloadBerkas');
+                Route::get('berkas/{stringName}', [GuestPendaftaranController::class, 'downloadBerkas'])->name('downloadBerkas');
                 // Get and Post Routes
-                Route::get('/{eventName}', [GuestOpenTenderController::class, 'showFromName'])->name('showFromName');
-                Route::post('/{eventName}', [GuestOpenTenderController::class, 'storeOpenTenderRegistration'])->name('storeOpenTenderRegistration');
+                Route::get('/{eventName}', [GuestPendaftaranController::class, 'showFromName'])->name('showFromName');
+                Route::post('/{eventName}', [GuestPendaftaranController::class, 'storePendaftaran'])->name('storePendaftaran');
             });
 
+        // Nanti akan dijadikan sebagai acuan utama
         Route::name('pendaftaran-kepanitiaan.')
             ->prefix('pendaftaran-kepanitiaan')
             ->group(function () {
                 // Index page -> Redirect to lates updated, but for now, it will be the tester
-                Route::get('berkas/{stringName}', [GuestOpenTenderController::class, 'downloadBerkas'])->name('downloadBerkas');
+                Route::get('berkas/{stringName}', [GuestPendaftaranController::class, 'downloadBerkas'])->name('downloadBerkas');
                 // Get and Post Routes
-                Route::get('/{eventName}', [GuestOpenTenderController::class, 'showFromName'])->name('showFromName');
-                Route::post('/{eventName}', [GuestOpenTenderController::class, 'storeOpenTenderRegistration'])->name('storeOpenTenderRegistration');
+                Route::get('/{eventName}', [GuestPendaftaranController::class, 'showFromName'])->name('showFromName');
+                Route::post('/{eventName}', [GuestPendaftaranController::class, 'storePendaftaran'])->name('storePendaftaran');
             });
     });
 
