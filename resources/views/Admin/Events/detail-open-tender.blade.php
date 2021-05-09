@@ -146,7 +146,6 @@
         $(document).ready(function() {
                 // option-event handler
                 function appendElement(numerical){
-
                     return $org;
                 }
             });

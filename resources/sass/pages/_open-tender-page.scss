@@ -1,0 +1,18 @@
+.progress {
+    position: relative;
+    width: 75%;
+}
+
+.bar {
+    background-color: #00ff00;
+    width: 0%;
+    height: 20px;
+}
+
+.percent {
+    position:absolute;
+    display:inline-block; 
+    left:50%;
+    color: #040608;
+    margin-top: 8px;
+}

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 /* model */
 use App\Models\Event;
 use App\Models\EventRegistrationTypes as EventField;
+use Symfony\Component\VarDumper\VarDumper;
 
 class EventController extends _AdminControllerBase
 {
@@ -40,11 +41,6 @@ class EventController extends _AdminControllerBase
      */
     public function store(Request $request)
     {
-        // if ($request->event_type == 'OPEN-TENDER') {
-        //     return $this->storeOpenTender($request);
-        // }
-        
-        // Event::create($request->except(['_token']));
         $event = Event::create($request->only([
             'name',
             'description',
@@ -54,29 +50,31 @@ class EventController extends _AdminControllerBase
             'link'
         ]));
 
-        foreach ($request->field as $field) {
-            switch ($field) {
-                case 'email':
-                    $fieldTypes = 'email';
-                    break;
-
-                case 'Angkatan':
-                    $fieldTypes = 'dropdown';
-                    break;
-
-                case 'Nomor Telepon':
-                    $fieldTypes = 'number';
-                    break;
-
-                default:
-                    $fieldTypes = 'text';
-                    break;
+        if ($request->field) {
+            foreach ($request->field as $field) {
+                switch ($field) {
+                    case 'email':
+                        $fieldTypes = 'email';
+                        break;
+    
+                    case 'Angkatan':
+                        $fieldTypes = 'dropdown';
+                        break;
+    
+                    case 'Nomor Telepon':
+                        $fieldTypes = 'number';
+                        break;
+    
+                    default:
+                        $fieldTypes = 'text';
+                        break;
+                }
+                EventField::create([
+                    'name' => str_replace(' ', '_', $field),
+                    'type' => $fieldTypes,
+                    'event_id' => $event->id
+                ])->save();
             }
-            EventField::create([
-                'name' => str_replace(' ', '_', $field),
-                'type' => $fieldTypes,
-                'event_id' => $event->id
-            ])->save();
         }
 
         if ($request->fieldTypes && $request->fieldNames) {
@@ -88,8 +86,20 @@ class EventController extends _AdminControllerBase
                 ])->save();
             }
         }
-        // Khusus Open Tender
-        if ($request->event_type == 'OPEN-TENDER') {
+        // Khusus Open Tender Dan Kepanitiaan
+        if ($request->event_type == 'OPEN-TENDER' || $request->event_type == 'KEPANITIAAN') {
+
+            EventField::create([
+                'name' => 'Organisasi',
+                'type' => 'text',
+                'event_id' => $event->id
+            ])->save();
+
+            EventField::create([
+                'name' => 'Kepanitiaan',
+                'type' => 'text',
+                'event_id' => $event->id
+            ])->save();
 
             EventField::create([
                 'name' => 'Tahun_Organisasi',
@@ -114,6 +124,15 @@ class EventController extends _AdminControllerBase
                 'type' => 'text',
                 'event_id' => $event->id
             ])->save();
+
+            // Khusus Kepanitiaan
+            if ($request->event_type == 'KEPANITIAAN') {
+                EventField::create([
+                    'name' => 'Swot',
+                    'type' => 'textarea',
+                    'event_id' => $event->id
+                ])->save();
+            }
         }
         $event->save();
 

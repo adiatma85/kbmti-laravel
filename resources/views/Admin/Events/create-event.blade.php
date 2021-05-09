@@ -47,6 +47,7 @@
                         <select class="custom-select" id="option-event" name="event_type" required>
                           <option value="NORMAL-EVENT">Normal Event</option>
                           <option value="OPEN-TENDER">Open Tender</option>
+                          <option value="KEPANITIAAN">Pendaftaran Kepanitiaan</option>
                         </select>
                     </div>
                     {{-- Body Text for Email Responses --}}
@@ -57,7 +58,7 @@
                     </div>
                     {{-- Link for Email Responses (Optional) --}}
                     <div class="form-group">
-                        <label for="link-response-email">Link Email</label>
+                        <label for="link-response-email">Link Tautan Berkas yang Disertakan</label>
                         <input type="text" class="form-control" id="link-response-email" placeholder="Nama Event Pendaftaran" name="link"
                             value="{{old('link') ?? ''}}">
                     </div>
