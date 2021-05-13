@@ -10216,6 +10216,7 @@ URUTAN Menambah media query: base + typography -> layout & grid -> page layout -
 .profile-top__first-desc-img {
   position: absolute;
   z-index: -1;
+  width: 100%;
 }
 
 .profile-top__second {
@@ -10227,6 +10228,7 @@ URUTAN Menambah media query: base + typography -> layout & grid -> page layout -
   font-size: 5rem;
   color: #2A1B3C;
   letter-spacing: 0.07em;
+  margin-bottom: 35px;
 }
 
 .profile-top__second-visi-title {
