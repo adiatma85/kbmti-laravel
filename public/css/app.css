@@ -10204,6 +10204,68 @@ URUTAN Menambah media query: base + typography -> layout & grid -> page layout -
   height: auto;
 }
 
+.profile-top__first-img {
+  width: 50vw;
+  min-width: 20rem;
+}
+
+.profile-top__first-desc-p {
+  text-align: justify;
+}
+
+.profile-top__first-desc-img {
+  position: absolute;
+  z-index: -1;
+}
+
+.profile-top__second {
+  margin-top: 300px;
+}
+
+.profile-top__second-title {
+  font-weight: 900;
+  font-size: 5rem;
+  color: #2A1B3C;
+  letter-spacing: 0.07em;
+}
+
+.profile-top__second-visi-title {
+  text-align: center;
+  font-weight: 800;
+  font-size: 4rem;
+}
+
+.profile-top__second-visi-content {
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #2A1B3C;
+}
+
+.profile-top__second-misi-title {
+  margin-top: 3rem;
+  text-align: center;
+  font-weight: 800;
+  font-size: 4rem;
+}
+
+.profile-top__second-misi-content {
+  color: #2A1B3C;
+  font-size: 1.2rem;
+  font-weight: 600;
+  list-style: none;
+}
+
+.profile-top__second-misi-content li::before {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #2A1B3C;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
 .progress {
   position: relative;
   width: 75%;
