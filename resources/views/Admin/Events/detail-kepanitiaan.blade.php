@@ -33,7 +33,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">List Pendaftar</h3>
+                        <h3 class="card-title">List Pendaftar Kepanitiaan</h3>
                     </div>
                     <div class="card-body">
                         <table id="main-table" class="table table-bordered table-striped">
@@ -68,7 +68,7 @@
                                     {{-- Pemberkasan --}}
                                     <td>
                                         {{-- {{$item->getPemberkasanAttribute($item->id)}} --}}
-                                        <a href="{{route('guest.open-tender.downloadBerkas', [ 'stringName' => $item->getPemberkasanAttribute($item->id)->response ])}}" target="blank">
+                                        <a href="{{route('guest.pendaftaran-kepanitiaan-dan-open-tender.downloadBerkas', [ 'allowed_prefixes' => $allowed_prefixes, 'stringName' => $item->getPemberkasanAttribute($item->id)->response ])}}" target="blank">
                                             <div class="col-md-6">
                                                 <button class="btn btn-success" onclick="clickedPemberkasan($item->getPemberkasanAttribute($item->id)->response)">
                                                     <i class="fa fa-download"></i>

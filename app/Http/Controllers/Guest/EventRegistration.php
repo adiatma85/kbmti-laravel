@@ -14,7 +14,7 @@ class EventRegistration extends _GuestControllerBase
 {
     public function index()
     {
-        return view('general/event-registration/index-page');
+        return view('general/pendaftaran/index-page');
     }
 
     public function showFromName($name)
@@ -31,7 +31,7 @@ class EventRegistration extends _GuestControllerBase
                 // 404
             );
         }
-        return view('general/event-registration/variable-page', compact('event'));
+        return view('general/pendaftaran/variable-page', compact('event'));
     }
 
     public function storeEventRegistration(Store $request)

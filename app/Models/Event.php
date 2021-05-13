@@ -14,7 +14,7 @@ class Event extends Model
     use HasFactory;
 
     // Fillable
-    protected $fillable = ['name', 'description', 'event_type', 'bodyText', 'link'];
+    protected $fillable = ['name', 'label' ,'description', 'event_type', 'link', 'expired_date'];
 
     // Reference on Fields
     public function eventFields()

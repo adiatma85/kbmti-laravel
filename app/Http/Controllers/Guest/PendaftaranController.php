@@ -19,12 +19,13 @@ class PendaftaranController extends _GuestControllerBase
     private $arrayedFields = ['organisasi', 'kepanitiaan', 'tahun_organisasi', 'tahun_kepanitiaan'];
     // Rencana arrayed fields akan ditambahi dengan swot
 
-
-    public function showFromName($name)
+    public function showFromName( $allowedPrefixes, $eventName, Request $request)
     {
-        $name = str_replace('-', ' ', $name);
-        $event = Event::where('name', $name)->first();
-        if (!$event) {
+        $eventName = str_replace('-', ' ', $eventName);
+        $event = Event::where('name', $eventName)
+            // ->where('expired_date', '>', Carbon::now())
+            ->first();
+        if (!$event || $this->notInAllowrdRoutes($allowedPrefixes) ) {
             return $this->generalSwalResponse(
                 'Halaman tidak ditemukan',
                 'Halaman yang Anda cari tidaklah ada!',
@@ -33,11 +34,12 @@ class PendaftaranController extends _GuestControllerBase
             );
         }
         $labelName = $event->event_type == 'OPEN-TENDER' ? "Ketua Pelaksana" : "Anggota Kepanitiaan";
-        return view('general/event-registration/open-tender-page', compact('event', 'labelName'));
+        // pendaftaran-kepanitiaan-page inclucing both open-tender and pendaftaran anggota kepanitiaan
+        return view('general/pendaftaran/pendaftaran-kepanitiaan-page', compact('event', 'labelName'));
     }
 
     // Store dari hasil pendaftaran
-    public function storePendaftaran(Request $request)
+    public function storePendaftaran( $allowedPrefixes, Request $request)
     {
         $name = str_replace('-', ' ', explode('/', url()->current())[4]);
         $event = Event::where('name', $name)
@@ -46,7 +48,7 @@ class PendaftaranController extends _GuestControllerBase
                     ->orWhere('event_type', 'KEPANITIAAN');
             })
             ->first() ?? null;
-        if (!$event) {
+        if (!$event || $this->notInAllowrdRoutes($allowedPrefixes)) {
             // Masukan gk valid
             return $this->generalSwalResponse(
                 'Not Found!',
@@ -111,7 +113,7 @@ class PendaftaranController extends _GuestControllerBase
         );
     }
 
-    public function downloadBerkas($stringName)
+    public function downloadBerkas($allowed_prefixes, $stringName)
     {
         return response()->download(storage_path('/app/rar/open-tender/' . $stringName));
     }
@@ -143,6 +145,18 @@ class PendaftaranController extends _GuestControllerBase
 
 
     // HELPER FUNCTIONS DEFINED BELOW
+
+    // Checking whether the url is valid or not
+    private function notInAllowrdRoutes ($url_segment) {
+        $allowed_segment = [
+            'open-tender',
+            'pendaftaran-kepanitiaan',
+            'pendaftaran-event'
+        ];
+        return !in_array($url_segment, $allowed_segment);
+    }
+
+
     // Handling the Credentdial Fields as defined in $credentialsFields
     private function handlingCredentialFields($response, $fieldId)
     {
@@ -188,7 +202,7 @@ class PendaftaranController extends _GuestControllerBase
     private function queueResolver($array)
     {
         foreach ($array as $item) {
-            EventFieldResponse::create( $item )->save();
+            EventFieldResponse::create($item)->save();
         }
     }
 }

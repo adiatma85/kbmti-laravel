@@ -20,10 +20,10 @@
 @stop
 
 @section('js')
-    @yield('custom-scripts')
     {{-- Jquery --}}
     <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
 
+    @yield('custom-scripts')
     {{-- Datatables --}}
     @include('include.plugins.load-datatables-js')
     {{-- Response --}}
