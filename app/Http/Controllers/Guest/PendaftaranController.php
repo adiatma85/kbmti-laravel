@@ -95,7 +95,14 @@ class PendaftaranController extends _GuestControllerBase
                 ];
                 array_push($queueResponse, $itemResponse);
             }
-            $this->queueResolver($queueResponse);
+            return response()->json([
+                'organisasi' => $request->organisasi,
+                'kepanitiaan' => $request->kepanitiaan,
+                'tahun_organisasi' => $request->tahun_organisasi,
+                'tahun_keapnitiaan' => $request->tahun_kepanitiaan,
+                'queue' => $queueResponse
+            ]);
+            // $this->queueResolver($queueResponse);
         } catch (\Throwable $th) {
             return $this->generalSwalResponse(
                 'Terjadi kesalahan dalam penyimpanan data!',
@@ -181,8 +188,8 @@ class PendaftaranController extends _GuestControllerBase
                 'eventRegistration_id' => $newRegistrationItemId,
                 'eventField_id' => $fieldId
             ];
-            return $item;
         }
+        return $item;
     }
 
     // Handling Storing Files
