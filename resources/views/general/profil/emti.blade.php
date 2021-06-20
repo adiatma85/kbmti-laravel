@@ -9,4 +9,4 @@
 @endsection
 
 @section('custom-script')
-@endsection
+@endsection 
