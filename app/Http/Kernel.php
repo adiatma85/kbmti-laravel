@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         // custom riute middleware
         'isGeneralAdmin' => \App\Http\Middleware\IsGeneralAdminMiddleware::class,
         'isMasterAdmin' => \App\Http\Middleware\IsMasterAdminMiddleware::class,
+        'isAllowedRoutesPendaftaran' => \App\Http\Middleware\Pendaftaran_Kepanitiaan_name_resolver_middleware::class
     ];
 }

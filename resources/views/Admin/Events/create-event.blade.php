@@ -12,6 +12,43 @@
 @endsection
 
 @section('content')
+    {{-- Variables goes here --}}
+    @php
+        $arrayOfFieldResponses = [
+            // 
+            [
+                "label" => "NIM Pendaftar",
+                "value" => "NIM",
+                "htmlId" => "pendaftarNim",
+            ],
+            [
+                "label" => "Nama Pendaftar",
+                "value" => "Nama",
+                "htmlId" => "pendaftarNama",
+            ],
+            [
+                "label" => "Email Peserta",
+                "value" => "Email",
+                "htmlId" => "pendaftarEmail",
+            ],
+            [
+                "label" => "Id Line Pendaftar",
+                "value" => "Id Line",
+                "htmlId" => "pendaftarLineId",
+            ],
+            [
+                "label" => "No. Telpon Peserta",
+                "value" => "Nomor Telepon",
+                "htmlId" => "pendaftarPhone",
+            ],
+            [
+                "label" => "Angkatan Pendaftar",
+                "value" => "Angkatan",
+                "htmlId" => "pesertaAngkatan",
+            ],
+        ];
+    @endphp
+
     <div class="container-fluid">
         @if ($errors->any())
         <div class="alert alert-danger">
@@ -29,11 +66,17 @@
             <form method="POST" action="{{route('admin.events.store')}}">
                 @csrf
                 <div class="card-body">
-                    {{-- Name of the Event --}}
+                    {{-- Name of the Event Nanti akan digunakan menjadi Link --}}
                     <div class="form-group">
                         <label for="title-events">Nama Event Pendaftaran</label>
                         <input type="text" class="form-control" id="title-events" placeholder="Nama Event Pendaftaran" name="name"
                             value="{{old('name') ?? ''}}" required>
+                    </div>
+                    {{-- Label dari Event Pendaftaran --}}
+                    <div class="form-group">
+                        <label for="label-events">Label Event Pendaftaran</label>
+                        <input type="text" class="form-control" id="label-events" placeholder="Label Event Pendaftaran" name="label"
+                            value="{{old('label') ?? ''}}" required>
                     </div>
                     {{-- Description Event --}}
                     <div class="form-group">
@@ -50,93 +93,45 @@
                           <option value="KEPANITIAAN">Pendaftaran Kepanitiaan</option>
                         </select>
                     </div>
-                    {{-- Body Text for Email Responses --}}
+                    {{-- Link Untuk Item yang akan Ditambahkan (Optional) --}}
                     <div class="form-group">
-                        <label for="body-response-email">Body Response Email</label>
-                        <textarea id="body-response-email" class="form-control" rows="3" placeholder="Konten Email yang akan dikirim"
-                            name="bodyText">{{old('bodyText') ?? ''}}</textarea>
-                    </div>
-                    {{-- Link for Email Responses (Optional) --}}
-                    <div class="form-group">
-                        <label for="link-response-email">Link Tautan Berkas yang Disertakan</label>
-                        <input type="text" class="form-control" id="link-response-email" placeholder="Nama Event Pendaftaran" name="link"
+                        <label for="link-berkas">Link Tautan Berkas yang Disertakan</label>
+                        <input type="text" class="form-control" id="link-berkas" placeholder="misalkan: https://drive.google.com" name="link"
                             value="{{old('link') ?? ''}}">
                     </div>
+                    <div class="form-group">
+                        <label for="expiration_date">Tanggal Expired Pendaftaran:</label>
+                          <div class="input-group date" id="expired_date" data-target-input="nearest">
+                              <input type="text" class="form-control datetimepicker-input" data-target="#expired_date" id="expiration_date" name="expired_date"/>
+                              <div class="input-group-append" data-target="#expired_date" data-toggle="datetimepicker">
+                                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                              </div>
+                          </div>
+                      </div>
                     {{-- Field yang diiperlukan --}}
                     <label>Daftar-Daftar Field yang Diperlukan</label>
                     <label>Default:</label>
                     <div class="row">
+                        {{-- For better approachment, using Array --}}
                         <div class="col-6" id="fieldsSlider">
                             {{-- Row 1 --}}
                             <div class="row">
-                                <div class="col-md-6">
-                                    {{-- FIELD NIM --}}
-                                    <div class="form-group">
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input onChangeDisabled" id="pesertaNim" value="NIM" name="field[]" checked >
-                                            <label class="custom-control-label" for="pesertaNim">NIM Peserta</label>
+                                @foreach ($arrayOfFieldResponses as $fieldResponse)
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="{{ $fieldResponse["htmlId"] }}" value="{{ $fieldResponse["value"] }}" name="field[]" checked >
+                                                <label class="custom-control-label" for="{{ $fieldResponse["htmlId"] }}">{{ $fieldResponse["label"] }}</label>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    {{-- FIELD NAMA --}}
-                                    <div class="form-group">
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input onChangeDisabled" id="pesertaName" value="Nama" name="field[]" checked >
-                                            <label class="custom-control-label" for="pesertaName">Nama Lengkap Peserta</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {{-- Row 2 --}}
-                            <div class="row">
-                                <div class="col-md-6">
-                                    {{-- FIELD EMAIL --}}
-                                    <div class="form-group">
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input onChangeDisabled" id="pesertaEmail" value="Email" name="field[]" checked >
-                                            <label class="custom-control-label" for="pesertaEmail">Email Peserta</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    {{-- FIELD ID LINE --}}
-                                    <div class="form-group">
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input onChangeDisabled" id="pesertaLineId" value="Id Line" name="field[]" checked >
-                                            <label class="custom-control-label" for="pesertaLineId">ID Line Peserta</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {{-- Row 3 --}}
-                            <div class="row">
-                                <div class="col-md-6">
-                                    {{-- FIELD NOMOR TELEPON --}}
-                                    <div class="form-group">
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input onChangeDisabled" id="pesertaPhone" value="Nomor Telepon" name="field[]" checked >
-                                            <label class="custom-control-label" for="pesertaPhone">No. Telepon Peserta</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    {{-- FIELD Email --}}
-                                    <div class="form-group">
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input onChangeDisabled" id="pesertaAngkatan" value="Angkatan" name="field[]" checked >
-                                            <label class="custom-control-label" for="pesertaAngkatan">Angkatan Peserta</label>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                         <div class="col-12">
                             <label>Tambahan</label>
+                            {{-- Append Field --}}
                             <div class="row" id="addFieldAppend">
-
                             </div>
                             <div class="d-flex justify-content-center">
                                 <button class="btn btn-info btn-block" id="addFieldButton">
@@ -158,19 +153,15 @@
 @endsection
 
 @section('custom-style')
-    
+{{-- Temposdominus Bootstrap --}}
+    <link rel="stylesheet" href="{{  asset('plugins/temposdominus-bootstrap/css/tempusdominus-bootstrap-4.min.css') }}">
 @endsection
 
 @section('custom-scripts')
-    {{-- bs-custom-file-input --}}
-    <script src="{{asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
-    {{-- init bs-custom-file --}}
-    <script>
-        $(function () {
-        bsCustomFileInput.init();
-        });
-    </script>
-
+    {{-- Moment --}}
+    <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
+    {{-- Temposdominus Bootstrap --}}
+    <script src="{{ asset('plugins/temposdominus-bootstrap/js/tempusdominus-bootstrap-4.min.js') }}"></script>
     {{-- Custom Script for Add New Field --}}
     <script>
         let index = 0;
@@ -186,42 +177,62 @@
                 // option-event handler
                 $("#option-event").change(function(event) {
                     let value = this.value
-                    if (value == 'OPEN-TENDER') {
-                        $append = "<div class='row' id='appendOpenTender'>" +
-                                "<div class='col-md-6'>" +
-                                    "<div class='form-group'>" +
-                                        "<div class='custom-control custom-switch'>" +
-                                            "<input type='checkbox' class='custom-control-input' id='pesertaOrganisasi' value='Organisasi' name='field[]' checked disabled>" +
-                                            "<label class='custom-control-label' for='pesertaOrganisasi'>Pengalaman Keorganisasian</label>" +
-                                        "</div>" +
-                                    "</div>" +
-                                "</div>" +
-                                "<div class='col-md-6'>" +
-                                    "<div class='form-group'>" +
-                                        "<div class='custom-control custom-switch' disabled>" +
-                                            "<input type='checkbox' class='custom-control-input' id='pesertaKepanitiaan' value='Kepanitiaan' name='field[]' checked disabled>" +
-                                            "<label class='custom-control-label' for='pesertaKepanitiaan'>Pengalaman Kepanitiaan</label>" +
-                                        "</div>" +
-                                    "</div>" +
-                                "</div>" +
-                                "<div class='col-md-6'>" +
-                                    "<div class='form-group'>" +
-                                        "<div class='custom-control custom-switch' disabled>" +
-                                            "<input type='checkbox' class='custom-control-input' id='pesertaInovasi' value='Inovasi' name='field[]' checked disabled>" +
-                                            "<label class='custom-control-label' for='pesertaInovasi'>Inovasi</label>" +
-                                        "</div>" +
-                                    "</div>" +
-                                "</div>" +
-                            "</div>";
+                    let element = document.getElementById(`appendKepanitiaan`);
+                    if ((value == 'OPEN-TENDER' || value == 'KEPANITIAAN')) {
+                        // Refresh
+                        if (element) {
+                            element.remove();
+                        }
+                        let arrayAppendElement = [
+                            {
+                                label: "Pengalaman Keogranisasian",
+                                value: "Organisasi",
+                                htmlId: "pendaftarOrganisasi"
+                            },
+                            {
+                                label: "Pengalaman Kepanitiaan",
+                                value: "Kepanitiaan",
+                                htmlId: "pendaftarKepanitiaan"
+                            },
+                            {
+                                label: "Inovasi",
+                                value: "Inovasi",
+                                htmlId: "pendaftarInovasi"
+                            }
+                        ];
+
+                        if (value == 'KEPANITIAAN') {
+                            arrayAppendElement.push({
+                                label: "Analisis SWOT",
+                                value: "Swot",
+                                htmlId: "pendaftarSwot"
+                            });
+                        }
+                        $append = "<div id='appendKepanitiaan' class='row'>";
+                        arrayAppendElement.forEach(element => {
+                            $append += appendOptionEvent(element);
+                        });
+                        $append += "</div>"
                         $("#fieldsSlider").append($append);
-                        $(".onChangeDisabled").prop('disabled', true)
                     } else {
-                        let element = document.getElementById(`appendOpenTender`);
                         element.remove();
-                        $(".onChangeDisabled").prop('disabled', false)
                     }
                 });
 
+                // Helper dari #option-event on change
+                function appendOptionEvent({ label, value, htmlId }) {
+                    let returnValue = "<div class='col-md-6'>" +
+                                    "<div class='form-group'>" +
+                                        "<div class='custom-control custom-switch'>" +
+                                            `<input type='checkbox' class='custom-control-input' id='peserta${htmlId}' value='${value}' name='field[]' checked>` +
+                                            `<label class='custom-control-label' for='peserta${htmlId}'>${label}</label>` +
+                                        "</div>" +
+                                    "</div>" +
+                                "</div>";
+                    return returnValue;
+                }
+
+                // Helper dari #addFieldButton onClick (adder)
                 function appendElement(numerical){
                     $org = `<div class='form-group col-md-12' id='field-${numerical}'>` +
                     "<div class='row'>" +
@@ -249,6 +260,7 @@
                     return $org;
                 }
 
+                // listener dari remover fieldbutton
                 function removeFunction(event){
                     event.preventDefault();
                     if (event.target !== this) {
@@ -259,7 +271,11 @@
                     let element = document.getElementById(`field-${number}`);
                     element.remove();
                     index--;
-                }
+                } 
+                // Date range picker
+                $('#expired_date').datetimepicker({
+                    format: 'L'
+                });
             });
     </script>
 @endsection
