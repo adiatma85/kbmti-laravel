@@ -17,6 +17,7 @@ use App\Http\Controllers\Guest\MiscController as GuestMiscController;
 use App\Http\Controllers\Guest\EventRegistration as GuestEventRegistrationController;
 use App\Http\Controllers\Guest\PendaftaranController as GuestPendaftaranController;
 use App\Http\Controllers\Guest\DepartmentController as GuestDepartmentController;
+use App\Http\Controllers\Guest\ProfileController as GuestProfileController;
 
 
 
@@ -56,9 +57,35 @@ Route::name('email.')
         Route::get('/testing-sending', [GuestMiscController::class, 'sendingEmail'])->name('sendingEmail');
     });
 
-Route::get('testing-open-tender-view', function () {
-    return view('general.event-registration.open-tender-page');
-});
+// profile -> Route untuk show profile EMTI dan BPMTI
+Route::name('profile.')
+    ->prefix('profile')
+    ->group(function () {
+        Route::get('/{sub}', [GuestProfileController::class, 'showProfile'])->name('showProfile');
+    });
+
+// event-registration -> Route Registrasi Event-event yang ada di KBMTI
+Route::name('event-registration.')
+    ->prefix('event-registration')
+    ->group(function () {
+        // Index page -> Redirect to lates updated, but for now, it will be the tester
+        Route::get('', [GuestEventRegistrationController::class, 'index'])->name('index');
+        // Get and Post Routes
+        Route::get('/{eventName}', [GuestEventRegistrationController::class, 'showFromName'])->name('showFromName');
+        Route::post('/{eventName}', [GuestEventRegistrationController::class, 'storeEventRegistration'])->name('storeEventRegistration');
+    });
+// open-tender -> Rount untuk membuka open tender kalau ada yang mau jadi kapel atau apapun itu
+Route::name('open-tender.')
+    ->prefix('open-tender')
+    ->group(function () {
+        // Index page -> Redirect to lates updated, but for now, it will be the tester
+        Route::get('', [GuestEventRegistrationController::class, 'index'])->name('index');
+        // Route::post('/item-store', [GuestEventRegistrationController::class, 'preStoreItem'])->name('preStoreItem');
+        Route::get('berkas/{stringName}', [GuestOpenTenderController::class, 'downloadBerkas'])->name('downloadBerkas');
+        // Get and Post Routes
+        Route::get('/{eventName}', [GuestOpenTenderController::class, 'showFromName'])->name('showFromName');
+        Route::post('/{eventName}', [GuestOpenTenderController::class, 'storeOpenTenderRegistration'])->name('storeOpenTenderRegistration');
+    });
 
 // Testing view for progress bar upload
 Route::name('progress-bar.')
@@ -121,7 +148,7 @@ Route::name('guest.')
                 Route::get('/{eventName}', [GuestEventRegistrationController::class, 'showFromName'])->name('showFromName');
                 Route::post('/{eventName}', [GuestEventRegistrationController::class, 'storeEventRegistration'])->name('storeEventRegistration');
             });
-        
+
         // Route unique karena bentuk struktur tidak mengikuti seperti yang lain
         Route::group([
             'prefix' => '{allowed_prefixes}',
