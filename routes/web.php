@@ -42,6 +42,8 @@ Route::get('php-info', function () {
     phpinfo();
 });
 
+Route::view('testing-api-com','testing-api-com');
+
 // Temporaries dan testing
 // Temporary Pengumuman
 Route::name('pengumuman.')
