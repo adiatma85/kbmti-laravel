@@ -19,6 +19,8 @@ use App\Http\Controllers\Guest\PendaftaranController as GuestPendaftaranControll
 use App\Http\Controllers\Guest\DepartmentController as GuestDepartmentController;
 use App\Http\Controllers\Guest\ProfileController as GuestProfileController;
 
+// Temporary
+use GuzzleHttp\Client;
 
 
 // Temporary Staff Ahli
@@ -42,7 +44,13 @@ Route::get('php-info', function () {
     phpinfo();
 });
 
-Route::view('testing-api-com','testing-api-com');
+Route::view('testing-api-com', 'testing-api-com');
+Route::get('testing-api-member-com', function () {
+    $client = new Client();
+    $api_request = $client->get('http://backoffice.com-indo.com/api/v1/user/members');
+    $json_response = json_decode($api_request->getBody()->getContents());
+    return response()->json($json_response);
+});
 
 // Temporaries dan testing
 // Temporary Pengumuman
