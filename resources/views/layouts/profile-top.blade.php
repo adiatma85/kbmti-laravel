@@ -7,10 +7,16 @@
             alt="">
         </div>
         <div class="profile-top__first-desc">
-            <p class="profile-top__first-desc-p">@yield('description')</p>
-            <img class="profile-top__first-desc-img" src="
-            @yield('picture-side')
-            " alt="">
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <p class="profile-top__first-desc-p">@yield('description')</p>
+                </div>
+                <div class="col-md-6 mt-5">
+                    <img class="profile-top__first-desc-img" src="
+                        @yield('picture-side')
+                    " alt="">
+                </div>
+            </div>
         </div>
     </div>
 
